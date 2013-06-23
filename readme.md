@@ -1,0 +1,1 @@
+Ruokakori muuttaa tapasi ostaa päivittäistavaraa.
