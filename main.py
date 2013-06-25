@@ -11,24 +11,38 @@ from google.appengine.ext import ndb
 from google.appengine.api import users
 
 
-class Greeting(ndb.Model):
-  """Models an individual guestbook entry with author, content, and date."""
+class Shop(ndb.Model):
+  """Models an individual shop"""
+  name = ndb.StringProperty()
+  city = ndb.StringProperty()
+  postal_code = ndb.StringProperty()
+  city_area = ndb.StringProperty()
+  #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
+
   author = ndb.UserProperty()
   content = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)
 
   @classmethod
-  def query_book(cls, ancestor_key):
-    return cls.query(ancestor=ancestor_key).order(-cls.date)
+  def query_book(cls):
+    return cls.query().order(-cls.date)
 
+class Crocery(ndb.Model):
+    """Models an individual crocery"""
+    name = ndb.StringProperty()
+    quantity = ndb.FloatProperty()
+    type_of_quanityt = ndb.StringProperty()
+    price = ndb.FloatProperty()
+
+    @classmethod
+    def query_book(cls):
+        return cls.query().order(-cls.date)
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
-    guestbook_name = self.request.get('guestbook_name')
     # There is no need to actually create the parent Book entity; we can
     # set it to be the parent of another entity without explicitly creating it
-    ancestor_key = ndb.Key("Book", guestbook_name or "*notitle*")
-    greetings = Greeting.query_book(ancestor_key).fetch(20)
+    greetings = Shop.query_book().fetch(20)
 
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
@@ -40,9 +54,7 @@ class MainPage(webapp2.RequestHandler):
     template_values = {
       'greetings': greetings,
       'url': url,
-      'url_linktext': url_linktext,
-      'guestbook_name': guestbook_name
-
+      'url_linktext': url_linktext
     }
 
     template = jinja_environment.get_template('index.html')
@@ -53,15 +65,13 @@ class Guestbook(webapp2.RequestHandler):
   def post(self):
     # Set parent key on each greeting to ensure that each
     # guestbook's greetings are in the same entity group.
-    guestbook_name = self.request.get('guestbook_name')
     # There is no need to actually create the parent Book entity; we can
     # set it to be the parent of another entity without explicitly creating it
-    greeting = Greeting(parent=ndb.Key("Book", guestbook_name or "*notitle*"),
-                        content = self.request.get('content'))
+    greeting = Shop(content = self.request.get('content'))
     if users.get_current_user():
       greeting.author = users.get_current_user()
     greeting.put()
-    self.redirect('/?' + urllib.urlencode({'guestbook_name': guestbook_name}))
+    self.redirect('/?')
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
