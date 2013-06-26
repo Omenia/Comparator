@@ -11,12 +11,12 @@ from google.appengine.api import users
 
 class Shop(ndb.Model):
   """Models an individual shop"""
+  author = ndb.UserProperty()
   city = ndb.StringProperty()
   postal_code = ndb.StringProperty()
   city_area = ndb.StringProperty()
   #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
 
-  author = ndb.UserProperty()
   name = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)
 
@@ -65,8 +65,6 @@ class Guestbook(webapp2.RequestHandler):
     # There is no need to actually create the parent Book entity; we can
     # set it to be the parent of another entity without explicitly creating it
     shop = Shop(name = self.request.get('name'))
-    if users.get_current_user():
-      shop.author = users.get_current_user()
     shop.put()
     self.redirect('/')
 

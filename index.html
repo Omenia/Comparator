@@ -4,11 +4,6 @@
 <html>
   <body>
     {% for shop in shops %}
-      {% if shop.author %}
-        <b>{{ shop.author.nickname() }}</b> wrote:
-      {% else %}
-        An anonymous person wrote:
-      {% endif %}
       <blockquote>{{ shop.name|escape }}</blockquote>
     {% endfor %}
 
