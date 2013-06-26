@@ -47,7 +47,7 @@ class MainPage(webapp2.RequestHandler):
 
 class Guestbook(webapp2.RequestHandler):
   def post(self):
-    shop = Shop(name = self.request.get('name'))
+    shop = Shop(name = self.request.get('name'), city = self.request.get('city'))
     shop.put()
     self.redirect('/')
 
