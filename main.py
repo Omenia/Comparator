@@ -54,6 +54,10 @@ class Guestbook(webapp2.RequestHandler):
     if self.request.get('add_shop'):
         shop = Shop(name=self.request.get('name'), city=self.request.get('city'))
         shop.put()
+    elif self.request.get('delete_shop'):
+        print "buu"
+        shop_to_delete = Shop.query_book().fetch(1)
+        shop_to_delete[0].key.delete()
     self.redirect('/')
 
 app = webapp2.WSGIApplication([
