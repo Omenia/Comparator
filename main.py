@@ -1,5 +1,3 @@
-import cgi
-import urllib
 import webapp2
 import jinja2
 import os
@@ -42,7 +40,7 @@ class MainPage(webapp2.RequestHandler):
   def get(self):
     # There is no need to actually create the parent Book entity; we can
     # set it to be the parent of another entity without explicitly creating it
-    greetings = Shop.query_book().fetch(20)
+    shops = Shop.query_book().fetch(20)
 
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
@@ -52,7 +50,7 @@ class MainPage(webapp2.RequestHandler):
       url_linktext = 'Login'
 
     template_values = {
-      'greetings': greetings,
+      'shops': shops,
       'url': url,
       'url_linktext': url_linktext
     }
@@ -71,7 +69,7 @@ class Guestbook(webapp2.RequestHandler):
     if users.get_current_user():
       greeting.author = users.get_current_user()
     greeting.put()
-    self.redirect('/?')
+    self.redirect('/')
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
