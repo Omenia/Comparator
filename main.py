@@ -11,14 +11,13 @@ from google.appengine.api import users
 
 class Shop(ndb.Model):
   """Models an individual shop"""
-  name = ndb.StringProperty()
   city = ndb.StringProperty()
   postal_code = ndb.StringProperty()
   city_area = ndb.StringProperty()
   #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
 
   author = ndb.UserProperty()
-  content = ndb.StringProperty()
+  name = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)
 
   @classmethod
@@ -65,10 +64,10 @@ class Guestbook(webapp2.RequestHandler):
     # guestbook's greetings are in the same entity group.
     # There is no need to actually create the parent Book entity; we can
     # set it to be the parent of another entity without explicitly creating it
-    greeting = Shop(content = self.request.get('content'))
+    shop = Shop(name = self.request.get('name'))
     if users.get_current_user():
-      greeting.author = users.get_current_user()
-    greeting.put()
+      shop.author = users.get_current_user()
+    shop.put()
     self.redirect('/')
 
 app = webapp2.WSGIApplication([
