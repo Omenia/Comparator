@@ -4,7 +4,7 @@
 <html>
   <body>
     {% for shop in shops %}
-      <blockquote>{{ shop.name|escape }}</blockquote>
+      <b>{{ shop.name|escape }}<br></b>
     {% endfor %}
 
     <form action="/sign" method="post">
