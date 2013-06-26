@@ -6,10 +6,11 @@
     {% for shop in shops %}
       <b>{{ shop.name|escape}} </b>  {{ shop.city}} <br>
     {% endfor %}
-
+    <br>
+    <b>Uuden kaupan tiedot:</b>
     <form action="/sign" method="post">
-      <div><textarea name="name" rows="1" cols="60"></textarea></div>
-      <div><textarea name="city" rows="1" cols="60"></textarea></div>
+      Nimi: <div><textarea name="name" rows="1" cols="60"></textarea></div>
+      Kaupunki: <div><textarea name="city" rows="1" cols="60"></textarea></div>
       <div><input type="submit" value="Luo kauppa"></div>
     </form>
 
