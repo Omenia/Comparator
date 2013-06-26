@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import webapp2
 import jinja2
 import os
@@ -41,14 +43,17 @@ class MainPage(webapp2.RequestHandler):
       'url_linktext': url_linktext
     }
 
+
     template = jinja_environment.get_template('index.html')
     self.response.out.write(template.render(template_values))
 
 
 class Guestbook(webapp2.RequestHandler):
   def post(self):
-    shop = Shop(name = self.request.get('name'), city = self.request.get('city'))
-    shop.put()
+    button_action = self.request.get("button_action")
+    if self.request.get('add_shop'):
+        shop = Shop(name=self.request.get('name'), city=self.request.get('city'))
+        shop.put()
     self.redirect('/')
 
 app = webapp2.WSGIApplication([

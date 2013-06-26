@@ -11,10 +11,9 @@
     <form action="/sign" method="post">
       Nimi: <div><textarea name="name" rows="1" cols="60"></textarea></div>
       Kaupunki: <div><textarea name="city" rows="1" cols="60"></textarea></div>
-      <div><input type="submit" value="Luo kauppa"></div>
+      <div><input type="submit" value="Luo kauppa" name = "add_shop"></div>
+      <div><input type="submit" value="Poista kauppa"></div>
     </form>
-
-    <button type = "delete_latest" name="_delete_last_shop">Poista viimeisin kauppa</button>
     <br>
     <a href="{{ url}}">{{ url_linktext }}</a>
 
