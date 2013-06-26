@@ -23,16 +23,6 @@ class Shop(ndb.Model):
   def query_book(cls):
     return cls.query().order(-cls.date)
 
-class Crocery(ndb.Model):
-    """Models an individual crocery"""
-    name = ndb.StringProperty()
-    quantity = ndb.FloatProperty()
-    type_of_quanityt = ndb.StringProperty()
-    price = ndb.FloatProperty()
-
-    @classmethod
-    def query_book(cls):
-        return cls.query().order(-cls.date)
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
@@ -40,10 +30,10 @@ class MainPage(webapp2.RequestHandler):
 
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
-      url_linktext = 'Logout'
+      url_linktext = 'Ulos Kirjautuminen'
     else:
       url = users.create_login_url(self.request.uri)
-      url_linktext = 'Login'
+      url_linktext = 'Kirjautuminen'
 
     template_values = {
       'shops': shops,
