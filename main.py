@@ -11,7 +11,6 @@ from google.appengine.api import users
 
 class Shop(ndb.Model):
   """Models an individual shop"""
-  author = ndb.UserProperty()
   city = ndb.StringProperty()
   postal_code = ndb.StringProperty()
   city_area = ndb.StringProperty()
@@ -37,8 +36,6 @@ class Crocery(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
-    # There is no need to actually create the parent Book entity; we can
-    # set it to be the parent of another entity without explicitly creating it
     shops = Shop.query_book().fetch(20)
 
     if users.get_current_user():
@@ -60,10 +57,6 @@ class MainPage(webapp2.RequestHandler):
 
 class Guestbook(webapp2.RequestHandler):
   def post(self):
-    # Set parent key on each greeting to ensure that each
-    # guestbook's greetings are in the same entity group.
-    # There is no need to actually create the parent Book entity; we can
-    # set it to be the parent of another entity without explicitly creating it
     shop = Shop(name = self.request.get('name'))
     shop.put()
     self.redirect('/')
