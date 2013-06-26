@@ -8,16 +8,16 @@ jinja_environment = jinja2.Environment(
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
+class Grocery(ndb.Model):
+    name = ndb.StringProperty()
+    price = ndb.FloatProperty()
 
 class Shop(ndb.Model):
   """Models an individual shop"""
-  city = ndb.StringProperty()
-  postal_code = ndb.StringProperty()
-  city_area = ndb.StringProperty()
-  #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
-
   name = ndb.StringProperty()
+  city = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)
+  #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
 
   @classmethod
   def query_book(cls):
