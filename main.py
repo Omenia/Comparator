@@ -19,7 +19,8 @@ class Shop(ndb.Model):
   name = ndb.StringProperty()
   city = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)
-  #croceries  = ndb.StructuredProperty(Crocery, repeated=True)
+  price = ndb.FloatProperty()
+  groceries  = ndb.StructuredProperty(Grocery, repeated=True)
 
   @classmethod
   def query_book(cls):
@@ -28,7 +29,7 @@ class Shop(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
-    shops = Shop.query_book().fetch(20)
+    shops = Shop.query().fetch(20)
 
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
@@ -52,11 +53,15 @@ class Guestbook(webapp2.RequestHandler):
   def post(self):
     button_action = self.request.get("button_action")
     if self.request.get('add_shop'):
-        shop = Shop(name=self.request.get('name'), city=self.request.get('city'))
+        shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
+                    groceries=[Grocery(name = self.request.get('g1_name'),
+                                      price = float(self.request.get('g1_price'))),
+                               Grocery(name = self.request.get('g2_name'),
+                                      price = float(self.request.get('g2_price')))])
         shop.put()
     elif self.request.get('delete_shop'):
         print "buu"
-        shop_to_delete = Shop.query_book().fetch(1)
+        shop_to_delete = Shop.query().fetch(1)
         shop_to_delete[0].key.delete()
     self.redirect('/')
 
