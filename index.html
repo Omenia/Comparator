@@ -4,7 +4,7 @@
 <html>
   <body>
     {% for shop in shops %}
-      <b>{{ shop.name|escape}} </b>  {{ shop.city}} <br>
+      <b>{{ shop.name|escape}} </b>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
     <br>
     <b>Uuden kaupan tiedot:</b>
