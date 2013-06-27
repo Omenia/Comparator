@@ -49,7 +49,7 @@ class MainPage(webapp2.RequestHandler):
     self.response.out.write(template.render(template_values))
 
 
-class Guestbook(webapp2.RequestHandler):
+class Grocerybasket(webapp2.RequestHandler):
   def post(self):
     button_action = self.request.get("button_action")
     if self.request.get('add_shop'):
@@ -67,5 +67,5 @@ class Guestbook(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
-  ('/sign', Guestbook)
+  ('/sign', Grocerybasket)
 ])
