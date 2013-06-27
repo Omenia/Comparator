@@ -51,7 +51,6 @@ class MainPage(webapp2.RequestHandler):
 
 class Grocerybasket(webapp2.RequestHandler):
   def post(self):
-    button_action = self.request.get("button_action")
     if self.request.get('add_shop'):
         shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
                     groceries=[Grocery(name = self.request.get('g1_name'),
