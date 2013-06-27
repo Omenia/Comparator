@@ -59,7 +59,6 @@ class Grocerybasket(webapp2.RequestHandler):
                                       price = float(self.request.get('g2_price')))])
         shop.put()
     elif self.request.get('delete_shop'):
-        print "buu"
         shop_to_delete = Shop.query().fetch(1)
         shop_to_delete[0].key.delete()
     self.redirect('/')
