@@ -50,15 +50,18 @@ class MainPage(webapp2.RequestHandler):
 
 
 class ManageShops(webapp2.RequestHandler):
-  def post(self):
-    if self.request.get('add_shop'):
-        return self.redirect('/add_shop')
-    elif self.request.get('delete_shop'):
-        shop_to_delete = Shop.query().fetch(1)
-        shop_to_delete[0].key.delete()
-    return self.redirect('/')
+
+    def post(self):
+        if self.request.get('add_shop'):
+            return self.redirect('/add_shop')
+        elif self.request.get('delete_shop'):
+            shop_to_delete = Shop.query().fetch(1)
+            shop_to_delete[0].key.delete()
+        return self.redirect('/')
+
 
 class AddShop(webapp2.RequestHandler):
+
     def get(self):
         template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
