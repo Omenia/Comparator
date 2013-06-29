@@ -49,21 +49,32 @@ class MainPage(webapp2.RequestHandler):
     self.response.out.write(template.render(template_values))
 
 
-class Grocerybasket(webapp2.RequestHandler):
+class ManageShops(webapp2.RequestHandler):
   def post(self):
     if self.request.get('add_shop'):
-        shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
-                    groceries=[Grocery(name = self.request.get('g1_name'),
-                                      price = float(self.request.get('g1_price'))),
-                               Grocery(name = self.request.get('g2_name'),
-                                      price = float(self.request.get('g2_price')))])
-        shop.put()
+        return self.redirect('/add_shop')
     elif self.request.get('delete_shop'):
         shop_to_delete = Shop.query().fetch(1)
         shop_to_delete[0].key.delete()
-    self.redirect('/')
+    return self.redirect('/')
+
+class AddShop(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('add_shop.html')
+        self.response.out.write(template.render())
+
+    def post(self):
+        shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
+            groceries=[Grocery(name = self.request.get('g1_name'),
+                              price = float(self.request.get('g1_price'))),
+                       Grocery(name = self.request.get('g2_name'),
+                              price = float(self.request.get('g2_price')))])
+        shop.put()
+        return self.redirect('/')
+
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
-  ('/sign', Grocerybasket)
+  ('/sign', ManageShops),
+  ('/add_shop', AddShop)
 ])
