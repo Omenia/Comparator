@@ -24,12 +24,12 @@ class Shop(ndb.Model):
 
   @classmethod
   def query_book(cls):
-    return cls.query().order(-cls.price)
+    return cls.query().order(cls.price)
 
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
-    shops = Shop.query().fetch(5)
+    shops = Shop.query_book().fetch(5)
 
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
