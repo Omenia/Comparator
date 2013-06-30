@@ -8,8 +8,9 @@
      Kaupunki: {{shop.city}} <br>
      Hinta: {{shop.price}} <br>
      <br>
-     Ruoat<br>
-     Ruoka 1: {{shop.g1_name}} {{shop.g1_price}}<br>
-     Ruoka 2: {{shop.g2_name}} {{shop.g2_price}}<br>
+     Ruoat:<br>
+     {% for grocery in shop.groceries %}
+        {{ grocery.name}} {{ grocery.price}} <br>
+     {% endfor %}
 </body>
 </html>
