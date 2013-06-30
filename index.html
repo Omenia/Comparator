@@ -1,10 +1,10 @@
-<head>
+<head xmlns="http://www.w3.org/1999/html">
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 </head>
 <html>
   <body>
     {% for shop in shops %}
-      <b>{{ shop.name|escape}} </b>  {{ shop.city}} {{ shop.price}}<br>
+      <a href="?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
     <br>
     <b>Uuden kaupan tiedot:</b>
