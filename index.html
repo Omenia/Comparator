@@ -4,7 +4,7 @@
 <html>
   <body>
     {% for shop in shops %}
-      <a href="?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
+      <a href="edit_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
     <br>
     <b>Uuden kaupan tiedot:</b>
