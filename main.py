@@ -75,7 +75,8 @@ class AddShop(webapp2.RequestHandler):
         shop.put()
         return self.redirect('/')
 
-class EditShop(webapp2.RequestHandler):
+
+class ShowShop(webapp2.RequestHandler):
 
     def get(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
@@ -83,12 +84,12 @@ class EditShop(webapp2.RequestHandler):
             'shop': shop
         }
 
-        template = jinja_environment.get_template('edit_shop.html')
+        template = jinja_environment.get_template('show_shop.html')
         self.response.out.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
   ('/sign', ManageShops),
   ('/add_shop', AddShop),
-  ('/edit_shop', EditShop)
+  ('/show_shop', ShowShop)
 ])
