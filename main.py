@@ -53,14 +53,6 @@ class MainPage(webapp2.RequestHandler):
             return self.redirect('/add_shop')
 
 
-class ManageShops(webapp2.RequestHandler):
-
-    def post(self):
-        if self.request.get('add_shop'):
-            return self.redirect('/add_shop')
-        return self.redirect('/')
-
-
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
@@ -98,7 +90,6 @@ class ShowShop(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
-  #('/sign', ManageShops),
   ('/add_shop', AddShop),
   ('/show_shop', ShowShop)
 ])
