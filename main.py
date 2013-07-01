@@ -28,25 +28,29 @@ class Shop(ndb.Model):
 
 
 class MainPage(webapp2.RequestHandler):
-  def get(self):
-    shops = Shop.query_book().fetch(5)
+    def get(self):
+        shops = Shop.query_book().fetch(5)
 
-    if users.get_current_user():
-      url = users.create_logout_url(self.request.uri)
-      url_linktext = 'Ulos Kirjautuminen'
-    else:
-      url = users.create_login_url(self.request.uri)
-      url_linktext = 'Kirjautuminen'
+        if users.get_current_user():
+          url = users.create_logout_url(self.request.uri)
+          url_linktext = 'Ulos Kirjautuminen'
+        else:
+          url = users.create_login_url(self.request.uri)
+          url_linktext = 'Kirjautuminen'
 
-    template_values = {
-      'shops': shops,
-      'url': url,
-      'url_linktext': url_linktext
-    }
+        template_values = {
+          'shops': shops,
+          'url': url,
+          'url_linktext': url_linktext
+        }
 
 
-    template = jinja_environment.get_template('index.html')
-    self.response.out.write(template.render(template_values))
+        template = jinja_environment.get_template('index.html')
+        self.response.out.write(template.render(template_values))
+
+    def post(self):
+        if self.request.get('add_shop'):
+            return self.redirect('/add_shop')
 
 
 class ManageShops(webapp2.RequestHandler):
@@ -94,7 +98,7 @@ class ShowShop(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
   ('/', MainPage),
-  ('/sign', ManageShops),
+  #('/sign', ManageShops),
   ('/add_shop', AddShop),
   ('/show_shop', ShowShop)
 ])
