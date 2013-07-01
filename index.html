@@ -7,7 +7,6 @@
       <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
     <br>
-    <b>Uuden kaupan tiedot:</b>
     <form method="post">
       <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
     </form>
