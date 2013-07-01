@@ -54,9 +54,6 @@ class ManageShops(webapp2.RequestHandler):
     def post(self):
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
-        elif self.request.get('delete_shop'):
-            shop_to_delete = Shop.query().fetch(1)
-            shop_to_delete[0].key.delete()
         return self.redirect('/')
 
 
