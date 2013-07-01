@@ -87,6 +87,14 @@ class ShowShop(webapp2.RequestHandler):
         template = jinja_environment.get_template('show_shop.html')
         self.response.out.write(template.render(template_values))
 
+    def post(self):
+        shop = ndb.Key(urlsafe = self.request.get('shop')).get()
+
+        if self.request.get('delete_shop'):
+            shop.key.delete()
+            return self.redirect('/')
+
+
 app = webapp2.WSGIApplication([
   ('/', MainPage),
   ('/sign', ManageShops),

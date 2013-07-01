@@ -12,5 +12,9 @@
      {% for grocery in shop.groceries %}
         {{ grocery.name}} {{ grocery.price}} <br>
      {% endfor %}
+
+     <form method="post">
+     <div><input type="submit" value="Poista kauppa" name = "delete_shop"></div>
+    </form>
 </body>
 </html>
