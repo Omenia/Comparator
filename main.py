@@ -86,10 +86,24 @@ class ShowShop(webapp2.RequestHandler):
         if self.request.get('delete_shop'):
             shop.key.delete()
             return self.redirect('/')
+        elif self.request.get('edit_shop'):
+            return self.redirect('/edit_shop?shop='+shop.key.urlsafe())
+
+
+class EditShop(webapp2.RequestHandler):
+    def get(self):
+        shop = ndb.Key(urlsafe = self.request.get('shop')).get()
+        template_values = {
+            'shop': shop
+        }
+
+        template = jinja_environment.get_template('edit_shop.html')
+        self.response.out.write(template.render(template_values))
 
 
 app = webapp2.WSGIApplication([
-  ('/', MainPage),
-  ('/add_shop', AddShop),
-  ('/show_shop', ShowShop)
+    ('/', MainPage),
+    ('/add_shop', AddShop),
+    ('/show_shop', ShowShop),
+    ('/edit_shop', EditShop)
 ])
