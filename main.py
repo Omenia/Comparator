@@ -73,12 +73,8 @@ class AddShop(webapp2.RequestHandler):
 class ShowShop(webapp2.RequestHandler):
 
     def get(self):
-        shop = ndb.Key(urlsafe = self.request.get('shop')).get()
-        template_values = {
-            'shop': shop
-        }
-
-        template = jinja_environment.get_template('show_shop.html')
+        safe_url = self.request.get('shop')
+        template_values, template = create_shop_page_from_template(self.request, safe_url, 'show_shop.html')
         self.response.out.write(template.render(template_values))
 
     def post(self):
