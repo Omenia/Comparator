@@ -10,6 +10,7 @@ jinja_environment = jinja2.Environment(
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
+
 class Grocery(ndb.Model):
     name = ndb.StringProperty()
     price = ndb.FloatProperty()
@@ -92,14 +93,19 @@ class ShowShop(webapp2.RequestHandler):
 
 class EditShop(webapp2.RequestHandler):
     def get(self):
-        shop = ndb.Key(urlsafe = self.request.get('shop')).get()
-        template_values = {
-            'shop': shop
-        }
-
-        template = jinja_environment.get_template('edit_shop.html')
+        safe_url = self.request.get('shop')
+        template_values, template = create_shop_page_from_template(self.request, safe_url, 'edit_shop.html')
         self.response.out.write(template.render(template_values))
 
+
+def create_shop_page_from_template(response, safe_url, page):
+    shop = ndb.Key(urlsafe = safe_url).get()
+    template_values = {
+        'shop': shop
+    }
+
+    template = jinja_environment.get_template(page)
+    return template_values, template
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
