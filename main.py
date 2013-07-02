@@ -74,8 +74,7 @@ class ShowShop(webapp2.RequestHandler):
 
     def get(self):
         safe_url = self.request.get('shop')
-        template_values, template = create_shop_page_from_template(self.request, safe_url, 'show_shop.html')
-        self.response.out.write(template.render(template_values))
+        render_shop_page_from_the_template(self.response, safe_url, 'show_shop.html')
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
@@ -90,18 +89,17 @@ class ShowShop(webapp2.RequestHandler):
 class EditShop(webapp2.RequestHandler):
     def get(self):
         safe_url = self.request.get('shop')
-        template_values, template = create_shop_page_from_template(self.request, safe_url, 'edit_shop.html')
-        self.response.out.write(template.render(template_values))
+        render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
 
 
-def create_shop_page_from_template(response, safe_url, page):
+def render_shop_page_from_the_template(response, safe_url, page):
     shop = ndb.Key(urlsafe = safe_url).get()
     template_values = {
         'shop': shop
     }
 
     template = jinja_environment.get_template(page)
-    return template_values, template
+    response.out.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
