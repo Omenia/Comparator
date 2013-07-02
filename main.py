@@ -91,6 +91,12 @@ class EditShop(webapp2.RequestHandler):
         safe_url = self.request.get('shop')
         render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
 
+    def post(self):
+        shop = ndb.Key(urlsafe = self.request.get('shop')).get()
+        shop.name = self.request.get('name')
+        shop.put()
+        return self.redirect('/show_shop?shop='+shop.key.urlsafe())
+
 
 def render_shop_page_from_the_template(response, safe_url, page):
     shop = ndb.Key(urlsafe = safe_url).get()
