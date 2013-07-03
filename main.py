@@ -20,16 +20,16 @@ class Grocery(ndb.Model):
 
 
 class Shop(ndb.Model):
-  """Models an individual shop"""
-  name = ndb.StringProperty()
-  city = ndb.StringProperty()
-  date = ndb.DateTimeProperty(auto_now_add=True)
-  price = ndb.FloatProperty()
-  groceries  = ndb.StructuredProperty(Grocery, repeated=True)
+    """Models an individual shop"""
+    name = ndb.StringProperty()
+    city = ndb.StringProperty()
+    date = ndb.DateTimeProperty(auto_now_add=True)
+    price = ndb.FloatProperty()
+    groceries  = ndb.StructuredProperty(Grocery, repeated=True)
 
-  @classmethod
-  def query_book(cls):
-    return cls.query().order(cls.price)
+    @classmethod
+    def query_book(cls):
+        return cls.query().order(cls.price)
 
 
 class MainPage(webapp2.RequestHandler):
@@ -64,18 +64,15 @@ class AddShop(webapp2.RequestHandler):
         template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
 
-
     def post(self):
         self.__add_shop_to_database()
         return self.redirect('/')
-
-
 
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
                     city=self.request.get('city'),
                     #price=float(self.request.get('g1_price')) + float(self.request.get('g2_price')),
-                    groceries=[self.__add_crocery_to_shop('Rasvaton Maito', 'rasvaton_maito')
+                    groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito')
                                ]
         )
         shop.price = self.__get_basket_price_from_groceries(shop.groceries)
@@ -87,17 +84,13 @@ class AddShop(webapp2.RequestHandler):
             price += grocery.price
         return price
 
-
-    def __add_crocery_to_shop(self, grocery_name, gorcery_id):
+    def __add_grocery_to_shop(self, grocery_name, gorcery_id):
         return Grocery(name=grocery_name,
                        manufacturer=self.request.get(gorcery_id+'_manufacturer'),
                        price=float(self.request.get(gorcery_id+'_price')),
                        quantity=self.request.get(gorcery_id+'_quantity'),
                        amount=float(self.request.get(gorcery_id+'_amount'))
-        )
-
-
-
+                       )
 
 
 class ShowShop(webapp2.RequestHandler):
