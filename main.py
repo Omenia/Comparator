@@ -66,9 +66,7 @@ class AddShop(webapp2.RequestHandler):
 
 
     def post(self):
-        shop = self.__add_shop_to_database()
-
-        shop.put()
+        self.__add_shop_to_database()
         return self.redirect('/')
 
     def __add_shop_to_database(self):
@@ -80,14 +78,11 @@ class AddShop(webapp2.RequestHandler):
                                        price=float(self.request.get('g1_price')),
                                        quantity=self.request.get('g1_quantity'),
                                        amount=float(self.request.get('g1_amount'))
-                    ),
-
-                               Grocery(name=self.request.get('g2_name'),
-                                       price=float(self.request.get('g2_price'))
-                               )
-                    ]
+                                       )
+                               ]
         )
-        return shop
+        shop.put()
+
 
 
 
