@@ -16,12 +16,13 @@ Add One Shop
 
 Add six shops. One should not been seen.
     Add the Shop With Groceries    S-Market GC    Gotham City
-    Add the Shop With Groceries    S-Market MP    Megaplolis    5
+    Add the Shop With Groceries    S-Market MP    Megapolis    5
     Add the Shop With Groceries    K-Market GC    Gotham City    3
-    Add the Shop With Groceries    K-Market MP    Megaplois    6
+    Add the Shop With Groceries    K-Market MP    Megapolis    6
     Add the Shop With Groceries    Lidl GC    Gotham City    2
     Add the Shop With Groceries    Lidl MP    Megapolis    4
-    Check that shop is removed    K-Market MP
+    Check that shop is not on main page    K-Market MP
+    [Teardown]    Remove six shops
 
 *** Keywords ***
 Enter to the shop adding page
@@ -39,7 +40,7 @@ Reload and check if there is a right shop in the list
     Reload Page
     Page Should Contain    ${shop_name}
 
-Check that shop is removed
+Check that shop is not on main page
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is not a shop in the list    ${shop}
 
@@ -64,8 +65,16 @@ Delete Shop
     [Arguments]    ${shop}
     Click Link    ${shop}
     Click Element    delete_shop
-    Check that shop is removed    ${shop}
+    Check that shop is not on main page    ${shop}
 
 Shop should exict in the list
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is a right shop in the list    ${shop}
+
+Remove six shops
+    Delete Shop    S-Market GC
+    Delete Shop    S-Market MP
+    Delete Shop    K-Market GC
+    Delete Shop    K-Market MP
+    Delete Shop    Lidl GC
+    Delete Shop    Lidl MP
