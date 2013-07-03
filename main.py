@@ -69,19 +69,32 @@ class AddShop(webapp2.RequestHandler):
         self.__add_shop_to_database()
         return self.redirect('/')
 
+
+
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
                     city=self.request.get('city'),
-                    price=float(self.request.get('g1_price')) + float(self.request.get('g2_price')),
-                    groceries=[Grocery(name='Rasvaton Maito',
-                                       manufacturer=self.request.get('g1_manufacturer'),
-                                       price=float(self.request.get('g1_price')),
-                                       quantity=self.request.get('g1_quantity'),
-                                       amount=float(self.request.get('g1_amount'))
-                                       )
+                    #price=float(self.request.get('g1_price')) + float(self.request.get('g2_price')),
+                    groceries=[self.__add_crocery_to_shop('Rasvaton Maito', 'rasvaton_maito')
                                ]
         )
+        shop.price = self.__get_basket_price_from_groceries(shop.groceries)
         shop.put()
+
+    def __get_basket_price_from_groceries(self, groceries):
+        price = 0
+        for grocery in groceries:
+            price += grocery.price
+        return price
+
+
+    def __add_crocery_to_shop(self, grocery_name, gorcery_id):
+        return Grocery(name=grocery_name,
+                       manufacturer=self.request.get(gorcery_id+'_manufacturer'),
+                       price=float(self.request.get(gorcery_id+'_price')),
+                       quantity=self.request.get(gorcery_id+'_quantity'),
+                       amount=float(self.request.get(gorcery_id+'_amount'))
+        )
 
 
 
