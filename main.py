@@ -13,7 +13,11 @@ from google.appengine.api import users
 
 class Grocery(ndb.Model):
     name = ndb.StringProperty()
+    manufacturer = ndb.StringProperty()
     price = ndb.FloatProperty()
+    quantity = ndb.StringProperty()
+    amount = ndb.FloatProperty()
+
 
 class Shop(ndb.Model):
   """Models an individual shop"""
@@ -62,10 +66,23 @@ class AddShop(webapp2.RequestHandler):
 
     def post(self):
         shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
-            groceries=[Grocery(name = self.request.get('g1_name'),
+            groceries= [Grocery(name = self.request.get('g1_name'),
                               price = float(self.request.get('g1_price'))),
-                       Grocery(name = self.request.get('g2_name'),
-                              price = float(self.request.get('g2_price')))])
+                        Grocery(name = self.request.get('g2_name'),
+                              price = float(self.request.get('g2_price'))),
+                        Grocery(name = self.request.get('g1_name'),
+                              price = float(self.request.get('g3_price'))),
+                        Grocery(name = self.request.get('g2_name'),
+                              price = float(self.request.get('g3_price'))),
+                        Grocery(name = self.request.get('g4_name'),
+                              price = float(self.request.get('g4_price'))),
+                        Grocery(name = self.request.get('g5_name'),
+                              price = float(self.request.get('g5_price'))),
+                        Grocery(name = self.request.get('g6_name'),
+                              price = float(self.request.get('g6_price'))),
+                        Grocery(name = self.request.get('g7_name'),
+                              price = float(self.request.get('g7_price')))])
+
         shop.put()
         return self.redirect('/')
 
