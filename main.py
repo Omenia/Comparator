@@ -64,27 +64,32 @@ class AddShop(webapp2.RequestHandler):
         template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
 
+
     def post(self):
-        shop = Shop(name=self.request.get('name'), city=self.request.get('city'), price=float(self.request.get('g1_price'))+float(self.request.get('g2_price')),
-            groceries= [Grocery(name = self.request.get('g1_name'),
-                              price = float(self.request.get('g1_price'))),
-                        Grocery(name = self.request.get('g2_name'),
-                              price = float(self.request.get('g2_price'))),
-                        Grocery(name = self.request.get('g1_name'),
-                              price = float(self.request.get('g3_price'))),
-                        Grocery(name = self.request.get('g2_name'),
-                              price = float(self.request.get('g3_price'))),
-                        Grocery(name = self.request.get('g4_name'),
-                              price = float(self.request.get('g4_price'))),
-                        Grocery(name = self.request.get('g5_name'),
-                              price = float(self.request.get('g5_price'))),
-                        Grocery(name = self.request.get('g6_name'),
-                              price = float(self.request.get('g6_price'))),
-                        Grocery(name = self.request.get('g7_name'),
-                              price = float(self.request.get('g7_price')))])
+        shop = self.__add_shop_to_database()
 
         shop.put()
         return self.redirect('/')
+
+    def __add_shop_to_database(self):
+        shop = Shop(name=self.request.get('name'),
+                    city=self.request.get('city'),
+                    price=float(self.request.get('g1_price')) + float(self.request.get('g2_price')),
+                    groceries=[Grocery(name='Rasvaton Maito',
+                                       manufacturer=self.request.get('g1_manufacturer'),
+                                       price=float(self.request.get('g1_price')),
+                                       quantity=self.request.get('g1_quantity'),
+                                       amount=float(self.request.get('g1_amount'))
+                    ),
+
+                               Grocery(name=self.request.get('g2_name'),
+                                       price=float(self.request.get('g2_price'))
+                               )
+                    ]
+        )
+        return shop
+
+
 
 
 class ShowShop(webapp2.RequestHandler):
