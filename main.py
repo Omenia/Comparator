@@ -114,7 +114,7 @@ class ShowShop(webapp2.RequestHandler):
 class EditShop(webapp2.RequestHandler):
     def get(self):
         safe_url = self.request.get('shop')
-        render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
+        render_shop_page_from_the_template(self.response, safe_url, TEMPLATE_DIR+'edit_shop.html')
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
