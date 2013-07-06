@@ -75,7 +75,9 @@ class AddShop(webapp2.RequestHandler):
                     city=self.request.get('city'),
                     groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1),
                                self.__add_grocery_to_shop('Reissumies', 'reissumies', quantity='kpl', amount=4,
-                                                          manufacturer='Oululainen')
+                                                          manufacturer='Oululainen'),
+                               self.__add_grocery_to_shop('Oltermanni', 'oltermanni', quantity='kg', amount=1,
+                                                          manufacturer='Valio')
                                ]
         )
         shop.price = self.__get_basket_price_from_groceries(shop.groceries)

@@ -8,6 +8,7 @@ Add the Shop With Groceries
     Add Shop Information    ${name}    ${city}
     Add Grocery with producer    rasvaton_maito    Valio    ${prices}
     Add Grocery without producer    reissumies    0.79
+    Add Grocery without producer    oltermanni    6.95
     Click Element    name=add_shop
 
 Enter to the shop adding page
