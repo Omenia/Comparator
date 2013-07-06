@@ -78,7 +78,8 @@ class AddShop(webapp2.RequestHandler):
                                                           manufacturer='Oululainen'),
                                self.__add_grocery_to_shop('Oltermanni', 'oltermanni', quantity='kg', amount=1,
                                                           manufacturer='Valio'),
-                               self.__add_grocery_to_shop('Tomaatit', 'tomaatit', quantity='kg', amount=1)
+                               self.__add_grocery_to_shop('Tomaatit', 'tomaatit', quantity='kg', amount=1),
+                               self.__add_grocery_to_shop('Jauheliha', 'jauheliha', quantity='g', amount=400)
                                ]
         )
         shop.price = self.__get_basket_price_from_groceries(shop.groceries)

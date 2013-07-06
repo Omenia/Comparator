@@ -9,7 +9,8 @@ Add the Shop With Groceries
     Add Grocery with producer    rasvaton_maito    Valio    ${prices}
     Add Grocery without producer    reissumies    0.79
     Add Grocery without producer    oltermanni    6.95
-    Add Grocery with producer    tomaatit    Tila    ${prices}
+    Add Grocery with producer    tomaatit    Tila    2.19
+    Add Grocery with producer    jauheliha    Reilu    3.29
     Click Element    name=add_shop
 
 Enter to the shop adding page
