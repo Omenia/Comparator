@@ -73,7 +73,9 @@ class AddShop(webapp2.RequestHandler):
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
                     city=self.request.get('city'),
-                    groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1)
+                    groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1),
+                               self.__add_grocery_to_shop('Reissumies', 'reissumies', quantity='kpl', amount=4,
+                                                          manufacturer='Oululainen')
                                ]
         )
         shop.price = self.__get_basket_price_from_groceries(shop.groceries)
@@ -97,6 +99,7 @@ class AddShop(webapp2.RequestHandler):
         if value:
             return value
         else:
+            print grocery_id+'_'+info + ":" + self.request.get(grocery_id+'_'+info)
             return self.request.get(grocery_id+'_'+info)
 
 

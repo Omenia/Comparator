@@ -6,7 +6,8 @@ Add the Shop With Groceries
     [Arguments]    ${name}    ${city}    ${prices}=1
     Enter to the shop adding page
     Add Shop Information    ${name}    ${city}
-    Add Grocery    rasvaton_maito    Valio    ${prices}
+    Add Grocery with producer    rasvaton_maito    Valio    ${prices}
+    Add Grocery without producer    reissumies    0.79
     Click Element    name=add_shop
 
 Enter to the shop adding page
@@ -17,7 +18,7 @@ Add Shop Information
     Input Text    name    ${name}
     Input Text    city    ${city}
 
-Add Grocery
+Add Grocery with producer
     [Arguments]    ${id}    ${name}    ${price}
     Input Text    ${id}_manufacturer    ${name}
     Input Text    ${id}_price    ${price}
@@ -45,3 +46,7 @@ Reload and check if there is not a shop in the list
     [Arguments]    ${shop_name}
     Reload Page
     Page Should Not Contain    ${shop_name}
+
+Add Grocery without producer
+    [Arguments]    ${id}    ${price}
+    Input Text    ${id}_price    ${price}
