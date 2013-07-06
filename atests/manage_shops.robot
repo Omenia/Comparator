@@ -6,7 +6,7 @@ Add the Shop With Groceries
     [Arguments]    ${name}    ${city}    ${prices}=1
     Enter to the shop adding page
     Add Shop Information    ${name}    ${city}
-    Add Grocery    Milk    ${prices}    l    1    rasvaton_maito
+    Add Grocery    rasvaton_maito    Valio    ${prices}
     Click Element    name=add_shop
 
 Enter to the shop adding page
@@ -18,11 +18,9 @@ Add Shop Information
     Input Text    city    ${city}
 
 Add Grocery
-    [Arguments]    ${name}    ${price}    ${quantity}    ${amount}    ${id}
+    [Arguments]    ${id}    ${name}    ${price}
     Input Text    ${id}_manufacturer    ${name}
     Input Text    ${id}_price    ${price}
-    Input Text    ${id}_quantity    ${quantity}
-    Input Text    ${id}_amount    ${amount}
 
 Shop should exict in the list
     [Arguments]    ${shop}
