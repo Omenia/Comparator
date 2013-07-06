@@ -73,7 +73,6 @@ class AddShop(webapp2.RequestHandler):
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
                     city=self.request.get('city'),
-                    #price=float(self.request.get('g1_price')) + float(self.request.get('g2_price')),
                     groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1)
                                ]
         )
