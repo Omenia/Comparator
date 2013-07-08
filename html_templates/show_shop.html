@@ -10,7 +10,7 @@
      <br>
      Ruoat:<br>
      {% for grocery in shop.groceries %}
-        {{ grocery.name}} {{ grocery.price}} <br>
+        {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}} <br>
      {% endfor %}
 
      <form method="post">

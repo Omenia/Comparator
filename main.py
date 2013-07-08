@@ -130,9 +130,9 @@ class EditShop(webapp2.RequestHandler):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
         shop.name = self.request.get('name')
         for grocery in shop.groceries:
-            print grocery
-            print self.request.get(grocery.name+"_price")
             grocery.price = float(self.request.get(grocery.name+"_price"))
+            if grocery.name == ("Jauheliha" or "Tomaatit" or "Rasvaton Maito"):
+                grocery.manufacturer = self.request.get(grocery.name+"_manufacturer")
         shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()
         return self.redirect('/show_shop?shop='+shop.key.urlsafe())

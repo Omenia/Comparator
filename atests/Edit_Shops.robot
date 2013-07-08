@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Create Base Shop
+Test Setup        Create Base Shop
 Resource          manage_shops.robot
 
 *** Variables ***
@@ -15,6 +15,11 @@ Modify one shop and one shop information
 Modify gorcery price in one grocery
     Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
     Check that there are right price and whole basket price is right
+    [Teardown]    Delete Shop    Citymarket Juva
+
+Modify gorcery manufacturor in one grocery
+    Modify Shop Information    Jauheliha_manufacturer    Citymarket Juva    Leon Liha
+    Page Should Contain    Leon Liha
     [Teardown]    Delete Shop    Citymarket Juva
 
 *** Keywords ***
