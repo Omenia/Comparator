@@ -44,11 +44,13 @@ class MainPage(webapp2.RequestHandler):
         else:
           url = users.create_login_url(self.request.uri)
           url_linktext = 'Kirjautuminen'
+        cities = ['Helsinki', 'Espoo', 'Vantaa']
 
         template_values = {
           'shops': shops,
           'url': url,
-          'url_linktext': url_linktext
+          'url_linktext': url_linktext,
+          'cities': cities
         }
 
 
@@ -129,6 +131,7 @@ class EditShop(webapp2.RequestHandler):
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
         shop.name = self.request.get('name')
+        shop.city = self.request.get('city')
         for grocery in shop.groceries:
             grocery.price = float(self.request.get(grocery.name+"_price"))
             if grocery.name == ("Jauheliha" or "Tomaatit" or "Rasvaton Maito"):

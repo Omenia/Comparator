@@ -9,6 +9,12 @@
     <br>
     <form method="post">
       <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+      <select name="city">
+        {% for city in cities %}
+            <option value="{{city}}">{{city}}</option>
+        {% endfor %}
+
+      </select>
     </form>
     <br>
     <a href="{{ url}}">{{ url_linktext }}</a>
