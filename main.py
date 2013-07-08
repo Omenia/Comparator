@@ -50,7 +50,7 @@ class MainPage(webapp2.RequestHandler):
         for shop in shops:
             if shop.city not in cities:
                 cities.append(shop.city)
-        cities.sort()
+        sorted(cities)
         template_values = {
           'shops': shops,
           'url': url,
