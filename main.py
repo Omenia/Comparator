@@ -35,7 +35,9 @@ class Shop(ndb.Model):
 
 
 class MainPage(webapp2.RequestHandler):
+
     def get(self):
+        cities = []
         shops = Shop.query_book().fetch(5)
 
         if users.get_current_user():
@@ -44,8 +46,11 @@ class MainPage(webapp2.RequestHandler):
         else:
           url = users.create_login_url(self.request.uri)
           url_linktext = 'Kirjautuminen'
-        cities = ['Helsinki', 'Espoo', 'Vantaa']
 
+        for shop in shops:
+            if shop.city not in cities:
+                cities.append(shop.city)
+        cities.sort()
         template_values = {
           'shops': shops,
           'url': url,
