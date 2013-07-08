@@ -15,7 +15,7 @@ Modify one shop and one shop information
 Modify gorcery price in one grocery
     Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
     Page Should Contain    42.24
-    [Teardown]    Delete Shop    Juva
+    [Teardown]    Delete Shop    Citymarket Juva
 
 *** Keywords ***
 Modify Shop Information
