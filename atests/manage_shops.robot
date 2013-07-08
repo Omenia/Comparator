@@ -34,6 +34,7 @@ Shop should exict in the list
 
 Delete Shop
     [Arguments]    ${shop}
+    Go To    ${HOST}
     Click Link    ${shop}
     Click Element    delete_shop
     Check that shop is not on main page    ${shop}
