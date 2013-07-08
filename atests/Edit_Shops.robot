@@ -13,8 +13,9 @@ Modify one shop and one shop information
     [Teardown]    Delete Shop    Citymarket Rantasalmi
 
 Modify gorcery price in one grocery
-    Modify Shop Information    oltermanni_price    Citymarket Juva    42.24
+    Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
     Page Should Contain    42.24
+    [Teardown]    Delete Shop    Juva
 
 *** Keywords ***
 Modify Shop Information

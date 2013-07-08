@@ -5,7 +5,15 @@
 </head>
 <body>
  <form method="post">
-    <div>Nimi: <textarea name="name" rows="1" cols="25"> {{shop.name}} </textarea></div>
+    <div>Nimi: <input type="text" required="required" name="name" value="{{shop.name}}" ></div>
+
+     {% for grocery in shop.groceries %}
+         {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}">
+         {% if grocery.name == 'Rasvaton Maito' or grocery.name == 'Tomaatit' or grocery.name == 'Jauheliha' %}
+             <input type = "text" name="{{grocery.name}}_manufacturer" required="required" value="{{grocery.manufacturer}}">
+         {% endif %}
+         <br>
+     {% endfor %}
 
     <div><input type="submit" value="Muuta arvot" name = "edit_shop"></div>
 </form>
