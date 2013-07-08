@@ -86,14 +86,8 @@ class AddShop(webapp2.RequestHandler):
                                                           manufacturer='Fazer')
                                ]
         )
-        shop.price = self.__get_basket_price_from_groceries(shop.groceries)
+        shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()
-
-    def __get_basket_price_from_groceries(self, groceries):
-        price = 0
-        for grocery in groceries:
-            price += grocery.price
-        return price
 
     def __add_grocery_to_shop(self, grocery_name, grocery_id, manufacturer = None, price = None, quantity = None, amount = None):
         return Grocery(name=grocery_name,
@@ -139,6 +133,7 @@ class EditShop(webapp2.RequestHandler):
             print grocery
             print self.request.get(grocery.name+"_price")
             grocery.price = float(self.request.get(grocery.name+"_price"))
+        shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()
         return self.redirect('/show_shop?shop='+shop.key.urlsafe())
 
@@ -151,6 +146,13 @@ def render_shop_page_from_the_template(response, safe_url, page):
 
     template = jinja_environment.get_template(page)
     response.out.write(template.render(template_values))
+
+
+def get_basket_price_from_groceries(groceries):
+    price = 0
+    for grocery in groceries:
+        price += grocery.price
+    return price
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
