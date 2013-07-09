@@ -12,7 +12,7 @@ Add the Shop With Groceries
     Add Grocery with producer    rasvaton_maito    Valio    ${prices}
     Add Grocery without producer    reissumies    0.79
     Add Grocery without producer    oltermanni    6.95
-    Add Grocery with producer    tomaatit    Tila    2.19
+    Add Grocery without producer    tomaatit    2.19
     Add Grocery with producer    jauheliha    Reilu    3.29
     Add Grocery without producer    jogurtti    2.45
     Add Grocery without producer    tutti-frutti    2.69
