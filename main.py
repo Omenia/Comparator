@@ -8,6 +8,7 @@ jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 TEMPLATE_DIR = 'html_templates/'
+USER = None
 
 from google.appengine.ext import ndb
 from google.appengine.api import users
@@ -53,9 +54,11 @@ class MainPage(webapp2.RequestHandler):
         if users.get_current_user():
           url = users.create_logout_url(self.request.uri)
           url_linktext = 'Ulos Kirjautuminen'
+          user = users.get_current_user()
         else:
           url = users.create_login_url(self.request.uri)
           url_linktext = 'Kirjautuminen'
+          user = None
 
         for shop in shops:
             if shop.city not in cities:
@@ -66,7 +69,8 @@ class MainPage(webapp2.RequestHandler):
           'shops': shops,
           'url': url,
           'url_linktext': url_linktext,
-          'cities': cities
+          'cities': cities,
+          'user': user
         }
 
 
@@ -161,11 +165,16 @@ class EditShop(webapp2.RequestHandler):
 
 
 def render_shop_page_from_the_template(response, safe_url, page):
+
+    if users.get_current_user():
+      user = users.get_current_user()
+    else:
+      user = None
     shop = ndb.Key(urlsafe = safe_url).get()
     template_values = {
-        'shop': shop
+        'shop': shop,
+        'user': user
     }
-
     template = jinja_environment.get_template(page)
     response.out.write(template.render(template_values))
 

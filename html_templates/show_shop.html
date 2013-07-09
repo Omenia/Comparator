@@ -13,9 +13,13 @@
         {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}} <br>
      {% endfor %}
 
+     {% if user %}
+
      <form method="post">
         <div><input type="submit" value="Poista kauppa" name = "delete_shop"></div>
         <div><input type="submit" value="Muokkaa kauppaa" name = "edit_shop"></div>
     </form>
+    {% endif %}
+
 </body>
 </html>

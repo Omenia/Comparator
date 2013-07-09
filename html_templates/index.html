@@ -16,7 +16,10 @@
       </select>
     <input type="submit" name="show_city" />
 
-    <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+    {% if user %}
+
+        <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+    {% endif %}
 
     </form>
 
