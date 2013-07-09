@@ -3,11 +3,10 @@
 </head>
 <html>
   <body>
-    {% for shop in shops_to_show %}
-      <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
-    {% endfor %}
-    <br>
-    <form method="post" action = "/">
+  <div>
+  <p class="right"><a href="{{ url}}">{{ url_linktext }}</a></p><br>
+  <img src="pics/logo.png"></img>
+  <form method="post" action = "/">
       <select name="city">
         {% for city in cities %}
             <option>{{city}}</option>
@@ -20,23 +19,25 @@
             <option>50</option>
             <option>100</option>
       </select>
-    <input type="submit" name="set_no_of_shopsity" value="Kauppojen määrä." />
+    <input type="submit" name="set_no_of_shopsity" value="Kauppojen määrä." /><br>
 
     {% if user %}
-        <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+        <input type="submit" value="Luo uusi kauppa" name = "add_shop">
     {% endif %}
 
     </form>
-
+    <p class="main">
+	{% for shop in shops_to_show %}
+     <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
+    {% endfor %}
+	</p>
     <br>
-    <a href="{{ url}}">{{ url_linktext }}</a><br>
-    <br>
-  Sivusto on vielä kokeilutilassa. Kehitämme palvelua käyttäjien toiveiden mukaan. Bugit ja toiveet voi lisätä suoraan
+    
+  <p class="bottom">Sivusto on vielä kokeilutilassa. Kehitämme palvelua käyttäjien toiveiden mukaan. Bugit ja toiveet voi lisätä suoraan
   <a href="https://bitbucket.org/ismaro/ruokakori/issues"> vikaseurantaan.</a> Palautetta voi antaa myös osoitteeseen:
   palaute@ruokakori.net.<br>
-<br>
   Kauppojen tietojen muuttaminen ja uusien lisääminen onnistuu kirjautumalla Google-tunnuksilla palveluun.<br>
-  <br>
-  Palvelun on toteuttanut ProNetworks Solutions Ismo Aro
+  Palvelun on toteuttanut ProNetworks Solutions Ismo Aro<br><br></p>
+  </div>
   </body>
 </html>

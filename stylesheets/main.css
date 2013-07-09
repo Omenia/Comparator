@@ -1,4 +1,29 @@
 body {
   font-family: Verdana, Helvetica, sans-serif;
   background-color: #DDDDDD;
+  background-image:url('../pics/bg.jpg');
+  background-repeat:repeat;
+}
+
+div {
+width:1200px;
+margin:150px;
+margin-left:auto;
+margin-right:auto;
+background-color:#ffffff;
+}
+
+p.main {
+text-align:center;
+}
+p.bottom {
+font-size:small;
+margin-left:20px;
+margin-bottom:50px;
+}
+
+p.right {
+text-align:right;
+margin-right:30px;
+margin-top:40px;
 }
