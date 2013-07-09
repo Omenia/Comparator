@@ -1,6 +1,9 @@
 *** Settings ***
 Library           Selenium 2 Library
 
+*** Variables ***
+${HOST}           http://localhost:8080
+
 *** Keywords ***
 Add the Shop With Groceries
     [Arguments]    ${name}    ${city}    ${prices}=1
@@ -72,3 +75,9 @@ Remove six shops
     Delete Shop    Lidl GC
     Delete Shop    Lidl MP
     Delete Shop    K-Market GC
+
+Open Browser and login
+    Open Browser    ${HOST}
+    Click Link    Kirjautuminen
+    Click Element     id=submit-login
+    Go To    ${HOST}
