@@ -3,20 +3,23 @@
 </head>
 <html>
   <body>
-    {% for shop in shops %}
+    {% for shop in shops_to_show %}
       <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
     <br>
-    <form method="post">
-      <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+    <form method="post" action = "/">
       <select name="city">
         {% for city in cities %}
-            <option value="{{city}}">{{city}}</option>
+            <option>{{city}}</option>
         {% endfor %}
 
       </select>
-    <input type="submit" />
+    <input type="submit" name="show_city" />
+
+    <div><input type="submit" value="Luo uusi kauppa" name = "add_shop"></div>
+
     </form>
+
     <br>
     <a href="{{ url}}">{{ url_linktext }}</a>
 

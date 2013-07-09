@@ -30,15 +30,25 @@ class Shop(ndb.Model):
     groceries  = ndb.StructuredProperty(Grocery, repeated=True)
 
     @classmethod
-    def query_book(cls):
-        return cls.query().order(cls.price)
+    def query_book(cls, qo = None):
+        if qo:
+            print "JEEEEEE"
+            return cls.query(qo).order(cls.price)
+        else:
+            return cls.query().order(cls.price)
 
 
 class MainPage(webapp2.RequestHandler):
 
+
     def get(self):
         cities = []
         shops = Shop.query_book().fetch(5)
+
+        if self.request.get('city'):
+            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(5)
+        else:
+            shops_to_show = Shop.query_book().fetch(5)
 
         if users.get_current_user():
           url = users.create_logout_url(self.request.uri)
@@ -52,6 +62,7 @@ class MainPage(webapp2.RequestHandler):
                 cities.append(shop.city)
         sorted(cities)
         template_values = {
+          'shops_to_show': shops_to_show,
           'shops': shops,
           'url': url,
           'url_linktext': url_linktext,
@@ -65,6 +76,9 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
+        elif self.request.get('show_city'):
+            return self.redirect('/?city='+self.request.get('city'))
+
 
 
 class AddShop(webapp2.RequestHandler):
