@@ -40,16 +40,16 @@ class Shop(ndb.Model):
 
 
 class MainPage(webapp2.RequestHandler):
-
+    shops_to_show = 5
 
     def get(self):
         cities = []
-        shops = Shop.query_book().fetch(5)
+        shops = Shop.query_book().fetch(self.shops_to_show)
 
         if self.request.get('city'):
-            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(5)
+            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.shops_to_show)
         else:
-            shops_to_show = Shop.query_book().fetch(5)
+            shops_to_show = Shop.query_book().fetch(self.shops_to_show)
 
         if users.get_current_user():
           url = users.create_logout_url(self.request.uri)
