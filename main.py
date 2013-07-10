@@ -33,7 +33,6 @@ class Shop(ndb.Model):
     @classmethod
     def query_book(cls, qo = None):
         if qo:
-            print "JEEEEEE"
             return cls.query(qo).order(cls.price)
         else:
             return cls.query().order(cls.price)
@@ -45,7 +44,6 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         cities = []
         shops = Shop.query_book().fetch(self.shops_to_show)
-
         if self.request.get('city'):
             shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.shops_to_show)
         else:
@@ -81,12 +79,13 @@ class MainPage(webapp2.RequestHandler):
 
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
-        elif self.request.get('show_city'):
-            return self.redirect('/?city='+self.request.get('city'))
-        elif self.request.get('set_no_of_shops'):
-            self.shops_to_show = self.request.get('no_of_shops')
-            return self.redirect('/')
-
+        elif self.request.get('apply_filter'):
+            url = ''
+            if self.request.get('city'):
+                url += '?city='+self.request.get('city')
+            if self.request.get('no_of_shops'):
+                url += '&no_of_shop='+ self.request.get('no_of_shops')
+            return self.redirect('/'+url)
 
 
 class AddShop(webapp2.RequestHandler):
