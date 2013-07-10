@@ -49,7 +49,9 @@ class MainPage(webapp2.RequestHandler):
         if self.request.get('no_of_shops'):
             self.shops_to_show = int(self.request.get('no_of_shops'))
         shops = Shop.query_book().fetch(self.shops_to_show)
-        if self.request.get('city'):
+        if self.request.get('postal_code'):
+            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(self.shops_to_show)
+        elif self.request.get('city'):
             shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.shops_to_show)
         else:
             shops_to_show = Shop.query_book().fetch(self.shops_to_show)
@@ -94,6 +96,8 @@ class MainPage(webapp2.RequestHandler):
                 url.append('city='+self.request.get('city'))
             if self.request.get('no_of_shops'):
                 url.append('no_of_shops='+self.request.get('no_of_shops'))
+            if self.request.get('postal_code'):
+                url.append('postal_code='+self.request.get('postal_code'))
             return self.redirect('/?'+"&".join(url))
         elif self.request.get('clear_filter'):
             return self.redirect('/')
@@ -112,6 +116,7 @@ class AddShop(webapp2.RequestHandler):
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
                     city=self.request.get('city'),
+                    postal_code=self.request.get('postal_code'),
                     groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1),
                                self.__add_grocery_to_shop('Reissumies', 'reissumies', quantity='kpl', amount=4,
                                                           manufacturer='Oululainen'),
@@ -170,6 +175,7 @@ class EditShop(webapp2.RequestHandler):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
         shop.name = self.request.get('name')
         shop.city = self.request.get('city')
+        shop.postal_code = self.request.get('postal_code')
         for grocery in shop.groceries:
             grocery.price = float(self.request.get(grocery.name+"_price"))
             if grocery.name == ("Jauheliha" or "Tomaatit" or "Rasvaton Maito"):

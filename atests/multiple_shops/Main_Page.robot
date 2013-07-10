@@ -1,4 +1,5 @@
 *** Settings ***
+Test Setup        Go To    ${HOST}
 Resource          ../manage_shops.robot
 
 *** Variables ***
@@ -15,6 +16,16 @@ Filter more tha five shops.
 
 Filter shops by cities
     Select From List    city    Gotham City
+    Click Element    name=apply_filter
+    Page Should Contain    S-Market GC
+    Page Should Not Contain    S-Market MP
+    Page Should Contain    K-Market GC
+    Page Should Not Contain    K-Market MP
+    Page Should Contain    Lidl GC
+    Page Should Not Contain    Lidl MP
+
+Filter shops by postal code
+    Select From List    postal_code    00500
     Click Element    name=apply_filter
     Page Should Contain    S-Market GC
     Page Should Not Contain    S-Market MP

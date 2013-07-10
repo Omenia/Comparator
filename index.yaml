@@ -20,3 +20,8 @@ indexes:
   properties:
   - name: city
   - name: price
+
+- kind: Shop
+  properties:
+  - name: postal_code
+  - name: price
