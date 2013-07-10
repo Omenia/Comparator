@@ -9,7 +9,7 @@ ${HOST}           http://localhost:8080
 Modify one shop and one shop information
     Modify Shop Information    name    Citymarket Juva    Citymarket Rantasalmi
     Go To    ${HOST}
-    Shop should exict in the list    Citymarket Rantasalmi
+    Shop should exict on main page    Citymarket Rantasalmi
     [Teardown]    Delete Shop    Citymarket Rantasalmi
 
 Modify gorcery price in one grocery
@@ -32,7 +32,7 @@ Modify Shop Information
 
 Create Base Shop
     Add the Shop With Groceries    Citymarket Juva    Juva
-    Shop should exict in the list    Citymarket Juva
+    Shop should exict on main page    Citymarket Juva
 
 Check that there are right price and whole basket price is right
     Page Should Contain    42.24

@@ -78,12 +78,14 @@ class MainPage(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
 
     def post(self):
+
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
         elif self.request.get('show_city'):
             return self.redirect('/?city='+self.request.get('city'))
         elif self.request.get('set_no_of_shops'):
             self.shops_to_show = self.request.get('no_of_shops')
+            return self.redirect('/')
 
 
 

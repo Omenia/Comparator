@@ -31,7 +31,7 @@ Add Grocery with producer
     Input Text    ${id}_manufacturer    ${name}
     Input Text    ${id}_price    ${price}
 
-Shop should exict in the list
+Shop should exict on main page
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is a right shop in the list    ${shop}
 
@@ -40,9 +40,9 @@ Delete Shop
     Go To    ${HOST}
     Click Link    ${shop}
     Click Element    delete_shop
-    Check that shop is not on main page    ${shop}
+    Shop should not exict on main page    ${shop}
 
-Check that shop is not on main page
+Shop should not exict on main page
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is not a shop in the list    ${shop}
 
@@ -79,5 +79,5 @@ Remove six shops
 Open Browser and login
     Open Browser    ${HOST}
     Click Link    Kirjautuminen
-    Click Element     id=submit-login
+    Click Element    id=submit-login
     Go To    ${HOST}
