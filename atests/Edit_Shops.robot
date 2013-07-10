@@ -31,7 +31,7 @@ Modify Shop Information
     Click Element    name=edit_shop
 
 Create Base Shop
-    Add the Shop With Groceries    Citymarket Juva    Juva
+    Add the Shop With Groceries    Citymarket Juva    Juva    00100
     Shop should exict on main page    Citymarket Juva
 
 Check that there are right price and whole basket price is right

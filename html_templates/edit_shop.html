@@ -7,6 +7,7 @@
  <form method="post">
     <div>Nimi: <input type="text" required="required" name="name" value="{{shop.name}}" ></div>
     <div>Kaupunki: <input type="text" required="required" name="city" value="{{shop.city}}" ></div>
+    <div>Postinumero: <input type="text" required="required" name="postal_code" value="{{shop.postal_code}}" ></div>
 
      {% for grocery in shop.groceries %}
          {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}">

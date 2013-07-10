@@ -26,6 +26,7 @@ class Shop(ndb.Model):
     """Models an individual shop"""
     name = ndb.StringProperty()
     city = ndb.StringProperty()
+    postal_code = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     price = ndb.FloatProperty()
     groceries  = ndb.StructuredProperty(Grocery, repeated=True)
@@ -43,6 +44,8 @@ class MainPage(webapp2.RequestHandler):
 
     def get(self):
         cities = []
+        postal_codes = []
+
         if self.request.get('no_of_shops'):
             self.shops_to_show = int(self.request.get('no_of_shops'))
         shops = Shop.query_book().fetch(self.shops_to_show)
@@ -63,14 +66,18 @@ class MainPage(webapp2.RequestHandler):
         for shop in shops:
             if shop.city not in cities:
                 cities.append(shop.city)
+            if shop.postal_code not in postal_codes:
+                postal_codes.append(shop.postal_code)
         sorted(cities)
+        sorted(postal_codes)
         template_values = {
           'shops_to_show': shops_to_show,
           'shops': shops,
           'url': url,
           'url_linktext': url_linktext,
           'cities': cities,
-          'user': user
+          'user': user,
+          'postal_codes': postal_codes
         }
 
 

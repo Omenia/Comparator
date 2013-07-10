@@ -14,11 +14,18 @@
         {% endfor %}
       </select>
         <select name="no_of_shops">
-            <option>5</option>
+            <option selected='selected'>5</option>
             <option>20</option>
             <option>50</option>
             <option>100</option>
       </select>
+      <select name="city">
+        <option selected= 'selected'></option>
+        {% for pc in postal_codes %}
+            <option>{{pc}}</option>
+        {% endfor %}
+      </select>
+
     <input type="submit" name="apply_filter" value="Aseta suodatin" />
     <input type="submit" name="clear_filter" value="Tyhjennä suodatin" />
       <br>

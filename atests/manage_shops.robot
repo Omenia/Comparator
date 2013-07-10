@@ -6,9 +6,9 @@ ${HOST}           http://localhost:8080
 
 *** Keywords ***
 Add the Shop With Groceries
-    [Arguments]    ${name}    ${city}    ${prices}=1
+    [Arguments]    ${name}    ${city}    ${postal_code}    ${prices}=1
     Enter to the shop adding page
-    Add Shop Information    ${name}    ${city}
+    Add Shop Information    ${name}    ${city}    ${postal_code}
     Add Grocery with producer    rasvaton_maito    Valio    ${prices}
     Add Grocery without producer    reissumies    0.79
     Add Grocery without producer    oltermanni    6.95
@@ -22,9 +22,10 @@ Enter to the shop adding page
     Click Element    name=add_shop
 
 Add Shop Information
-    [Arguments]    ${name}    ${city}
+    [Arguments]    ${name}    ${city}    ${postal_code}
     Input Text    name    ${name}
     Input Text    city    ${city}
+    Input Text    postal_code    ${postal_code}
 
 Add Grocery with producer
     [Arguments]    ${id}    ${name}    ${price}
@@ -61,12 +62,12 @@ Add Grocery without producer
     Input Text    ${id}_price    ${price}
 
 Create six shops with the different total price.
-    Add the Shop With Groceries    S-Market GC    Gotham City
-    Add the Shop With Groceries    S-Market MP    Megapolis    5
-    Add the Shop With Groceries    K-Market GC    Gotham City    3
-    Add the Shop With Groceries    K-Market MP    Megapolis    6
-    Add the Shop With Groceries    Lidl GC    Gotham City    2
-    Add the Shop With Groceries    Lidl MP    Megapolis    4
+    Add the Shop With Groceries    S-Market GC    Gotham City    00500
+    Add the Shop With Groceries    S-Market MP    Megapolis    02340    5
+    Add the Shop With Groceries    K-Market GC    Gotham City    00500    3
+    Add the Shop With Groceries    K-Market MP    Megapolis    02340    6
+    Add the Shop With Groceries    Lidl GC    Gotham City    00500    2
+    Add the Shop With Groceries    Lidl MP    Megapolis    02340    4
 
 Remove six shops
     Delete Shop    S-Market GC
