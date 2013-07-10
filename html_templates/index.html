@@ -8,6 +8,7 @@
   <img src="pics/logo.png"></img>
   <form method="post" action = "/">
       <select name="city">
+            <option selected= 'selected'></option>
         {% for city in cities %}
             <option>{{city}}</option>
         {% endfor %}

@@ -82,12 +82,12 @@ class MainPage(webapp2.RequestHandler):
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
         elif self.request.get('apply_filter'):
-            url = ''
+            url = []
             if self.request.get('city'):
-                url += '?city='+self.request.get('city')
+                url.append('city='+self.request.get('city'))
             if self.request.get('no_of_shops'):
-                url += '&no_of_shops='+ self.request.get('no_of_shops')
-            return self.redirect('/'+url)
+                url.append('no_of_shops='+ self.request.get('no_of_shops'))
+            return self.redirect('/?'+"&".join(url))
         elif self.request.get('clear_filter'):
             return self.redirect('/')
 
