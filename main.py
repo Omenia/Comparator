@@ -86,7 +86,7 @@ class MainPage(webapp2.RequestHandler):
             if self.request.get('city'):
                 url.append('city='+self.request.get('city'))
             if self.request.get('no_of_shops'):
-                url.append('no_of_shops='+ self.request.get('no_of_shops'))
+                url.append('no_of_shops='+self.request.get('no_of_shops'))
             return self.redirect('/?'+"&".join(url))
         elif self.request.get('clear_filter'):
             return self.redirect('/')

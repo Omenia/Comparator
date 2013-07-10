@@ -10,12 +10,12 @@ With default setting by five shown shops, one should no been seen
 
 Filter more tha five shops.
     Select From List    no_of_shops    20
-    Click Element    name=set_no_of_shops
+    Click Element    name=apply_filter
     Shop should exict on main page    K-Market MP
 
 Filter shops by cities
     Select From List    city    Gotham City
-    Click Element    name=show_city
+    Click Element    name=apply_filter
     Page Should Contain    S-Market GC
     Page Should Not Contain    S-Market MP
     Page Should Contain    K-Market GC
