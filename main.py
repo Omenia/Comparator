@@ -43,6 +43,8 @@ class MainPage(webapp2.RequestHandler):
 
     def get(self):
         cities = []
+        if self.request.get('no_of_shops'):
+            self.shops_to_show = int(self.request.get('no_of_shops'))
         shops = Shop.query_book().fetch(self.shops_to_show)
         if self.request.get('city'):
             shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.shops_to_show)
@@ -84,8 +86,10 @@ class MainPage(webapp2.RequestHandler):
             if self.request.get('city'):
                 url += '?city='+self.request.get('city')
             if self.request.get('no_of_shops'):
-                url += '&no_of_shop='+ self.request.get('no_of_shops')
+                url += '&no_of_shops='+ self.request.get('no_of_shops')
             return self.redirect('/'+url)
+        elif self.request.get('clear_filter'):
+            return self.redirect('/')
 
 
 class AddShop(webapp2.RequestHandler):
