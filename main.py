@@ -56,14 +56,7 @@ class MainPage(webapp2.RequestHandler):
         else:
             shops_to_show = Shop.query_book().fetch(self.shops_to_show)
 
-        if users.get_current_user():
-          url = users.create_logout_url(self.request.uri)
-          url_linktext = 'Ulos Kirjautuminen'
-          user = users.get_current_user()
-        else:
-          url = users.create_login_url(self.request.uri)
-          url_linktext = 'Kirjautuminen'
-          user = None
+        url, url_linktext, user = self.__return_user_and_login_url()
 
         for shop in shops:
             if shop.city not in cities:
@@ -86,6 +79,7 @@ class MainPage(webapp2.RequestHandler):
         template = jinja_environment.get_template(TEMPLATE_DIR+'index.html')
         self.response.out.write(template.render(template_values))
 
+
     def post(self):
 
         if self.request.get('add_shop'):
@@ -101,6 +95,17 @@ class MainPage(webapp2.RequestHandler):
             return self.redirect('/?'+"&".join(url))
         elif self.request.get('clear_filter'):
             return self.redirect('/')
+
+    def __return_user_and_login_url(self):
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Ulos Kirjautuminen'
+            user = users.get_current_user()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Kirjautuminen'
+            user = None
+        return url, url_linktext, user
 
 
 class AddShop(webapp2.RequestHandler):
