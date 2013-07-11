@@ -40,24 +40,21 @@ class Shop(ndb.Model):
 
 
 class MainPage(webapp2.RequestHandler):
-    shops_to_show = 5
+    amount_of_shops = 5
 
     def get(self):
 
         if self.request.get('no_of_shops'):
-            self.shops_to_show = int(self.request.get('no_of_shops'))
-        shops = Shop.query_book().fetch(self.shops_to_show)
+            self.amount_of_shops = int(self.request.get('no_of_shops'))
+        shops = Shop.query_book().fetch(self.amount_of_shops)
         if self.request.get('postal_code'):
-            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(self.shops_to_show)
+            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(self.amount_of_shops)
         elif self.request.get('city'):
-            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.shops_to_show)
+            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.amount_of_shops)
         else:
-            shops_to_show = Shop.query_book().fetch(self.shops_to_show)
-
+            shops_to_show = Shop.query_book().fetch(self.amount_of_shops)
         url, url_linktext, user = self.__return_user_and_login_url()
-
         cities, postal_codes = self.__get_cities_and_postal_codes(shops)
-
         template_values = {
           'shops_to_show': shops_to_show,
           'shops': shops,
