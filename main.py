@@ -43,8 +43,6 @@ class MainPage(webapp2.RequestHandler):
     shops_to_show = 5
 
     def get(self):
-        cities = []
-        postal_codes = []
 
         if self.request.get('no_of_shops'):
             self.shops_to_show = int(self.request.get('no_of_shops'))
@@ -58,13 +56,8 @@ class MainPage(webapp2.RequestHandler):
 
         url, url_linktext, user = self.__return_user_and_login_url()
 
-        for shop in shops:
-            if shop.city not in cities:
-                cities.append(shop.city)
-            if shop.postal_code not in postal_codes:
-                postal_codes.append(shop.postal_code)
-        sorted(cities)
-        sorted(postal_codes)
+        cities, postal_codes = self.__get_cities_and_postal_codes(shops)
+
         template_values = {
           'shops_to_show': shops_to_show,
           'shops': shops,
@@ -75,10 +68,8 @@ class MainPage(webapp2.RequestHandler):
           'postal_codes': postal_codes
         }
 
-
         template = jinja_environment.get_template(TEMPLATE_DIR+'index.html')
         self.response.out.write(template.render(template_values))
-
 
     def post(self):
 
@@ -107,6 +98,15 @@ class MainPage(webapp2.RequestHandler):
             user = None
         return url, url_linktext, user
 
+    def __get_cities_and_postal_codes(self, shops):
+        cities = []
+        postal_codes = []
+        for shop in shops:
+            if shop.city not in cities:
+                cities.append(shop.city)
+            if shop.postal_code not in postal_codes:
+                postal_codes.append(shop.postal_code)
+        return sorted(cities), sorted(postal_codes)
 
 class AddShop(webapp2.RequestHandler):
 
