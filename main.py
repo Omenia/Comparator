@@ -76,14 +76,7 @@ class MainPage(webapp2.RequestHandler):
         if self.request.get('add_shop'):
             return self.redirect('/add_shop')
         elif self.request.get('apply_filter'):
-            url = []
-            if self.request.get('city'):
-                url.append('city='+self.request.get('city'))
-            if self.request.get('no_of_shops'):
-                url.append('no_of_shops='+self.request.get('no_of_shops'))
-            if self.request.get('postal_code'):
-                url.append('postal_code='+self.request.get('postal_code'))
-            return self.redirect('/?'+"&".join(url))
+            return self.redirect(self.__generate_url_with_filters())
         elif self.request.get('clear_filter'):
             return self.redirect('/')
 
@@ -107,6 +100,17 @@ class MainPage(webapp2.RequestHandler):
             if shop.postal_code not in postal_codes:
                 postal_codes.append(shop.postal_code)
         return sorted(cities), sorted(postal_codes)
+
+    def __generate_url_with_filters(self):
+        url_components = []
+        if self.request.get('city'):
+            url_components.append('city=' + self.request.get('city'))
+        if self.request.get('no_of_shops'):
+            url_components.append('no_of_shops=' + self.request.get('no_of_shops'))
+        if self.request.get('postal_code'):
+            url_components.append('postal_code=' + self.request.get('postal_code'))
+        return '/?' + "&".join(url_components)
+
 
 class AddShop(webapp2.RequestHandler):
 
