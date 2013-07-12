@@ -1,34 +1,28 @@
-<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-<body>
+{% extends "base.html" %}
+{% block content %}
 <form method="post">
-      <br>
-      <div>Nimi: <input type="text" required="required" name="name"</div>
-      <div>Kaupunki: <input type="text" required="required" name="city" ></div>
-      <div>Postinumero: <input type="text" required="required" name="postal_code"></div>
-      <br>
-      Suomalainen rasvaton maito 1l:
-      <div>Tuottaja: <input type="text" required="required" name="rasvaton_maito_manufacturer"> </div>
-      <div>Hinta: <input type="number" step="any" required="required" name="rasvaton_maito_price"></div>
-     Reissumies 4kpl:
-      <div>Hinta: <input type="number" step="any" required="required" name="reissumies_price" ></div>
-     Oltermanni Juusto 1kg:
-      <div>Hinta: <input type="number" step="any" required="required" name="oltermanni_price" ></div>
-     Suomalaiset tomaatit 1kg:
-    <div>Hinta: <input type="number" step="any" required="required" name="tomaatit_price"></textarea></div>
-    Suomalainen naudan jauheliha 400g:
-    <div>Tuottaja: <input type="text" required="required" name="jauheliha_manufacturer" ></div>
-    <div>Hinta: <input type="number" step="any" required="required" name="jauheliha_price" ></div>
-    Maustettu Jogurtti Arla & Igman 1l:
-    <div>Hinta: <input type="number" step="any" required="required" name="jogurtti_price" ></div>
-    Tutti-Frutti Karkkipussi  400g:
-    <div>Hinta: <input type="number" step="any" required="required" name="tutti-frutti_price"></div>
-    Juhlamokka Kahvi 500g:
-    <div>Hinta: <input type="number" step="any" required="required" name="kahvi_price"></div>
-
-      <div><input type="submit" value="Luo kauppa" name = "add_shop"></div>
+    Nimi: <input type="text" required="required" name="name"><br>
+    Kaupunki: <input type="text" required="required" name="city" ><br>
+    Postinumero: <input type="text" required="required" name="postal_code"><br>
+    <br>
+    Suomalainen rasvaton maito 1l:<br>
+    Tuottaja: <input type="text" required="required" name="rasvaton_maito_manufacturer"><br>
+    Hinta: <input type="number" step="any" required="required" name="rasvaton_maito_price"><br>
+    Reissumies 4kpl:<br>
+    Hinta: <input type="number" step="any" required="required" name="reissumies_price" ><br>
+    Oltermanni Juusto 1kg:<br>
+    Hinta: <input type="number" step="any" required="required" name="oltermanni_price" ><br>
+    Suomalaiset tomaatit 1kg:<br>
+    Hinta: <input type="number" step="any" required="required" name="tomaatit_price"><br>
+    Suomalainen naudan jauheliha 400g:<br>
+    Tuottaja: <input type="text" required="required" name="jauheliha_manufacturer" ><br>
+    Hinta: <input type="number" step="any" required="required" name="jauheliha_price" ><br>
+    Maustettu Jogurtti Arla & Igman 1l:<br>
+    Hinta: <input type="number" step="any" required="required" name="jogurtti_price" ><br>
+    Tutti-Frutti Karkkipussi  400g:<br>
+    Hinta: <input type="number" step="any" required="required" name="tutti-frutti_price"><br>
+    Juhlamokka Kahvi 500g:<br>
+    Hinta: <input type="number" step="any" required="required" name="kahvi_price"><br>
+    <input type="submit" value="Luo kauppa" name = "add_shop"><br>
 </form>
-
-</body>
-</html>
+{% endblock %}
