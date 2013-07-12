@@ -130,7 +130,7 @@ class AddShop(webapp2.RequestHandler):
                                                           manufacturer='Valio'),
                                self.__add_grocery_to_shop('Tomaatit', 'tomaatit', quantity='kg', amount=1,
                                                           manufacturer='Suomalainen'),
-                               self.__add_grocery_to_shop('Jauheliha', 'jauheliha', quantity='g', amount=400),
+                               self.__add_grocery_to_shop('Naudan Jauheliha', 'jauheliha', quantity='g', amount=400),
                                self.__add_grocery_to_shop('Jogurtti', 'jogurtti', quantity='l', amount=1,
                                                           manufacturer='Arla & Ingman'),
                                self.__add_grocery_to_shop('Tutti-Frutti', 'tutti-frutti', quantity='g', amount=400,
@@ -186,7 +186,7 @@ class EditShop(webapp2.RequestHandler):
         shop.postal_code = self.request.get('postal_code')
         for grocery in shop.groceries:
             grocery.price = float(self.request.get(grocery.name+"_price"))
-            if grocery.name == ("Jauheliha" or "Tomaatit" or "Rasvaton Maito"):
+            if grocery.name == ("Naudan Jauheliha" or "Tomaatit" or "Rasvaton Maito"):
                 grocery.manufacturer = self.request.get(grocery.name+"_manufacturer")
         shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()

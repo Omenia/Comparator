@@ -18,7 +18,7 @@ Modify gorcery price in one grocery
     [Teardown]    Delete Shop    Citymarket Juva
 
 Modify gorcery manufacturor in one grocery
-    Modify Shop Information    Jauheliha_manufacturer    Citymarket Juva    Leon Liha
+    Modify Shop Information    Naudan Jauheliha_manufacturer    Citymarket Juva    Leon Liha
     Page Should Contain    Leon Liha
     [Teardown]    Delete Shop    Citymarket Juva
 
