@@ -11,7 +11,7 @@
 
      {% for grocery in shop.groceries %}
          {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}">
-         {% if grocery.name == 'Rasvaton Maito' or grocery.name == 'Jauheliha' %}
+         {% if grocery.name == 'Rasvaton Maito' or grocery.name == 'Naudan Jauheliha' %}
              <input type = "text" name="{{grocery.name}}_manufacturer" required="required" value="{{grocery.manufacturer}}">
          {% endif %}
          <br>
