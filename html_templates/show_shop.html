@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
      Nimi: {{shop.name}} <br>
      Kaupunki: {{shop.city}} <br>
      Postinumero: {{shop.postal_code}}
@@ -17,10 +13,9 @@
      {% if user %}
 
      <form method="post">
-        <div><input type="submit" value="Poista kauppa" name = "delete_shop"></div>
-        <div><input type="submit" value="Muokkaa kauppaa" name = "edit_shop"></div>
+        <input type="submit" value="Poista kauppa" name = "delete_shop">
+        <input type="submit" value="Muokkaa kauppaa" name = "edit_shop">
     </form>
     {% endif %}
 
-</body>
-</html>
+{% endblock %}
