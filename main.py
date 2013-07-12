@@ -134,7 +134,9 @@ class AddShop(webapp2.RequestHandler):
                                self.__add_grocery_to_shop('Jogurtti', 'jogurtti', quantity='l', amount=1,
                                                           manufacturer='Arla & Ingman'),
                                self.__add_grocery_to_shop('Tutti-Frutti', 'tutti-frutti', quantity='g', amount=400,
-                                                          manufacturer='Fazer')
+                                                          manufacturer='Fazer'),
+                               self.__add_grocery_to_shop('Juhlamokka Kahvi', 'kahvi', quantity='g', amount=500,
+                                                          manufacturer='Paulig')
                                ]
         )
         shop.price = get_basket_price_from_groceries(shop.groceries)

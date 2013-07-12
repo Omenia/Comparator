@@ -36,4 +36,4 @@ Create Base Shop
 
 Check that there are right price and whole basket price is right
     Page Should Contain    42.24
-    Page Should Contain    54.65
+    Page Should Contain    57.9
