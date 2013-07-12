@@ -4,10 +4,11 @@ import webapp2
 import jinja2
 import os
 
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
-
 TEMPLATE_DIR = 'html_templates/'
+
+jinja_environment = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(TEMPLATE_DIR))
+
 USER = None
 
 from google.appengine.ext import ndb
@@ -65,7 +66,7 @@ class MainPage(webapp2.RequestHandler):
           'postal_codes': postal_codes
         }
 
-        template = jinja_environment.get_template(TEMPLATE_DIR+'index.html')
+        template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(template_values))
 
     def post(self):
@@ -112,7 +113,7 @@ class MainPage(webapp2.RequestHandler):
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
-        template = jinja_environment.get_template(TEMPLATE_DIR+'add_shop.html')
+        template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
 
     def post(self):
@@ -154,7 +155,6 @@ class AddShop(webapp2.RequestHandler):
         if value:
             return value
         else:
-            print grocery_id+'_'+info + ":" + self.request.get(grocery_id+'_'+info)
             return self.request.get(grocery_id+'_'+info)
 
 
@@ -162,7 +162,7 @@ class ShowShop(webapp2.RequestHandler):
 
     def get(self):
         safe_url = self.request.get('shop')
-        render_shop_page_from_the_template(self.response, safe_url, TEMPLATE_DIR+'show_shop.html')
+        render_shop_page_from_the_template(self.response, safe_url, 'show_shop.html')
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
@@ -177,7 +177,7 @@ class ShowShop(webapp2.RequestHandler):
 class EditShop(webapp2.RequestHandler):
     def get(self):
         safe_url = self.request.get('shop')
-        render_shop_page_from_the_template(self.response, safe_url, TEMPLATE_DIR+'edit_shop.html')
+        render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()

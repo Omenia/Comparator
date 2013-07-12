@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    {% block head %}
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <title>Ruokakori.net</title>
+    {% endblock %}
+</head>
+<body>
+    <div id= "top">
+        {% block top %}
+        <img src="pics/logo.jpg"></img><br>
+        <a href="{{ url}}">{{ url_linktext}}</a><br>
+        <br>Löydä alueesi halvin ruokakori<br><br>
+        {% endblock %}
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        <img src="pics/note.jpg" class="float_left"></img>
+        <p class="bottom">Sivusto on vielä kokeilutilassa. Kehitämme palvelua käyttäjien toiveiden mukaan. Bugit ja toiveet
+        voi lisätä suoraan <a href="https://bitbucket.org/ismaro/ruokakori/issues">vikaseurantaan</a>.<br> Palautetta voi
+        antaa myös osoitteeseen: <a href = "mailto:palaute@ruokakori.net?subject=Palautetta ruokakori.net palvelusta">
+        palaute@ruokakori.net</a>.<br>Kauppojen tietojen muuttaminen ja uusien lisääminen onnistuu kirjautumalla Google-tunnuksilla palveluun.<br>Palvelun on toteuttanut ProNetworks Solutions</p>
+
+        <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-42398393-1', 'ruokakori.net');
+              ga('send', 'pageview');
+        </script>
+        {% endblock %}
+    </div>
+</body>
