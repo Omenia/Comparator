@@ -2,7 +2,6 @@
 
 import webapp2
 import jinja2
-import os
 
 TEMPLATE_DIR = 'html_templates/'
 
@@ -30,7 +29,7 @@ class Shop(ndb.Model):
     postal_code = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     price = ndb.FloatProperty()
-    groceries  = ndb.StructuredProperty(Grocery, repeated=True)
+    groceries = ndb.StructuredProperty(Grocery, repeated=True)
 
     @classmethod
     def query_book(cls, qo = None):
@@ -146,7 +145,7 @@ class AddShop(webapp2.RequestHandler):
     def __add_grocery_to_shop(self, grocery_name, grocery_id, manufacturer = None, price = None, quantity = None, amount = None):
         return Grocery(name=grocery_name,
                        manufacturer=self.__return_value_to_the_grocery('manufacturer', manufacturer, grocery_id),
-                       price=float(self.__return_value_to_the_grocery('price', price, grocery_id)),
+                       price=float(self.__return_value_to_the_grocery('price', price, grocery_id).replace(',', '.')),
                        quantity=self.__return_value_to_the_grocery('quantity', quantity, grocery_id),
                        amount=float(self.__return_value_to_the_grocery('amount', amount, grocery_id))
                        )
