@@ -145,10 +145,16 @@ class AddShop(webapp2.RequestHandler):
     def __add_grocery_to_shop(self, grocery_name, grocery_id, manufacturer = None, price = None, quantity = None, amount = None):
         return Grocery(name=grocery_name,
                        manufacturer=self.__return_value_to_the_grocery('manufacturer', manufacturer, grocery_id),
-                       price=float(self.__return_value_to_the_grocery('price', price, grocery_id).replace(',', '.')),
+                       price=self.__format_number_with_dot(self.__return_value_to_the_grocery('price', price, grocery_id)),
                        quantity=self.__return_value_to_the_grocery('quantity', quantity, grocery_id),
-                       amount=float(self.__return_value_to_the_grocery('amount', amount, grocery_id))
+                       amount=self.__format_number_with_dot(self.__return_value_to_the_grocery('amount', amount, grocery_id))
                        )
+
+    def __format_number_with_dot(self, number):
+        if isinstance(number, int):
+            return float(number)
+        else:
+            return float(number.replace(',', '.'))
 
     def __return_value_to_the_grocery(self, info, value, grocery_id):
         if value:
