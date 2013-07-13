@@ -19,7 +19,10 @@ Modify gorcery price in one grocery
 
 Modify gorcery manufacturor in one grocery
     Modify Shop Information    Naudan Jauheliha_manufacturer    Citymarket Juva    Leon Liha
+    Go To    ${HOST}
+    Modify Shop Information    Rasvaton Maito_manufacturer    Citymarket Juva    Sonjan Meijeri
     Page Should Contain    Leon Liha
+    Page Should Contain    Sonjan Meijeri
     [Teardown]    Delete Shop    Citymarket Juva
 
 *** Keywords ***
