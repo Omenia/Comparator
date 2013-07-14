@@ -40,24 +40,14 @@ class Shop(ndb.Model):
 
 
 class MainPage(webapp2.RequestHandler):
-    amount_of_shops = 5
 
     def get(self):
 
-        if self.request.get('no_of_shops'):
-            self.amount_of_shops = int(self.request.get('no_of_shops'))
-        shops = Shop.query_book().fetch(self.amount_of_shops)
-        if self.request.get('postal_code'):
-            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(self.amount_of_shops)
-        elif self.request.get('city'):
-            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(self.amount_of_shops)
-        else:
-            shops_to_show = Shop.query_book().fetch(self.amount_of_shops)
+        shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
-        cities, postal_codes = self.__get_cities_and_postal_codes(shops)
+        cities, postal_codes = self.__get_cities_and_postal_codes()
         template_values = {
           'shops_to_show': shops_to_show,
-          'shops': shops,
           'url': url,
           'url_linktext': url_linktext,
           'cities': cities,
@@ -77,6 +67,18 @@ class MainPage(webapp2.RequestHandler):
         elif self.request.get('clear_filter'):
             return self.redirect('/')
 
+    def __create_shops_which_are_shown(self):
+        amount_of_shops = 5
+        if self.request.get('no_of_shops'):
+            amount_of_shops = int(self.request.get('no_of_shops'))
+        if self.request.get('postal_code'):
+            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(amount_of_shops)
+        elif self.request.get('city'):
+            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(amount_of_shops)
+        else:
+            shops_to_show = Shop.query_book().fetch(amount_of_shops)
+        return shops_to_show
+
     def __return_user_and_login_url(self):
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
@@ -88,7 +90,9 @@ class MainPage(webapp2.RequestHandler):
             user = None
         return url, url_linktext, user
 
-    def __get_cities_and_postal_codes(self, shops):
+    def __get_cities_and_postal_codes(self):
+        #TODO: This is nasty and costly one. We are just fetching all shops from the DB.
+        shops = Shop.query_book().fetch(1000)
         cities = []
         postal_codes = []
         for shop in shops:
