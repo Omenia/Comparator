@@ -5,13 +5,13 @@
     {% endfor %}
 	<form method="post" action = "/">
     <select name="city">
-        <option selected= 'selected'>Kaupunki</option>
+        <option selected= 'selected' value = "">Kaupunki</option>
         {% for city in cities %}
             <option>{{city}}</option>
         {% endfor %}
     </select>
     <select name="area">
-        <option selected= 'selected'>Alue</option>
+        <option selected= 'selected' value = "" >Alue</option>
         {% for area in areas %}
             <option>{{area}}</option>
         {% endfor %}
@@ -23,7 +23,7 @@
         <option>100</option>
     </select>
     <select name="postal_code">
-        <option selected= 'selected'>Postinumero</option>
+        <option selected= 'selected' value="">Postinumero</option>
         {% for pc in postal_codes %}
             <option>{{pc}}</option>
         {% endfor %}
