@@ -2,6 +2,7 @@
 
 import webapp2
 import jinja2
+import urllib2
 
 TEMPLATE_DIR = 'html_templates/'
 
@@ -112,9 +113,9 @@ class MainPage(webapp2.RequestHandler):
     def __generate_url_with_filters(self):
         url_components = []
         if self.request.get('city'):
-            url_components.append('city=' + self.request.get('city'))
+            url_components.append('city=' + urllib2.quote(self.request.get('city').encode('utf8')))
         if self.request.get('area'):
-            url_components.append('area=' + self.request.get('area'))
+            url_components.append('area=' + urllib2.quote(self.request.get('area').encode('utf8')))
         if self.request.get('no_of_shops'):
             url_components.append('no_of_shops=' + self.request.get('no_of_shops'))
         if self.request.get('postal_code'):
