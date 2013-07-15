@@ -22,8 +22,8 @@ text-align:right;
 margin-right:30px;
 margin-top:40px;
 }
-
-img.float_left { 
-    float: left; 
-	margin-top:0;
+	
+img
+{  border-style: none;
 }
+
