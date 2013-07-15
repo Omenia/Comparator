@@ -18,6 +18,11 @@ indexes:
 
 - kind: Shop
   properties:
+  - name: area
+  - name: price
+
+- kind: Shop
+  properties:
   - name: city
   - name: price
 

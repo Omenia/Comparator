@@ -74,7 +74,7 @@ class MainPage(webapp2.RequestHandler):
         if self.request.get('no_of_shops'):
             amount_of_shops = int(self.request.get('no_of_shops'))
         if self.request.get('area'):
-            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('area')).fetch(amount_of_shops)
+            shops_to_show = Shop.query_book(Shop.area == self.request.get('area')).fetch(amount_of_shops)
         elif self.request.get('postal_code'):
             shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(amount_of_shops)
         elif self.request.get('city'):
