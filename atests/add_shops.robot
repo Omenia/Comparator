@@ -17,12 +17,15 @@ Add one shop, with one price with comma.
 
 Add one shop with scnadic character
     Add the Shop With Groceries    S-Market    Mäntsälä    Mäntsälä    00500
-    Shop should exict on main page    S-Market Mäntsälä
+    ${shop}=    Convert To String    S-Market Mäntsälä
+    Shop should exict on main page    ${shop}
     Aplying filter with \ scandic char shoul succeed.
-    [Teardown]    Delete Shop    S-Market GC
+    [Teardown]    Delete Shop    S-Market Mäntsälä
 
 *** Keywords ***
 Aplying filter with \ scandic char shoul succeed.
-    Select From List    city    Mäntsälä
+    ${area}=    Convert To String    Mäntsälä
+    ${shop}=    Convert To String    S-Market Mäntsälä
+    Select From List    city    ${area}
     Click Element    name=apply_filter
-    Shop should exict on main page    K-Market Mäntsälä
+    Shop should exict on main page    ${shop}

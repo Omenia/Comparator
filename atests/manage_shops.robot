@@ -41,6 +41,7 @@ Shop should exict on main page
 Delete Shop
     [Arguments]    ${shop}
     Go To    ${HOST}
+    ${shop}=    Convert To String    ${shop}
     Click Link    ${shop}
     Click Element    delete_shop
     Shop should not exict on main page    ${shop}
