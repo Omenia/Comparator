@@ -6,12 +6,12 @@ ${HOST}           http://localhost:8080
 
 *** Test Cases ***
 Add One Shop
-    Add the Shop With Groceries    S-Market GC    Gotham City    00500
+    Add the Shop With Groceries    S-Market    Gotham City    GC    00500
     Shop should exict on main page    S-Market GC
     [Teardown]    Delete Shop    S-Market GC
 
 Add one shop, with one price with comma.
-    Add the Shop With Groceries    S-Market GC    Gotham City    00500    1,4
+    Add the Shop With Groceries    S-Market    Gotham City    GC    00500    1.4
     Shop should exict on main page    S-Market GC
     [Teardown]    Delete Shop    S-Market GC
 

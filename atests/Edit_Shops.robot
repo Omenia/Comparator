@@ -7,10 +7,10 @@ ${HOST}           http://localhost:8080
 
 *** Test Cases ***
 Modify one shop and one shop information
-    Modify Shop Information    name    Citymarket Juva    Citymarket Rantasalmi
+    Modify Shop Information    name    Citymarket Juva    Tokmanni
     Go To    ${HOST}
-    Shop should exict on main page    Citymarket Rantasalmi
-    [Teardown]    Delete Shop    Citymarket Rantasalmi
+    Shop should exict on main page    Tokmanni
+    [Teardown]    Delete Shop    Tokmanni Juva
 
 Modify gorcery price in one grocery
     Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
@@ -25,6 +25,12 @@ Modify gorcery manufacturor in one grocery
     Page Should Contain    Sonjan Meijeri
     [Teardown]    Delete Shop    Citymarket Juva
 
+Modify area
+    Modify Shop Information    area    Citymarket Juva    Rantasalmi
+    Go To    ${HOST}
+    Shop should exict on main page    Rantasalmi
+    [Teardown]    Delete Shop    Citymarket Rantasalmi
+
 *** Keywords ***
 Modify Shop Information
     [Arguments]    ${id field}    ${old name}    ${new name}
@@ -34,7 +40,7 @@ Modify Shop Information
     Click Element    name=edit_shop
 
 Create Base Shop
-    Add the Shop With Groceries    Citymarket Juva    Juva    00100
+    Add the Shop With Groceries    Citymarket    Juva    Juva    00100
     Shop should exict on main page    Citymarket Juva
 
 Check that there are right price and whole basket price is right

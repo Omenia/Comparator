@@ -33,3 +33,13 @@ Filter shops by postal code
     Page Should Not Contain    K-Market MP
     Page Should Contain    Lidl GC
     Page Should Not Contain    Lidl MP
+
+Filter shops by areas
+    Select From List    area    GC
+    Click Element    name=apply_filter
+    Page Should Contain    S-Market GC
+    Page Should Not Contain    S-Market MP
+    Page Should Contain    K-Market GC
+    Page Should Not Contain    K-Market MP
+    Page Should Contain    Lidl GC
+    Page Should Not Contain    Lidl MP

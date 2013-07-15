@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     {% for shop in shops_to_show %}
-         <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name|escape}}</a>  {{ shop.city}} {{ shop.price}}<br>
+         <a href="show_shop?shop={{shop.key.urlsafe()}}">{{ shop.name}} {{shop.area}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
 	<form method="post" action = "/">
     <select name="city">
@@ -10,6 +10,13 @@
             <option>{{city}}</option>
         {% endfor %}
     </select>
+    <select name="area">
+        <option selected= 'selected'></option>
+        {% for area in areas %}
+            <option>{{area}}</option>
+        {% endfor %}
+    </select>
+
     <select name="no_of_shops">
         <option selected='selected'>5</option>
         <option>20</option>

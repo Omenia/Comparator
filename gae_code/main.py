@@ -26,6 +26,7 @@ class Shop(ndb.Model):
     """Models an individual shop"""
     name = ndb.StringProperty()
     city = ndb.StringProperty()
+    area = ndb.StringProperty()
     postal_code = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     price = ndb.FloatProperty()
@@ -45,12 +46,13 @@ class MainPage(webapp2.RequestHandler):
 
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
-        cities, postal_codes = self.__get_cities_and_postal_codes()
+        cities, areas, postal_codes = self.__get_cities_and_postal_codes()
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
           'url_linktext': url_linktext,
           'cities': cities,
+          'areas': areas,
           'user': user,
           'postal_codes': postal_codes
         }
@@ -71,7 +73,9 @@ class MainPage(webapp2.RequestHandler):
         amount_of_shops = 5
         if self.request.get('no_of_shops'):
             amount_of_shops = int(self.request.get('no_of_shops'))
-        if self.request.get('postal_code'):
+        if self.request.get('area'):
+            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('area')).fetch(amount_of_shops)
+        elif self.request.get('postal_code'):
             shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(amount_of_shops)
         elif self.request.get('city'):
             shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(amount_of_shops)
@@ -95,17 +99,22 @@ class MainPage(webapp2.RequestHandler):
         shops = Shop.query_book().fetch(1000)
         cities = []
         postal_codes = []
+        areas = []
         for shop in shops:
             if shop.city not in cities:
                 cities.append(shop.city)
+            if shop.area not in areas:
+                areas.append(shop.area)
             if shop.postal_code not in postal_codes:
                 postal_codes.append(shop.postal_code)
-        return sorted(cities), sorted(postal_codes)
+        return sorted(cities), sorted(areas), sorted(postal_codes)
 
     def __generate_url_with_filters(self):
         url_components = []
         if self.request.get('city'):
             url_components.append('city=' + self.request.get('city'))
+        if self.request.get('area'):
+            url_components.append('area=' + self.request.get('area'))
         if self.request.get('no_of_shops'):
             url_components.append('no_of_shops=' + self.request.get('no_of_shops'))
         if self.request.get('postal_code'):
@@ -125,6 +134,7 @@ class AddShop(webapp2.RequestHandler):
 
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
+                    area=self.request.get('area'),
                     city=self.request.get('city'),
                     postal_code=self.request.get('postal_code'),
                     groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1),
@@ -191,6 +201,7 @@ class EditShop(webapp2.RequestHandler):
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
         shop.name = self.request.get('name')
+        shop.area = self.request.get('area')
         shop.city = self.request.get('city')
         shop.postal_code = self.request.get('postal_code')
         for grocery in shop.groceries:
