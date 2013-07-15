@@ -43,3 +43,11 @@ Filter shops by areas
     Page Should Not Contain    K-Market MP
     Page Should Contain    Lidl GC
     Page Should Not Contain    Lidl MP
+
+Filter shops by price
+    Select From List    order    Kallein
+    Click Element    name=apply_filter
+    Page Should Contain    K-Market MP
+    Select From List    order    Halvin
+    Click Element    name=apply_filter
+    Page Should Not Contain    K-Market MP

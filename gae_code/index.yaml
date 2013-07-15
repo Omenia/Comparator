@@ -28,5 +28,11 @@ indexes:
 
 - kind: Shop
   properties:
+  - name: city
+  - name: price
+    direction: desc
+
+- kind: Shop
+  properties:
   - name: postal_code
   - name: price

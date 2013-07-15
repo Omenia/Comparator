@@ -4,6 +4,10 @@
          <a href="show_shop?shop={{shop.key.urlsafe()}}">{{shop.name}} {{shop.area}}</a>  {{ shop.city}} {{ shop.price}}<br>
     {% endfor %}
 	<form method="post" action = "/">
+    <select name="order">
+        <option selected= 'selected'>Halvin</option>
+        <option>Kallein</option>
+    </select>
     <select name="city">
         <option selected= 'selected' value = "">Kaupunki</option>
         {% for city in cities %}

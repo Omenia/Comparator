@@ -34,11 +34,16 @@ class Shop(ndb.Model):
     groceries = ndb.StructuredProperty(Grocery, repeated=True)
 
     @classmethod
-    def query_book(cls, qo = None):
-        if qo:
-            return cls.query(qo).order(cls.price)
+    def query_book(cls, order = 'Halvin', qo = None):
+        if order == 'Halvin':
+            price_order = cls.price
         else:
-            return cls.query().order(cls.price)
+            price_order = -cls.price
+
+        if qo:
+            return cls.query(qo).order(price_order)
+        else:
+            return cls.query().order(price_order)
 
 
 class MainPage(webapp2.RequestHandler):
@@ -72,16 +77,19 @@ class MainPage(webapp2.RequestHandler):
 
     def __create_shops_which_are_shown(self):
         amount_of_shops = 5
+        orde = 'Halvin'
+        if self.request.get('order'):
+            orde = self.request.get('order')
         if self.request.get('no_of_shops'):
             amount_of_shops = int(self.request.get('no_of_shops'))
         if self.request.get('area'):
-            shops_to_show = Shop.query_book(Shop.area == self.request.get('area')).fetch(amount_of_shops)
+            shops_to_show = Shop.query_book(order=orde, qo=Shop.area == self.request.get('area')).fetch(amount_of_shops)
         elif self.request.get('postal_code'):
-            shops_to_show = Shop.query_book(Shop.postal_code == self.request.get('postal_code')).fetch(amount_of_shops)
+            shops_to_show = Shop.query_book(order=orde, qo=Shop.postal_code == self.request.get('postal_code')).fetch(amount_of_shops)
         elif self.request.get('city'):
-            shops_to_show = Shop.query_book(Shop.city == self.request.get('city')).fetch(amount_of_shops)
+            shops_to_show = Shop.query_book(order=orde, qo=Shop.city == self.request.get('city')).fetch(amount_of_shops)
         else:
-            shops_to_show = Shop.query_book().fetch(amount_of_shops)
+            shops_to_show = Shop.query_book(order=orde).fetch(amount_of_shops)
         return shops_to_show
 
     def __return_user_and_login_url(self):
@@ -112,6 +120,8 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_url_with_filters(self):
         url_components = []
+        if self.request.get('order'):
+            url_components.append('order=' + self.request.get('order'))
         if self.request.get('city'):
             url_components.append('city=' + urllib2.quote(self.request.get('city').encode('utf8')))
         if self.request.get('area'):
