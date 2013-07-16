@@ -24,3 +24,7 @@ libraries:
 
 - name: jinja2
   version: latest
+
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
