@@ -51,3 +51,10 @@ Filter shops by price
     Select From List    order    Halvin
     Click Element    name=apply_filter
     Page Should Not Contain    K-Market MP
+
+Filter by most expencive, city, area.
+    Select From List    order    Kallein
+    Select From List    city    Gotham City
+    Select From List    area    GC
+    Click Element    name=apply_filter
+    Page Should Contain    K-Market GC

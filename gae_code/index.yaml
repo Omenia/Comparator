@@ -23,6 +23,12 @@ indexes:
 
 - kind: Shop
   properties:
+  - name: area
+  - name: price
+    direction: desc
+
+- kind: Shop
+  properties:
   - name: city
   - name: price
 
