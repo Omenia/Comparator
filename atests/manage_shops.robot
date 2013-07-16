@@ -82,6 +82,7 @@ Remove six shops
 
 Open Browser and login
     Open Browser    ${HOST}
-    Click Link    Kirjautuminen
+    ${login}=    Convert To String    Kirjaudu sisään
+    Click Link    ${login}
     Click Element    id=submit-login
     Go To    ${HOST}
