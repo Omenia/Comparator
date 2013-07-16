@@ -95,11 +95,11 @@ class MainPage(webapp2.RequestHandler):
     def __return_user_and_login_url(self):
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Ulos Kirjautuminen'
+            url_linktext = 'Kirjaudu ulos'.decode('utf-8')
             user = users.get_current_user()
         else:
             url = users.create_login_url(self.request.uri)
-            url_linktext = 'Kirjautuminen'
+            url_linktext = 'Kirjaudu sisään'.decode('utf-8')
             user = None
         return url, url_linktext, user
 

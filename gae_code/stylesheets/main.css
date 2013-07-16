@@ -1,26 +1,93 @@
 
-div
+#container
 {
+
 width:890px;
 margin-left:auto;
 margin-right:auto;
-background-color:#ffffff;
 }
 
-p.main {
-text-align:center;
+#login
+{
+
+text-align:right;
+padding:5px;
+padding-right:40px;
 }
-p.bottom {
+
+#content
+{
+
+width:690px;
+margin-left:auto;
+margin-right:auto;
+padding-top:25px;
+padding-bottom:20px;
+
+}
+
+#list_white
+{
+
+width:690;
+}
+
+#list_gray_first
+{
+
+background-color:#F8F8F8;
+padding:15px;
+}
+
+#list_gray
+{
+
+background-color:#F8F8F8;
+padding:15px;
+
+}
+
+#footer
+{
+
+
+}
+
+a.login:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.login:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.login:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.login:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color: #D80000;}
+
+a.shop:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.shop:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.shop:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
+a.shop:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color: #D80000;}
+
+a.first_shop:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
+a.first_shop:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
+a.first_shop:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
+a.first_shop:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color: #D80000;}
+
+
+p.first_shop {
+font-family:Arial, Helvetica, sans-serif;
+font-size:22px; color:#505050;
+font-weight:bold
+}
+
+p.shop {
+font-family:Arial, Helvetica, sans-serif;
+font-size:22px; color:#505050;
+font-weight:bold
+}
+
+
+p.disclaimer{
 margin-left:20px;
 margin-bottom:50px;
 color:#606060;
 font-family:Arial, Helvetica, sans-serif;
 font-size:13px;
-}
-p.right {
-text-align:right;
-margin-right:30px;
-margin-top:40px;
 }
 	
 img
