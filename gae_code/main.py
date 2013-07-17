@@ -65,7 +65,7 @@ class MainPage(webapp2.RequestHandler):
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
-        filters = self.__generate_filters()
+        filters = self.__generate_filters(cities)
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
@@ -89,13 +89,21 @@ class MainPage(webapp2.RequestHandler):
         elif self.request.get('clear_filter'):
             return self.redirect('/')
 
-    def __generate_filters(self):
+    def __generate_filters(self, cities):
+        opt = []
+        for city in cities:
+            opt.append(Opt(value=city, name=city))
         filters = [Filter(name = 'order',
                         selected= 'Halvin',
                         selected_value='Halvin',
                         options= [
                             Opt(value='Kallein', name='Kallein'),
-                            ])]
+                            ]),
+                    Filter(name='city',
+                           selected='Kaupunki',
+                           selected_value='',
+                                options=opt)
+                           ]
         print "!!!!!!!!!!"
         print filters[0].selected
         return filters
