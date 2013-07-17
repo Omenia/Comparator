@@ -39,11 +39,24 @@ class Shop(ndb.Model):
             price_order = cls.price
         else:
             price_order = -cls.price
-
         if qo:
             return cls.query(qo).order(price_order)
         else:
             return cls.query().order(price_order)
+
+
+class Filter(object):
+    def __init__(self, name, selected, selected_value, options):
+        self.name = name
+        self.selected = selected
+        self.selected_value = selected_value
+        self.options = options
+
+
+class Opt(object):
+    def __init__(self, value, name):
+        self.value = value
+        self.name = name
 
 
 class MainPage(webapp2.RequestHandler):
@@ -52,15 +65,13 @@ class MainPage(webapp2.RequestHandler):
 
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
-        cities, areas, postal_codes = self.__get_cities_and_postal_codes()
+        filters = self.__generate_filters()
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
           'url_linktext': url_linktext,
-          'cities': cities,
-          'areas': areas,
           'user': user,
-          'postal_codes': postal_codes
+          'filters': filters
         }
 
         template = jinja_environment.get_template('index.html')
@@ -74,6 +85,39 @@ class MainPage(webapp2.RequestHandler):
             return self.redirect(self.__generate_url_with_filters())
         elif self.request.get('clear_filter'):
             return self.redirect('/')
+
+    def __create_options_for_filter(self, opts):
+        options = []
+        for op in opts:
+            options.append(Opt(value=op, name=op))
+        return options
+
+    def __generate_filters(self):
+        cities, areas, postal_codes = self.__get_cities_and_postal_codes()
+        filters = [Filter(name = 'order',
+                        selected= 'Halvin',
+                        selected_value='Halvin',
+                        options= [
+                            Opt(value='Kallein', name='Kallein'),
+                            ]),
+                    Filter(name='city',
+                           selected='Kaupunki',
+                           selected_value='',
+                                options=self.__create_options_for_filter(cities)),
+                    Filter(name='area',
+                           selected='Alue',
+                           selected_value='',
+                                options=self.__create_options_for_filter(areas)),
+                    Filter(name='no_of_shops',
+                           selected='5',
+                           selected_value='5',
+                                options=self.__create_options_for_filter(['20', '50', '100'])),
+                    Filter(name='postal_code',
+                           selected='Postinumero',
+                           selected_value='',
+                                options=self.__create_options_for_filter(postal_codes))
+                            ]
+        return filters
 
     def __create_shops_which_are_shown(self):
         amount_of_shops = 5
@@ -136,6 +180,8 @@ class MainPage(webapp2.RequestHandler):
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
+        if not users.get_current_user():
+            return self.redirect('/')
         template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
 
@@ -198,6 +244,8 @@ class ShowShop(webapp2.RequestHandler):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
 
         if self.request.get('delete_shop'):
+            if not users.get_current_user():
+                return self.redirect('/')
             shop.key.delete()
             return self.redirect('/')
         elif self.request.get('edit_shop'):
@@ -206,6 +254,8 @@ class ShowShop(webapp2.RequestHandler):
 
 class EditShop(webapp2.RequestHandler):
     def get(self):
+        if not users.get_current_user():
+            return self.redirect('/')
         safe_url = self.request.get('shop')
         render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
 

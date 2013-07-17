@@ -1,38 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
     {% for shop in shops_to_show %}
-         <a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">{{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a><br>
+         <a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
+             {{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a><br>
     {% endfor %}
 	<br>
 	<form method="post" action = "/">
-    <select name="order">
-        <option selected= 'selected'>Halvin</option>
-        <option>Kallein</option>
-    </select>
-    <select name="city">
-        <option selected= 'selected' value = "">Kaupunki</option>
-        {% for city in cities %}
-            <option>{{city}}</option>
-        {% endfor %}
-    </select>
-    <select name="area">
-        <option selected= 'selected' value = "" >Alue</option>
-        {% for area in areas %}
-            <option>{{area}}</option>
-        {% endfor %}
-    </select>
-    <select name="no_of_shops">
-        <option selected='selected'>5</option>
-        <option>20</option>
-        <option>50</option>
-        <option>100</option>
-    </select>
-    <select name="postal_code">
-        <option selected= 'selected' value="">Postinumero</option>
-        {% for pc in postal_codes %}
-            <option>{{pc}}</option>
-        {% endfor %}
-    </select>
+       {% for filter in filters %}
+           <select name = {{filter.name}}>
+               <option selected= 'selected' value="{{filter.selected_value}}">{{filter.selected}}</option>
+               {% for option in filter.options %}
+                    <option value="{{option.value}}">{{option.name}}</option>
+               {% endfor %}
+           </select>
+       {% endfor %}
     <input type="submit" name="apply_filter" value="Aseta suodatin" />
     <input type="submit" name="clear_filter" value="Tyhjennä suodatin" /><br><br>
     {% if user %}
