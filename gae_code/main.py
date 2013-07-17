@@ -113,7 +113,11 @@ class MainPage(webapp2.RequestHandler):
                     Filter(name='no_of_shops',
                            selected='5',
                            selected_value='5',
-                                options=self.__create_options_for_filter(['20', '50', '100']))
+                                options=self.__create_options_for_filter(['20', '50', '100'])),
+                    Filter(name='postal_code',
+                           selected='Postinumero',
+                           selected_value='',
+                                options=self.__create_options_for_filter(postal_codes))
                            ]
 
         print "!!!!!!!!!!"

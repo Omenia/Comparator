@@ -14,12 +14,6 @@
                {% endfor %}
            </select>
        {% endfor %}
-    <select name="postal_code">
-        <option selected= 'selected' value="">Postinumero</option>
-        {% for pc in postal_codes %}
-            <option>{{pc}}</option>
-        {% endfor %}
-    </select>
     <input type="submit" name="apply_filter" value="Aseta suodatin" />
     <input type="submit" name="clear_filter" value="Tyhjennä suodatin" /><br><br>
     {% if user %}
