@@ -180,6 +180,8 @@ class MainPage(webapp2.RequestHandler):
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
+        if not users.get_current_user():
+            return self.redirect('/')
         template = jinja_environment.get_template('add_shop.html')
         self.response.out.write(template.render())
 
@@ -242,6 +244,8 @@ class ShowShop(webapp2.RequestHandler):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
 
         if self.request.get('delete_shop'):
+            if not users.get_current_user():
+                return self.redirect('/')
             shop.key.delete()
             return self.redirect('/')
         elif self.request.get('edit_shop'):
@@ -250,6 +254,8 @@ class ShowShop(webapp2.RequestHandler):
 
 class EditShop(webapp2.RequestHandler):
     def get(self):
+        if not users.get_current_user():
+            return self.redirect('/')
         safe_url = self.request.get('shop')
         render_shop_page_from_the_template(self.response, safe_url, 'edit_shop.html')
 
