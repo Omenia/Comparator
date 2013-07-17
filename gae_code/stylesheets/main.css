@@ -12,16 +12,19 @@ padding:25px;
 width:890px;
 margin-left:auto;
 margin-right:auto;
-margin-top:50px;
 background-color:#FFFFFF;
 }
 
 #login
 {
 
+width:940px;
+margin-left:auto;
+margin-right:auto;
 text-align:right;
-padding:5px;
-padding-right:40px;
+margin-bottom:5px;
+padding-right:15px;
+
 }
 
 #content
@@ -31,7 +34,7 @@ width:690px;
 margin-left:auto;
 margin-right:auto;
 padding-top:25px;
-padding-bottom:20px;
+
 
 }
 
@@ -58,42 +61,44 @@ padding:15px;
 
 #footer
 {
-
+width:890px;
 
 }
 
-a.login:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
-a.login:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
-a.login:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
-a.login:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color: #D80000;}
+a.login:link {text-decoration: none;  font-size:15px; color:#505050; font-weight:bold}
+a.login:visited {text-decoration: none;  font-size:15px; color:#505050; font-weight:bold}
+a.login:active {text-decoration: none;  font-size:15px; color:#505050; font-weight:bold}
+a.login:hover {text-decoration: none; font-size:15px; color: #D80000;}
 
 a.shop:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
 a.shop:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
 a.shop:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#505050; font-weight:bold}
 a.shop:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:15px; color: #D80000;}
 
-a.first_shop:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
-a.first_shop:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
-a.first_shop:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; font-weight:bold}
-a.first_shop:hover {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color: #D80000;}
+a.first_shop:link {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; }
+a.first_shop:visited {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050;}
+a.first_shop:active {text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#505050; }
+a.first_shop:hover {text-decoration: underline; font-family:Arial, Helvetica, sans-serif; font-size:16px; color: #D80000;}
 
 
-p.first_shop {
+p.b {
 font-family:Arial, Helvetica, sans-serif;
 font-size:22px; color:#505050;
-font-weight:bold
+
 }
 
-p.shop {
+p.m {
+
 font-family:Arial, Helvetica, sans-serif;
-font-size:22px; color:#505050;
-font-weight:bold
+font-size:16px; color:#505050;
+
 }
 
 
-p.disclaimer{
+p.s{
 margin-left:20px;
-margin-bottom:50px;
+margin-bottom:5px;
+margin-top:30px;
 color:#606060;
 font-family:Arial, Helvetica, sans-serif;
 font-size:13px;

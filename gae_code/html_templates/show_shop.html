@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-     Nimi: {{shop.name}} {{shop.area}}<br>
-     Kaupunki: {{shop.city}} <br>
-     Postinumero: {{shop.postal_code}} <br>
-     Hinta: {{shop.price}} <br>
-     <br>
-     Ruoat:<br>
+     <p class="b">{{shop.name}} {{shop.area}} </p>
+	 <p class="m">{{shop.postal_code}}  {{shop.city}}</p>
+     <p class="m">
      {% for grocery in shop.groceries %}
-        {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}} <br>
+       {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}} <br>
      {% endfor %}
-
+     </p>
      {% if user %}
 
      <form method="post">
