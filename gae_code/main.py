@@ -70,7 +70,6 @@ class MainPage(webapp2.RequestHandler):
           'shops_to_show': shops_to_show,
           'url': url,
           'url_linktext': url_linktext,
-          'areas': areas,
           'user': user,
           'postal_codes': postal_codes,
           'filters': filters
@@ -110,8 +109,11 @@ class MainPage(webapp2.RequestHandler):
                     Filter(name='area',
                            selected='Alue',
                            selected_value='',
-                                options=self.__create_options_for_filter(areas))
-
+                                options=self.__create_options_for_filter(areas)),
+                    Filter(name='no_of_shops',
+                           selected='5',
+                           selected_value='5',
+                                options=self.__create_options_for_filter(['20', '50', '100']))
                            ]
 
         print "!!!!!!!!!!"
