@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
      <p class="b">{{shop.name}} {{shop.area}} </p>
-	 <p class="m">{{shop.postal_code}}  {{shop.city}}</p>
-     <p class="m">
+	 <p class="m">{{shop.postal_code}}  {{shop.city}}
      {% for grocery in shop.groceries %}
-       {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}} <br>
+       {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}}€<br>
      {% endfor %}
+     <br>
+     Yhteensä: {{shop.price}}€
      </p>
      {% if user %}
 
