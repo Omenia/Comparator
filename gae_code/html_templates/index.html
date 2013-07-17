@@ -2,7 +2,7 @@
 {% block content %}
     {% for shop in shops_to_show %}
          <a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
-             {{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a><br>
+             {{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a> {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}}<br>
     {% endfor %}
 	<br>
 	<form method="post" action = "/">
