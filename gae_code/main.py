@@ -39,12 +39,24 @@ class Shop(ndb.Model):
             price_order = cls.price
         else:
             price_order = -cls.price
-
         if qo:
             return cls.query(qo).order(price_order)
         else:
             return cls.query().order(price_order)
 
+
+class Filter(object):
+    def __init__(self, name, selected, selected_value, options):
+        self.name = name
+        self.selected = selected
+        self.selected_value = selected_value
+        self.options = options
+
+
+class Opt(object):
+    def __init__(self, value, name):
+        self.value = value
+        self.name = name
 
 class MainPage(webapp2.RequestHandler):
 
@@ -53,6 +65,7 @@ class MainPage(webapp2.RequestHandler):
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
+        filters = self.__generate_filters()
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
@@ -60,7 +73,8 @@ class MainPage(webapp2.RequestHandler):
           'cities': cities,
           'areas': areas,
           'user': user,
-          'postal_codes': postal_codes
+          'postal_codes': postal_codes,
+          'filters': filters
         }
 
         template = jinja_environment.get_template('index.html')
@@ -74,6 +88,17 @@ class MainPage(webapp2.RequestHandler):
             return self.redirect(self.__generate_url_with_filters())
         elif self.request.get('clear_filter'):
             return self.redirect('/')
+
+    def __generate_filters(self):
+        filters = [Filter(name = 'order',
+                        selected= 'Halvin',
+                        selected_value='Halvin',
+                        options= [
+                            Opt(value='Kallein', name='Kallein'),
+                            ])]
+        print "!!!!!!!!!!"
+        print filters[0].selected
+        return filters
 
     def __create_shops_which_are_shown(self):
         amount_of_shops = 5

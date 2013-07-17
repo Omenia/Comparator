@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
     {% for shop in shops_to_show %}
-         <a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">{{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a><br>
+         <a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
+             {{shop.name}} {{shop.area}} {{ shop.city}} {{ shop.price}} €</a><br>
     {% endfor %}
 	<br>
 	<form method="post" action = "/">
-    <select name="order">
-        <option selected= 'selected'>Halvin</option>
-        <option>Kallein</option>
-    </select>
+       {% for filter in filters %}
+           <select name = {{filter.name}}>
+               <option selected= 'selected' value="{{filter.selected_value}}">{{filter.selected}}</option>
+               {% for option in filter.options %}
+                    <option value="{{option.value}}">{{option.name}}</option>
+               {% endfor %}
+           </select>
+       {% endfor %}
+
     <select name="city">
         <option selected= 'selected' value = "">Kaupunki</option>
         {% for city in cities %}
