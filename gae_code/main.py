@@ -58,20 +58,19 @@ class Opt(object):
         self.value = value
         self.name = name
 
+
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
 
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
-        cities, areas, postal_codes = self.__get_cities_and_postal_codes()
         filters = self.__generate_filters()
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
           'url_linktext': url_linktext,
           'user': user,
-          'postal_codes': postal_codes,
           'filters': filters
         }
 
@@ -95,7 +94,6 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_filters(self):
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
-
         filters = [Filter(name = 'order',
                         selected= 'Halvin',
                         selected_value='Halvin',
@@ -118,10 +116,7 @@ class MainPage(webapp2.RequestHandler):
                            selected='Postinumero',
                            selected_value='',
                                 options=self.__create_options_for_filter(postal_codes))
-                           ]
-
-        print "!!!!!!!!!!"
-        print filters[0].selected
+                            ]
         return filters
 
     def __create_shops_which_are_shown(self):
