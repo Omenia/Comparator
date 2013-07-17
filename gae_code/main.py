@@ -3,6 +3,7 @@
 import webapp2
 import jinja2
 import urllib2
+import datetime
 
 TEMPLATE_DIR = 'html_templates/'
 
@@ -20,7 +21,7 @@ class Grocery(ndb.Model):
     manufacturer = ndb.StringProperty()
     price = ndb.FloatProperty()
     quantity = ndb.StringProperty()
-    amount = ndb.FloatProperty()
+    amount = ndb.IntegerProperty()
 
 
 class Shop(ndb.Model):
@@ -29,7 +30,7 @@ class Shop(ndb.Model):
     city = ndb.StringProperty()
     area = ndb.StringProperty()
     postal_code = ndb.StringProperty()
-    date = ndb.DateTimeProperty(auto_now_add=True)
+    date = ndb.DateTimeProperty(auto_now=True)
     price = ndb.FloatProperty()
     groceries = ndb.StructuredProperty(Grocery, repeated=True)
 
@@ -218,7 +219,7 @@ class AddShop(webapp2.RequestHandler):
                        manufacturer=self.__return_value_to_the_grocery('manufacturer', manufacturer, grocery_id),
                        price=self.__format_number_with_dot(self.__return_value_to_the_grocery('price', price, grocery_id)),
                        quantity=self.__return_value_to_the_grocery('quantity', quantity, grocery_id),
-                       amount=self.__format_number_with_dot(self.__return_value_to_the_grocery('amount', amount, grocery_id))
+                       amount=self.__return_value_to_the_grocery('amount', amount, grocery_id)
                        )
 
     def __format_number_with_dot(self, number):
