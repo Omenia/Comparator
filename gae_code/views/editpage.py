@@ -33,7 +33,7 @@ class EditShop(webapp2.RequestHandler):
 
 
 def render_shop_page_from_the_template(response, safe_url, page):
-
+    #TODO: this function is also in showshop.py
     if users.get_current_user():
       user = users.get_current_user()
     else:
@@ -48,6 +48,7 @@ def render_shop_page_from_the_template(response, safe_url, page):
 
 
 def get_basket_price_from_groceries(groceries):
+    #TODO: this function is also in addshop.py
     price = 0
     for grocery in groceries:
         price += grocery.price
