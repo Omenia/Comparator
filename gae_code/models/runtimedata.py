@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Filter(object):
     def __init__(self, name, selected, selected_value, options):
         self.name = name
