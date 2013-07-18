@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Open Browser and login
+Suite Setup       Login
 Suite Teardown    Close Browser
 Test Setup        Go To    ${HOST}
 Resource          manage_shops.robot

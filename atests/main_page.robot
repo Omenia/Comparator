@@ -6,8 +6,7 @@ ${HOST}           http://localhost:8080
 
 *** Test Cases ***
 Go directly to the add page.
-    Open Browser    ${HOST}/add_shop
+    Go To    ${HOST}/add_shop
     Page Should Contain Element    apply_filter
     Go To    ${HOST}/edit_shop
     Page Should Contain Element    apply_filter
-    [Teardown]    Close Browser
