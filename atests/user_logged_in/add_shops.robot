@@ -2,7 +2,6 @@
 Resource          manage_shops.robot
 
 *** Variables ***
-${HOST}           http://localhost:8080
 
 *** Test Cases ***
 Add One Shop

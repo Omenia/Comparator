@@ -2,7 +2,6 @@
 Library           Selenium 2 Library
 
 *** Variables ***
-${HOST}           http://localhost:8080
 
 *** Keywords ***
 Add the Shop With Groceries
