@@ -1,11 +1,10 @@
 body 
 {
-background-color:#F8F8F8;
+background-color:#F9F8F6;
 }
 #container
 {
-border-style:solid;
-border-width:1px;
+border:1px solid;
 border-color:#E0E0E0;
 padding:25px;
 
@@ -30,18 +29,27 @@ padding-right:15px;
 #content
 {
 
-width:690px;
+width:730px;
 margin-left:auto;
 margin-right:auto;
 padding-top:25px;
-
 
 }
 
 #list_white
 {
 
-width:690;
+width:730;
+padding:10px;
+}
+
+#form
+{
+
+width:730;
+margin-left:auto;
+margin-right:auto;
+
 }
 
 #list_gray_first
@@ -62,7 +70,6 @@ padding:15px;
 #footer
 {
 width:890px;
-
 }
 
 a.login:link {text-decoration: none;  font-size:15px; color:#505050; font-weight:bold}
@@ -94,18 +101,82 @@ font-size:16px; color:#505050;
 
 }
 
+.m {
 
-p.s{
+font-family:Arial, Helvetica, sans-serif;
+font-size:16px; color:#505050;
+
+}
+.b {
+font-family:Arial, Helvetica, sans-serif;
+font-size:22px; color:#505050;
+
+}
+
+.s{
 margin-left:20px;
 margin-bottom:5px;
 margin-top:30px;
 color:#606060;
 font-family:Arial, Helvetica, sans-serif;
-font-size:13px;
+font-size:12px;
+
+}
+.si{
+margin-left:20px;
+margin-bottom:5px;
+margin-top:30px;
+color:#606060;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+font-style:italic;
 }
 	
 img
 {  
 border-style: none;
+}
+
+table.shop
+{
+width:730px;
+}
+td.name
+{
+width:300px;
+padding:5px;
+}
+td.price
+{
+width:80px;
+padding:5px;
+}
+td.added
+{
+width:350px;
+padding:5px;
+text-align:left;
+}
+
+table.show
+{
+width:730px;
+}
+
+td.c1_show
+{
+width:250px;
+padding:3px;
+}
+td.c2_show
+{
+width:50px;
+padding:3px;
+}
+td.c3_show
+{
+width:430px;
+padding:3px;
+text-align:left;
 }
 

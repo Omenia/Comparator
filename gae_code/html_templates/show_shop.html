@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-     <p class="b">{{shop.name}} {{shop.area}} </p>
-	 <p class="m">{{shop.postal_code}}  {{shop.city}}<br>
-     Päivitetty:  {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}}<br>
-     <br>
+<table class="shop"><tr><td class="c1_show">
+     <span class="m">{{shop.name}} {{shop.area}}<br>
+	 {{shop.postal_code}}  {{shop.city}}</span>
+     <td class="c1_show">&nbsp;</td><td class="c3_show"><span class="s">Päivitetty: {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}}</span></td></tr>
+     
      {% for grocery in shop.groceries %}
-       {{ grocery.name}} {{grocery.manufacturer}} {{grocery.amount}} {{grocery.quantity}} {{ grocery.price}}€<br>
+     <tr><td class="c1_show"><span class="m">{{ grocery.name}} {{grocery.manufacturer}}</td><td class="c2_show"><span class="m">{{grocery.amount}} {{grocery.quantity}}</td><td class="c3_show"><span class="m">{{ grocery.price}} €</span></td></tr>
      {% endfor %}
-     <br>
-     Yhteensä: {{shop.price}}€
-     </p>
-     {% if user %}
-
+     <tr><td class="c1_show">&nbsp;</td><td class="c2_show"><span class="m">Yhteensä:</span></td><td class="c3_show"><span class="m">{{ shop.price}} €</span></td></tr>
+     </table>
+	 {% if user %}
+<br><br>
      <form method="post">
+	    <input type="submit" value="Muokkaa kauppaa" name = "edit_shop"><br><br><br>
+  
         <input type="submit" value="Poista kauppa" name = "delete_shop">
-        <input type="submit" value="Muokkaa kauppaa" name = "edit_shop">
     </form>
     {% endif %}
 
