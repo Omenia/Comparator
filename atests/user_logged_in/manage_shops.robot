@@ -2,7 +2,6 @@
 Library           Selenium 2 Library
 
 *** Variables ***
-${HOST}           http://localhost:8080
 
 *** Keywords ***
 Add the Shop With Groceries
@@ -80,8 +79,8 @@ Remove six shops
     Delete Shop    Lidl MP
     Delete Shop    K-Market GC
 
-Open Browser and login
-    Open Browser    ${HOST}
+Login
+    Go To    ${HOST}
     ${login}=    Convert To String    Kirjaudu sisään
     Click Link    ${login}
     Click Element    id=submit-login

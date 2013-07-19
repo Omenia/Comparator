@@ -3,7 +3,6 @@ Test Setup        Create Base Shop
 Resource          manage_shops.robot
 
 *** Variables ***
-${HOST}           http://localhost:8080
 
 *** Test Cases ***
 Modify one shop and one shop information

@@ -3,7 +3,6 @@ Test Setup        Go To    ${HOST}
 Resource          ../manage_shops.robot
 
 *** Variables ***
-${HOST}           http://localhost:8080
 
 *** Test Cases ***
 With default setting by five shown shops, one should no been seen
