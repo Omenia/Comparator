@@ -3,12 +3,15 @@
 <head>
     {% block head %}
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-    <title>Ruokakori.net - Löydä alueesi halvin ruokakori</title>
+    <title>Ruokakori.net: Löydä alueesi halvin ruokakori - {% block title%}{%endblock%}</title>
     {% endblock %}
 </head>
 <body>
-<div id="login"><a href="{{ url}}" class="login">{{ url_linktext}}</a></div>
-    
+    {% block header %}
+        <div id="login"><a href="{{ url}}" class="login">{{ url_linktext}}</a></div>
+    {% endblock %}
+
+
     <div id= "container">
         {% block top %}
         <a href="/"> <img src="pics/logo.jpg"></img> </a>
