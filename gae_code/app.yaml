@@ -18,6 +18,10 @@ handlers:
 - url: .*
   script: main.app
 
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
 libraries:
 - name: webapp2
   version: latest
