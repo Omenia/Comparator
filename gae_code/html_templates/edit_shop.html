@@ -2,15 +2,15 @@
 {% block title %}Muokkaa kauppaa: {{shop.name}} {{shop.area}} {{shop.city}}{% endblock %}
 {% block content %}
  <form method="post">
-    Kauppa (esim. K-Citymarket tai Siwa): <input type="text" required="required" name="name" value="{{shop.name}}" > <br>
-    Alue (esim. kauppakeskus tai kaupunginosa): <input type="text" required="required" name="area" value="{{shop.area}}" > <br>
-    Kaupunki: <input type="text" required="required" name="city" value="{{shop.city}}" > <br>
-    Postinumero: <input type="text" required="required" name="postal_code" value="{{shop.postal_code}}" > <br>
+    Kauppa (esim. K-Citymarket tai Siwa): <input type="text" required="required" name="name" value="{{shop.name}}"maxlength="50"> <br>
+    Alue (esim. kauppakeskus tai kaupunginosa): <input type="text" required="required" name="area" value="{{shop.area}}"maxlength="50"> <br>
+    Kaupunki: <input type="text" required="required" name="city" value="{{shop.city}}"maxlength="50"> <br>
+    Postinumero: <input type="text" required="required" name="postal_code" value="{{shop.postal_code}}"maxlength="50"> <br>
     <br>
      {% for grocery in shop.groceries %}
-         {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}">
+         {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}" maxlength="50">
          {% if grocery.name == 'Rasvaton Maito' or grocery.name == 'Naudan Jauheliha' %}
-             <input type = "text" name="{{grocery.name}}_manufacturer" required="required" value="{{grocery.manufacturer}}">
+             <input type = "text" name="{{grocery.name}}_manufacturer" required="required" value="{{grocery.manufacturer}}" maxlength="50">
          {% endif %}
          <br>
      {% endfor %}
