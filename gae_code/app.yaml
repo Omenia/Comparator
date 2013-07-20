@@ -14,13 +14,13 @@ handlers:
 
 - url: /pics
   static_dir: pics
-  
+
+- url: /robots\.txt
+  static_files: robots.txt
+  upload: robots\.txt
+
 - url: .*
   script: main.app
-
-- url: /robots.txt
-  static_files: robots.txt
-  upload: robots.txt
 
 libraries:
 - name: webapp2
