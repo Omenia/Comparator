@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Ostoskorin hinta: {{shop.name}} {{shop.area}} {{shop.city}}{% endblock %}
 {% block content %}
+<script type="text/javascript">
+function deleteShop(shop){
+    var conf = confirm("Haluatko varmasti tuhota kaupan?");
+    if(conf == true){
+         alert("Tuhosit kaupan "+shop);
+    }
+}
+</script>
+
 <table class="shop"><tr><td class="c1_show">
      <span class="m">{{shop.name}} {{shop.area}}<br>
 	 {{shop.postal_code}}  {{shop.city}}</span>
@@ -14,9 +23,8 @@
 	 {% if user %}
 <br><br>
      <form method="post">
-	    <input type="submit" value="Muokkaa kauppaa" name = "edit_shop"><br><br><br>
-  
-        <input type="submit" value="Poista kauppa" name = "delete_shop">
+	    <input type="submit" value="Muokkaa kauppaa" name = "edit_shop">
+        <input type="submit" value="Poista kauppa" onClick="deleteShop('{{shop.name}} {{shop.area}}')" name = "delete_shop">
     </form>
     {% endif %}
 
