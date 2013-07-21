@@ -48,16 +48,20 @@ class MainPage(webapp2.RequestHandler):
     def __create_selected_values_dictionary(self):
         selected_values = {}
         selected_values.update(self.__add_key_to_the_selected_values_dict('city', 'Kaupunki'))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('area', 'Alue'))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('no_of_shops', '5', '5'))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('postal_code', 'Postinumero'))
+
         return selected_values
 
-    def __add_key_to_the_selected_values_dict(self, ident, default_id):
+    def __add_key_to_the_selected_values_dict(self, ident, default_id, default_value=''):
         selected_value = {}
         if self.request.get(ident):
             selected_value[ident] = self.request.get(ident)
             selected_value[ident+'_value'] = self.request.get(ident)
         else:
             selected_value[ident] = default_id
-            selected_value[ident+'_value'] = ''
+            selected_value[ident+'_value'] = default_value
 
         return selected_value
 
@@ -66,28 +70,6 @@ class MainPage(webapp2.RequestHandler):
         #TODO: Fix this if else madness. Maybe use dictionary.
         selected_values = {}
         selected_values = self.__create_selected_values_dictionary()
-
-
-        if self.request.get('area'):
-            selected_area = self.request.get('area')
-            selected_area_value = self.request.get('area')
-        else:
-            selected_area = 'Alue'
-            selected_area_value = ''
-
-        if self.request.get('no_of_shops'):
-            selected_no_of_shops = self.request.get('no_of_shops')
-            selected_no_of_shops_value = self.request.get('no_of_shops')
-        else:
-            selected_no_of_shops = '5'
-            selected_no_of_shops_value = '5'
-
-        if self.request.get('postal_code'):
-            selected_postal_code = self.request.get('postal_code')
-            selected_postal_code_value = self.request.get('postal_code')
-        else:
-            selected_postal_code = 'Postinumero'
-            selected_postal_code_value = ''
 
         filters = [Filter(name = 'order',
                         selected= 'Halvin',
@@ -100,16 +82,16 @@ class MainPage(webapp2.RequestHandler):
                            selected_value=selected_values['city_value'],
                                 options=self.__create_options_for_filter(cities)),
                     Filter(name='area',
-                           selected=selected_area,
-                           selected_value=selected_area_value,
+                           selected=selected_values['area'],
+                           selected_value=selected_values['area_value'],
                                 options=self.__create_options_for_filter(areas)),
                     Filter(name='no_of_shops',
-                           selected=selected_no_of_shops,
-                           selected_value=selected_no_of_shops_value,
+                           selected=selected_values['no_of_shops'],
+                           selected_value=selected_values['no_of_shops_value'],
                                 options=self.__create_options_for_filter(['20', '50', '100'])),
                     Filter(name='postal_code',
-                           selected=selected_postal_code,
-                           selected_value=selected_postal_code_value,
+                           selected=selected_values['postal_code'],
+                           selected_value=selected_values['postal_code_value'],
                                 options=self.__create_options_for_filter(postal_codes))
                             ]
         return filters
