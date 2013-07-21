@@ -17,14 +17,16 @@
   })();
 </script>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fi_FI/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-    <script>
+<script>
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/fi_FI/all.js#xfbml=1';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+</div>
+<script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -32,7 +34,8 @@
       ga('create', 'UA-42398393-1', 'ruokakori.net');
       ga('send', 'pageview');
     </script>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+    <script> !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+        fjs.async=true;
         if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
             fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
     </script>
@@ -43,9 +46,9 @@
 
     <div id= "container">
         {% block top %}
-       <div class="fb-like" data-href="http://www.ruokakori.net/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+       <div class="fb-like" data-href="http://www.ruokakori.net/" data-send="false" data-layout="button_count" data-show-faces="true"></div>
         <a href="https://twitter.com/Ruokakori" class="twitter-follow-button" data-show-count="false">Follow @Ruokakori</a>
-        <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
+        <div class="g-plusone" data-size="medium" data-annotation="inline" ></div>
         <a href="/"> <img src="pics/logo.jpg"></img> </a>
         Vertaa ruokakorien hintoja. Tiedonkeruu tapahtuu käyttäjien toimesta. Osallistumalla parannat palvelua! :)
 	    {% endblock %}
