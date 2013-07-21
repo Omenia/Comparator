@@ -67,8 +67,6 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_filters(self):
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
-        #TODO: Fix this if else madness. Maybe use dictionary.
-        selected_values = {}
         selected_values = self.__create_selected_values_dictionary()
 
         filters = [Filter(name = 'order',
