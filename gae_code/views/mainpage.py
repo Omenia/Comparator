@@ -47,6 +47,35 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_filters(self):
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
+        #TODO: Fix this if else madness. Maybe use dictionary.
+        if self.request.get('city'):
+            selected_city = self.request.get('city')
+            selected_city_value = self.request.get('city')
+        else:
+            selected_city = 'Kaupunki'
+            selected_city_value = ''
+
+        if self.request.get('area'):
+            selected_area = self.request.get('area')
+            selected_area_value = self.request.get('area')
+        else:
+            selected_area = 'Alue'
+            selected_area_value = ''
+
+        if self.request.get('no_of_shops'):
+            selected_no_of_shops = self.request.get('no_of_shops')
+            selected_no_of_shops_value = self.request.get('no_of_shops')
+        else:
+            selected_no_of_shops = '5'
+            selected_no_of_shops_value = '5'
+
+        if self.request.get('postal_code'):
+            selected_postal_code = self.request.get('postal_code')
+            selected_postal_code_value = self.request.get('postal_code')
+        else:
+            selected_postal_code = 'Postinumero'
+            selected_postal_code_value = ''
+
         filters = [Filter(name = 'order',
                         selected= 'Halvin',
                         selected_value='Halvin',
@@ -54,20 +83,20 @@ class MainPage(webapp2.RequestHandler):
                             Opt(value='Kallein', name='Kallein'),
                             ]),
                     Filter(name='city',
-                           selected='Kaupunki',
-                           selected_value='',
+                           selected=selected_city,
+                           selected_value=selected_city_value,
                                 options=self.__create_options_for_filter(cities)),
                     Filter(name='area',
-                           selected='Alue',
-                           selected_value='',
+                           selected=selected_area,
+                           selected_value=selected_area_value,
                                 options=self.__create_options_for_filter(areas)),
                     Filter(name='no_of_shops',
-                           selected='5',
-                           selected_value='5',
+                           selected=selected_no_of_shops,
+                           selected_value=selected_no_of_shops_value,
                                 options=self.__create_options_for_filter(['20', '50', '100'])),
                     Filter(name='postal_code',
-                           selected='Postinumero',
-                           selected_value='',
+                           selected=selected_postal_code,
+                           selected_value=selected_postal_code_value,
                                 options=self.__create_options_for_filter(postal_codes))
                             ]
         return filters
