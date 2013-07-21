@@ -45,15 +45,28 @@ class MainPage(webapp2.RequestHandler):
             options.append(Opt(value=op, name=op))
         return options
 
+    def __create_selected_values_dictionary(self):
+        selected_values = {}
+        selected_values.update(self.__add_key_to_the_selected_values_dict('city', 'Kaupunki'))
+        return selected_values
+
+    def __add_key_to_the_selected_values_dict(self, ident, default_id):
+        selected_value = {}
+        if self.request.get(ident):
+            selected_value[ident] = self.request.get(ident)
+            selected_value[ident+'_value'] = self.request.get(ident)
+        else:
+            selected_value[ident] = default_id
+            selected_value[ident+'_value'] = ''
+
+        return selected_value
+
     def __generate_filters(self):
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
         #TODO: Fix this if else madness. Maybe use dictionary.
-        if self.request.get('city'):
-            selected_city = self.request.get('city')
-            selected_city_value = self.request.get('city')
-        else:
-            selected_city = 'Kaupunki'
-            selected_city_value = ''
+        selected_values = {}
+        selected_values = self.__create_selected_values_dictionary()
+
 
         if self.request.get('area'):
             selected_area = self.request.get('area')
@@ -83,8 +96,8 @@ class MainPage(webapp2.RequestHandler):
                             Opt(value='Kallein', name='Kallein'),
                             ]),
                     Filter(name='city',
-                           selected=selected_city,
-                           selected_value=selected_city_value,
+                           selected=selected_values['city'],
+                           selected_value=selected_values['city_value'],
                                 options=self.__create_options_for_filter(cities)),
                     Filter(name='area',
                            selected=selected_area,
