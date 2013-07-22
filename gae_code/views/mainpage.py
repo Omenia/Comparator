@@ -45,14 +45,25 @@ class MainPage(webapp2.RequestHandler):
             options.append(Opt(value=op, name=op))
         return options
 
-    def __create_selected_values_dictionary(self):
+    def __create_selected_values_dictionary(self, cities, areas, postal_codes, no_of_shops):
         selected_values = {}
-        selected_values.update(self.__add_key_to_the_selected_values_dict('city', 'Kaupunki'))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('area', 'Alue'))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('no_of_shops', '5', '5'))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('postal_code', 'Postinumero'))
+        default_for_city = 'Kaupunki'
+        default_for_area = 'Alue'
+        default_for_no_of_shops = '5'
+        default_for_postal_code = 'Postinumero'
+        selected_values.update(self.__add_key_to_the_selected_values_dict('city', default_for_city))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('area', default_for_area))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('no_of_shops', default_for_no_of_shops, default_for_no_of_shops))
+        selected_values.update(self.__add_key_to_the_selected_values_dict('postal_code', default_for_postal_code))
 
-        return selected_values
+        if len(cities) != 0:
+        #TODO: nice bubblegum here.
+            cities.insert(0,default_for_city)
+            areas.insert(0,default_for_area)
+            postal_codes.insert(0,default_for_postal_code)
+            no_of_shops.insert(0,default_for_no_of_shops)
+
+        return selected_values, cities, areas, postal_codes, no_of_shops
 
     def __add_key_to_the_selected_values_dict(self, ident, default_id, default_value=''):
         selected_value = {}
@@ -66,8 +77,10 @@ class MainPage(webapp2.RequestHandler):
         return selected_value
 
     def __generate_filters(self):
+        no_of_shops = ['20', '50', '100']
         cities, areas, postal_codes = self.__get_cities_and_postal_codes()
-        selected_values = self.__create_selected_values_dictionary()
+        selected_values, cities, areas, postal_codes, no_of_shops = \
+            self.__create_selected_values_dictionary(cities, areas, postal_codes, no_of_shops)
 
         filters = [Filter(name = 'order',
                         selected= 'Halvin',
@@ -86,7 +99,7 @@ class MainPage(webapp2.RequestHandler):
                     Filter(name='no_of_shops',
                            selected=selected_values['no_of_shops'],
                            selected_value=selected_values['no_of_shops_value'],
-                                options=self.__create_options_for_filter(['20', '50', '100'])),
+                                options=self.__create_options_for_filter(no_of_shops)),
                     Filter(name='postal_code',
                            selected=selected_values['postal_code'],
                            selected_value=selected_values['postal_code_value'],
