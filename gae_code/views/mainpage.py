@@ -152,14 +152,19 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_url_with_filters(self):
         url_components = []
+        default_for_city = 'Kaupunki'
+        default_for_area = 'Alue'
+        default_for_no_of_shops = '5'
+        default_for_postal_code = 'Postinumero'
+
         if self.request.get('order'):
             url_components.append('order=' + self.request.get('order'))
-        if self.request.get('city'):
+        if self.request.get('city') and self.request.get('city') != default_for_city:
             url_components.append('city=' + urllib2.quote(self.request.get('city').encode('utf8')))
-        if self.request.get('area'):
+        if self.request.get('area') and self.request.get('area') != default_for_area:
             url_components.append('area=' + urllib2.quote(self.request.get('area').encode('utf8')))
-        if self.request.get('no_of_shops'):
+        if self.request.get('no_of_shops') and self.request.get('no_of_shops') != default_for_no_of_shops:
             url_components.append('no_of_shops=' + self.request.get('no_of_shops'))
-        if self.request.get('postal_code'):
+        if self.request.get('postal_code') and self.request.get('postal_code') != default_for_postal_code:
             url_components.append('postal_code=' + self.request.get('postal_code'))
         return '/?' + "&".join(url_components)
