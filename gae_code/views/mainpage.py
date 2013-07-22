@@ -152,6 +152,7 @@ class MainPage(webapp2.RequestHandler):
 
     def __generate_url_with_filters(self):
         url_components = []
+        #TODO: dear future me. I cannot explain how sorry I am. But now you need to fix these default_*-grab
         default_for_city = 'Kaupunki'
         default_for_area = 'Alue'
         default_for_no_of_shops = '5'
