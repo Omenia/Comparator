@@ -10,15 +10,13 @@ function deleteShop(shop){
 }
 </script>
 
-<table class="shop"><tr><td class="c1_show">
-     <span class="m">{{shop.name}} {{shop.area}}<br>
-	 {{shop.postal_code}}  {{shop.city}}</span>
-     <td class="c1_show">&nbsp;</td><td class="c3_show"><span class="s">Päivitetty: {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}}</span></td></tr>
+<table width="600"><tr><td colspan="3">
+     <span class="m"><b>{{shop.name}} {{shop.area}}</b>, {{shop.postal_code}} {{shop.city}}</span><span class="si"> (Päivitetty: {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}})</span><br><br></td></tr>
      
      {% for grocery in shop.groceries %}
-     <tr><td class="c1_show"><span class="m">{{ grocery.name}} {{grocery.manufacturer}}</td><td class="c2_show"><span class="m">{{grocery.amount}} {{grocery.quantity}}</td><td class="c3_show"><span class="m">{{ grocery.price}} €</span></td></tr>
+     <tr><td><span class="m">{{ grocery.name}} {{grocery.manufacturer}}</td><td><span class="m">{{grocery.amount}} {{grocery.quantity}}</td><td><span class="m">{{ grocery.price}} €</span></td></tr>
      {% endfor %}
-     <tr><td class="c1_show">&nbsp;</td><td class="c2_show"><span class="m">Yhteensä:</span></td><td class="c3_show"><span class="m">{{ shop.price}} €</span></td></tr>
+     <tr><td>&nbsp;</td><td><img src="pics/total.png"></td><td><span class="m"><b>{{ shop.price}} €</b></span></td></tr>
      </table>
 	 {% if user %}
 <br><br>

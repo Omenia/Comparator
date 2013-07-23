@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Pääsivu{% endblock %}
 {% block content %}
-    <table class="shop">
+
+    <table width="600">
     {% for shop in shops_to_show %}
-			 <tr><td class="{{ loop.cycle('name_odd', 'name_even') }}"><a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
-             {{shop.name}} {{shop.area}}, {{ shop.city}}</a></td><td class="price"><span class="m"> {{ shop.price}} €</span></td><td class="added"><span class="si">(Päivitetty {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}})</span></td></tr>
+			 <tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td class="name_even"><a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
+             {{shop.name}} {{shop.area}}, {{ shop.city}}</a></td><td class="total_price"><span class="m"> {{ shop.price}} €</span></td><td class="date_added"><span class="si">(Päivitetty {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}})</span></td></tr>
 	{% endfor %}
-	</table>
-	<div id="list_white">
+	</table><br>
 	<form method="post" action = "/">
        {% for filter in filters %}
            <select name = {{filter.name}}>
@@ -17,12 +17,27 @@
                {% endfor %}
            </select>
        {% endfor %}
-    <input type="submit" name="apply_filter" value="Aseta suodatin" />
-    <input type="submit" name="clear_filter" value="Tyhjennä suodatin" /><br><br>
+    <input type="submit" name="apply_filter" value="Aseta" />
+    <input type="submit" name="clear_filter" value="Tyhjennä" /><br><br>
     {% if user %}
         <input type="submit" value="Lisää kauppa" name = "add_shop">
     {% endif %}
     </form>
-   </div>
+	</div>
+		<div id="aside"><span class="s">
+	<table width="240"><tr><td>
+	<b>Ruokakorin sisältö</b></td><td></td></tr>
+	<tr bgcolor="#f5f5f5"><td>Suomalainen tomaatti</td><td>1 kg</td></tr>
+	<tr><td>Suomalainen rasvaton maito</td><td> 1 l</td></tr>
+	<tr bgcolor="#f5f5f5"><td>Reissumies, Oululainen</td><td> 4 kpl</td></tr>
+	<tr><td>Oltermanni Valio</td><td> 1 kg</td></tr> 
+	<tr bgcolor="#f5f5f5"><td>Suomalainen naudan jauheliha</td><td> 400 g</td></tr>
+	<tr ><td>Juhla Mokka kahvi, Paulig</td><td> 500 g</td></tr>
+	<tr bgcolor="#f5f5f5"><td>Maustettu jogurtti, Arla Ingman</td><td> 1 l</td></tr>
+	<tr><td>Tutti Frutti Mix Jumbo, Fazer</td><td> 400 g</td></tr></table><br></span>
+	
+	<img class="bottom" src="pics/tomato.png">
+	</div>
+ 
 	
 {% endblock %}

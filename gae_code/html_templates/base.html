@@ -37,23 +37,27 @@
             fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
     </script>
     {% block header %}
-        <div id="login"><a href="{{ url}}" class="login">{{ url_linktext}}</a></div>
-    {% endblock %}
+	<div class="fb-like" data-href="http://www.ruokakori.net/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+	<a href="https://twitter.com/Ruokakori" class="twitter-follow-button" data-show-count="false">Follow @Ruokakori</a>
+    <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>  
+     {% endblock %}
 
-
-    <div id= "container">
-        {% block top %}
-       <div class="fb-like" data-href="http://www.ruokakori.net/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-        <a href="https://twitter.com/Ruokakori" class="twitter-follow-button" data-show-count="false">Follow @Ruokakori</a>
-        <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
-        <a href="/"> <img src="pics/logo.jpg"></img> </a>
-        Vertaa ruokakorien hintoja. Tiedonkeruu tapahtuu käyttäjien toimesta. Osallistumalla parannat palvelua! :)
-	    {% endblock %}
+<div id="container">
+    <div id= "content-container">
+	         {% block top %}
+		
+	  <a href="/"> <img src="pics/logo.png"></img> </a><br>
+		<div id="text_and_login">
+	  <span class="m_b"><i> Vertaa ruokakorien hintoja. Tiedonkeruu tapahtuu käyttäjien toimesta. Osallistumalla parannat palvelua! :)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></span>
+		<a href="{{ url}}" class="login">{{ url_linktext}}</a>  </div><br>
+         {% endblock %}
+		
     <div id="content">
-	
+	  
 	{% block content %}{% endblock %}
-	
 	</div>
+
+	
     <div id="footer">
         {% block footer %}
         <p class="s">Sivusto on vielä kokeilutilassa. Kehitämme palvelua käyttäjien toiveiden mukaan. Bugit ja toiveet
@@ -62,4 +66,6 @@
         palaute@ruokakori.net</a><br>Puuttuuko kauppa tai tiedot ovat virheelliset? Tietojen muuttaminen ja uuden kaupan lisääminen onnistuu kirjautumalla Google-tunnuksilla palveluun.<br>Palvelun on toteuttanut ProNetworks Solutions</p>
         {% endblock %}
 		</div>
+    </div>
+<div>
 </body>
