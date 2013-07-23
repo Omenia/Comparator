@@ -14,7 +14,7 @@ function deleteShop(shop){
      <span class="m"><b>{{shop.name}} {{shop.area}}</b>, {{shop.postal_code}} {{shop.city}}</span><span class="si"> (Päivitetty: {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}})</span><br><br></td></tr>
      
      {% for grocery in shop.groceries %}
-     <tr><td><span class="m">{{ grocery.name}} {{grocery.manufacturer}}</td><td><span class="m">{{grocery.amount}} {{grocery.quantity}}</td><td><span class="m">{{ grocery.price}} €</span></td></tr>
+     <tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td><span class="m">{{ grocery.name}} {{grocery.manufacturer}}</td><td><span class="m">{{grocery.amount}} {{grocery.quantity}}</td><td><span class="m">{{ grocery.price}} €</span></td></tr>
      {% endfor %}
      <tr><td>&nbsp;</td><td><img src="pics/total.png"></td><td><span class="m"><b>{{ shop.price}} €</b></span></td></tr>
      </table>
