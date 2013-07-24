@@ -48,11 +48,16 @@
 <div id="container">
     <div id= "content-container">
 	         {% block top %}
-		
+
+	  <a href="{{ url}}" class="login">{{ url_linktext}}</a>  </div><br>		
 	  <a href="/"> <img src="pics/logo.png"></img> </a><br>
 		<div id="text_and_login">
-	  <span class="m_b"><i> Vertaa ruokakorien hintoja. Tiedonkeruu tapahtuu käyttäjien toimesta. Osallistumalla parannat palvelua! :)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></span>
-		<a href="{{ url}}" class="login">{{ url_linktext}}</a>  </div><br>
+	  <span class="m_b"><i> Vertaa ruokakorien hintoja. Tiedonkeruu tapahtuu käyttäjien toimesta. Osallistumalla parannat palvelua! :)
+		{% if not user %}
+		Voit lisätä kaupan <a href="{{ url}}">kirjautumalla</a> Google-tunnuksella, tai lähettämällä <a href = "mailto:palaute@ruokakori.net?subject=Uusi%20kauppa">
+        Sähköpostia.</a>
+		</i></span>
+		{% endif %}
          {% endblock %}
 		
     <div id="content">
