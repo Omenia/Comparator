@@ -2,3 +2,4 @@
 
 from databasemodels import *
 from runtimedata import *
+from staticdata import *

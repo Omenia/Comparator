@@ -19,12 +19,14 @@ class MainPage(webapp2.RequestHandler):
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = self.__return_user_and_login_url()
         filters = self.__generate_filters()
+        print default_groceries
         template_values = {
           'shops_to_show': shops_to_show,
           'url': url,
           'url_linktext': url_linktext,
           'user': user,
-          'filters': filters
+          'filters': filters,
+		  'default_groceries': default_groceries
         }
 
         template = jinja_environment.get_template('index.html')
