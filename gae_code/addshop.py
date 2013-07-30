@@ -3,6 +3,7 @@
 
 import webapp2
 import jinja2
+from common import get_basket_price_from_groceries
 
 
 from google.appengine.api import users
@@ -69,10 +70,3 @@ class AddShop(webapp2.RequestHandler):
             return value
         else:
             return self.request.get(grocery_id+'_'+info)
-
-
-def get_basket_price_from_groceries(groceries):
-    price = 0
-    for grocery in groceries:
-        price += grocery.price
-    return price
