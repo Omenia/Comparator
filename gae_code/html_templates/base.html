@@ -8,6 +8,7 @@
 </head>
 <body>
 
+{% if current_url != "localhost" %}
 <script type="text/javascript" src="js/google_plus.js">
 </script>
 <div id="fb-root"></div>
@@ -17,12 +18,15 @@
 </script>
 <script src="js/twitter_follow.js"> 
 </script>
+{% endif %}
 
     {% block header %}
+	{% if current_url != "localhost" %}
 	<div class="fb-like" data-href="http://www.ruokakori.net/" data-send="false" data-layout="button_count" data-show-faces="true"></div>
 	<a href="https://twitter.com/Ruokakori" class="twitter-follow-button" data-show-count="false">Follow @Ruokakori</a>
     <div class="g-plusone" data-size="medium" data-annotation="bubble" ></div>  
-     {% endblock %}
+	{% endif %}
+	{% endblock %}
 
 <div id="container">
     <div id= "content-container">
