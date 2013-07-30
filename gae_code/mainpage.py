@@ -30,7 +30,7 @@ class MainPage(webapp2.RequestHandler):
           'url_linktext': url_linktext,
           'user': user,
           'filters': filters,
-            'default_groceries': default_groceries
+          'default_groceries': default_groceries
         }
 
         template = jinja_environment.get_template('index.html')
