@@ -4,15 +4,12 @@
 import webapp2
 import jinja2
 from common import get_basket_price_from_groceries
+from common import render_add_shop
 
 
 from google.appengine.api import users
 from models import Grocery
 from models import Shop
-
-TEMPLATE_DIR = 'html_templates/'
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(TEMPLATE_DIR))
 
 
 class AddShop(webapp2.RequestHandler):
@@ -20,8 +17,7 @@ class AddShop(webapp2.RequestHandler):
     def get(self):
         if not users.get_current_user():
             return self.redirect('/')
-        template = jinja_environment.get_template('add_shop.html')
-        self.response.out.write(template.render())
+        render_add_shop(self.request.host.split(':')[0], self.response)
 
     def post(self):
         self.__add_shop_to_database()
