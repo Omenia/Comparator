@@ -22,7 +22,7 @@ def render_shop_page_from_the_template(request, response, safe_url, page):
     template_values = {
         'shop': shop,
         'user': user,
-        'url,': url,
+        'url': url,
         'url_linktext': url_linktext,
         'current_url': request.host.split(':')[0]
     }

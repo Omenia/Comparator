@@ -13,7 +13,7 @@ class EditShop(webapp2.RequestHandler):
             return self.redirect('/')
         safe_url = self.request.get('shop')
         render_shop_page_from_the_template(
-                self.request.host.split(':')[0],
+                self.request,
                 self.response, safe_url,
                 'edit_shop.html')
 
