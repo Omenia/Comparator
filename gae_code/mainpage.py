@@ -4,7 +4,10 @@ import urllib2
 import webapp2
 import jinja2
 
-from models import *
+from models import default_groceries
+from models import Opt
+from models import Filter
+from models import Shop
 from google.appengine.api import users
 
 TEMPLATE_DIR = 'html_templates/'
