@@ -16,7 +16,7 @@ class AddShop(webapp2.RequestHandler):
     def get(self):
         if not users.get_current_user():
             return self.redirect('/')
-        render_add_shop(self.request.host.split(':')[0], self.response)
+        render_add_shop(self.request, self.response)
 
     def post(self):
         self.__add_shop_to_database()
