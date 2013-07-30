@@ -6,7 +6,8 @@ import jinja2
 
 
 from google.appengine.api import users
-from models import *
+from models import Grocery
+from models import Shop
 
 TEMPLATE_DIR = 'html_templates/'
 jinja_environment = jinja2.Environment(
