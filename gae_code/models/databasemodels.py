@@ -2,6 +2,7 @@
 
 from google.appengine.ext import ndb
 
+
 class Grocery(ndb.Model):
     name = ndb.StringProperty()
     manufacturer = ndb.StringProperty()
@@ -21,7 +22,7 @@ class Shop(ndb.Model):
     groceries = ndb.StructuredProperty(Grocery, repeated=True)
 
     @classmethod
-    def query_book(cls, order = 'Halvin', qo = None):
+    def query_book(cls, order='Halvin', qo=None):
         if order == 'Halvin':
             price_order = cls.price
         else:

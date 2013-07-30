@@ -8,9 +8,6 @@ from common import get_basket_price_from_groceries
 from common import render_shop_page_from_the_template
 
 
-jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader('html_templates/'))
-
-
 class EditShop(webapp2.RequestHandler):
     def get(self):
         if not users.get_current_user():
