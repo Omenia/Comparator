@@ -4,10 +4,10 @@ import jinja2
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from common import get_basket_price_from_groceries
 
-TEMPLATE_DIR = 'html_templates/'
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(TEMPLATE_DIR))
+
+jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader('html_templates/'))
 
 
 class EditShop(webapp2.RequestHandler):
@@ -45,11 +45,3 @@ def render_shop_page_from_the_template(response, safe_url, page):
     }
     template = jinja_environment.get_template(page)
     response.out.write(template.render(template_values))
-
-
-def get_basket_price_from_groceries(groceries):
-    #TODO: this function is also in addshop.py
-    price = 0
-    for grocery in groceries:
-        price += grocery.price
-    return price
