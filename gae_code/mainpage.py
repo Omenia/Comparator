@@ -8,7 +8,8 @@ from models import default_groceries
 from models import Opt
 from models import Filter
 from models import Shop
-from google.appengine.api import users
+from common import return_user_and_login_url
+
 
 TEMPLATE_DIR = 'html_templates/'
 jinja_environment = jinja2.Environment(
@@ -20,7 +21,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
 
         shops_to_show = self.__create_shops_which_are_shown()
-        url, url_linktext, user = self.__return_user_and_login_url()
+        url, url_linktext, user = return_user_and_login_url(self.request.uri)
         filters = self.__generate_filters()
         template_values = {
           'shops_to_show': shops_to_show,
@@ -62,7 +63,6 @@ class MainPage(webapp2.RequestHandler):
         selected_values.update(self.__add_key_to_the_selected_values_dict('postal_code', default_for_postal_code))
 
         if len(cities) != 0:
-        #TODO: nice bubblegum here.
             cities.insert(0,default_for_city)
             areas.insert(0,default_for_area)
             postal_codes.insert(0,default_for_postal_code)
@@ -128,17 +128,6 @@ class MainPage(webapp2.RequestHandler):
         else:
             shops_to_show = Shop.query_book(order=orde).fetch(amount_of_shops)
         return shops_to_show
-
-    def __return_user_and_login_url(self):
-        if users.get_current_user():
-            url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Kirjaudu ulos'.decode('utf-8')
-            user = users.get_current_user()
-        else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Kirjaudu sisään'.decode('utf-8')
-            user = None
-        return url, url_linktext, user
 
     def __get_cities_and_postal_codes(self):
         #TODO: This is nasty and costly one. We are just fetching all shops from the DB.
