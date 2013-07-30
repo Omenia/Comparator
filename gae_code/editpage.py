@@ -30,4 +30,3 @@ class EditShop(webapp2.RequestHandler):
         shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()
         return self.redirect('/show_shop?shop=' + shop.key.urlsafe())
-

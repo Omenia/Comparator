@@ -2,7 +2,6 @@
 
 
 import webapp2
-import jinja2
 from common import get_basket_price_from_groceries
 from common import render_add_shop
 
@@ -65,4 +64,4 @@ class AddShop(webapp2.RequestHandler):
         if value:
             return value
         else:
-            return self.request.get(grocery_id+'_'+info)
+            return self.request.get(grocery_id + '_' + info)
