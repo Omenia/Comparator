@@ -14,8 +14,10 @@ from models import Shop
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
+        print "mitä ihmettä?"
         if not users.get_current_user():
             return self.redirect('/')
+        print '!!!!!!!'
         render_add_shop(self.request, self.response)
 
     def post(self):
@@ -39,7 +41,7 @@ class AddShop(webapp2.RequestHandler):
                                                           manufacturer='Arla & Ingman'),
                                self.__add_grocery_to_shop('Tutti-Frutti', 'tutti-frutti', quantity='g', amount=400,
                                                           manufacturer='Fazer'),
-                               self.__add_grocery_to_shop('Juhlamokka Kahvi', 'kahvi', quantity='g', amount=500,
+                               self.__add_grocery_to_shop('Juhla Mokka kahvi', 'kahvi', quantity='g', amount=500,
                                                           manufacturer='Paulig')
                                ]
         )

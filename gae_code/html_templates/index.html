@@ -4,7 +4,7 @@
 
     <table width="600">
     {% for shop in shops_to_show %}
-			 <tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td class="name_even"><a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
+              <tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td class="name_even"><a href="show_shop?shop={{shop.key.urlsafe()}}" class="first_shop" id="{{shop.name}} {{shop.area}}">
              {{shop.name}} {{shop.area}}, {{ shop.city}}</a></td><td class="total_price"><span class="m"> {{ shop.price}} €</span></td><td class="date_added"><span class="si">(Päivitetty {{shop.date.day}}.{{shop.date.month}}.{{shop.date.year}})</span></td></tr>
 	{% endfor %}
 	</table><br>

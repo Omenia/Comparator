@@ -32,7 +32,6 @@ class MainPage(webapp2.RequestHandler):
           'filters': filters,
           'default_groceries': default_groceries
         }
-
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(template_values))
 

@@ -7,24 +7,13 @@
     Kaupunki: <input type="text" required="required" name="city" maxlength="50"><br>
     Postinumero: <input type="text" required="required" name="postal_code" maxlength="50"><br>
     <br>
-    Suomalainen rasvaton maito 1l:<br>
-    Tuottaja: <input type="text" required="required" name="rasvaton_maito_manufacturer" maxlength="50"><br>
-    Hinta: <input type="number" step="any" required="required" name="rasvaton_maito_price" maxlength="50"><br>
-    Reissumies 4kpl:<br>
-    Hinta: <input type="number" step="any" required="required" name="reissumies_price" maxlength="50"><br>
-    Oltermanni Juusto 1kg:<br>
-    Hinta: <input type="number" step="any" required="required" name="oltermanni_price" maxlength="50"><br>
-    Suomalaiset tomaatit 1kg:<br>
-    Hinta: <input type="number" step="any" required="required" name="tomaatit_price" maxlength="50"><br>
-    Suomalainen naudan jauheliha 400g:<br>
-    Tuottaja: <input type="text" required="required" name="jauheliha_manufacturer" maxlength="50"><br>
-    Hinta: <input type="number" step="any" required="required" name="jauheliha_price" maxlength="50"><br>
-    Maustettu Jogurtti Arla & Ingman 1l:<br>
-    Hinta: <input type="number" step="any" required="required" name="jogurtti_price" maxlength="50"><br>
-    Tutti-Frutti Karkkipussi  400g:<br>
-    Hinta: <input type="number" step="any" required="required" name="tutti-frutti_price" maxlength="50"><br>
-    Juhlamokka Kahvi 500g:<br>
-    Hinta: <input type="number" step="any" required="required" name="kahvi_price" maxlength="50"><br>
+    {% for grocery in groceries %}
+        {{grocery.name}} {{grocery.amount}} {{grocery.quantity}} <br>
+        {% if grocery.name == "Suomalainen rasvaton maito" or grocery.name == "Suomalainen naudan jauheliha" %}
+            Tuottaja: <input type="text" required="required" name={{grocery.name}}"_manufacturer" maxlength="50"><br>
+        {%endif%}
+        Hinta: <input type="number" step="any" required="required" name="{grocery.name}_price" maxlength="50"><br>
+    {% endfor %}
     <input type="submit" value="Luo kauppa" name = "add_shop"><br>
 </form>
 <br>
