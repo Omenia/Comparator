@@ -12,7 +12,7 @@ Modify one shop and one shop information
     [Teardown]    Delete Shop    Tokmanni Juva
 
 Modify gorcery price in one grocery
-    Modify Shop Information    oltermanni_price    Citymarket Juva    42.24
+    Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
     Check that there are right price and whole basket price is right
     [Teardown]    Delete Shop    Citymarket Juva
 

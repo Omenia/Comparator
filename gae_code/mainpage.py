@@ -4,11 +4,11 @@ import urllib2
 import webapp2
 import jinja2
 
-from models import default_groceries
 from models import Opt
 from models import Filter
 from models import Shop
 from common import return_user_and_login_url
+from common import create_basket
 
 
 TEMPLATE_DIR = 'html_templates/'
@@ -19,7 +19,7 @@ jinja_environment = jinja2.Environment(
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
-
+        default_groceries = create_basket()
         shops_to_show = self.__create_shops_which_are_shown()
         url, url_linktext, user = return_user_and_login_url(self.request.uri)
         filters = self.__generate_filters()

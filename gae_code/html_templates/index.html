@@ -28,7 +28,7 @@
 	<table width="240"><tr><td>
 	<b>Ruokakorin sisältö</b></td><td></td></tr>
 	{% for grocery in default_groceries %}
-	<tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td>{{grocery[0]}}</td><td>{{grocery[1]}}</td></tr>
+	<tr class="{{ loop.cycle('n_odd', 'n_even') }}"><td>{{grocery.name}}</td><td>{{grocery.amount}} {{grocery.quantity}}</td></tr>
 	{% endfor %}
 </table><br></span>
 	
