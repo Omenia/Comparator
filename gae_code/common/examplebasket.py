@@ -1,6 +1,10 @@
+from ident import identifier
+
+
 class Grocery(object):
-    def __init__(self, name, manufacturer, quantity, amount):
+    def __init__(self, name, identi, manufacturer, quantity, amount):
         self.name = name
+        self.identi = identi
         self.manufacturer = manufacturer
         self.quantity = quantity
         self.amount = amount
@@ -21,6 +25,7 @@ def create_basket():
 
 def __add_grocery(name, amount, quantity, manufacturer=None):
     return Grocery(name=name,
+            identi=identifier(name),
             manufacturer=manufacturer,
             amount=amount,
             quantity=quantity)

@@ -25,7 +25,7 @@ class EditShop(webapp2.RequestHandler):
         shop.postal_code = self.request.get('postal_code')
         for grocery in shop.groceries:
             grocery.price = float(self.request.get(grocery.name + "_price"))
-            if grocery.name == "Rasvaton Maito" or grocery.name == "Naudan Jauheliha":
+            if grocery.name == "Suomalainen rasvaton maito" or grocery.name == "Suomalainen naudan jauheliha":
                 grocery.manufacturer = self.request.get(grocery.name + "_manufacturer")
         shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()

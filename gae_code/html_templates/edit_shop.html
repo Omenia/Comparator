@@ -9,7 +9,7 @@
     <br>
      {% for grocery in shop.groceries %}
          {{ grocery.name}} <input type="number" name="{{grocery.name}}_price" step="any" required="required" value= "{{grocery.price}}" maxlength="50">
-         {% if grocery.name == 'Rasvaton Maito' or grocery.name == 'Naudan Jauheliha' %}
+         {% if grocery.name == 'Suomalainen rasvaton maito' or grocery.name == 'Suomalainen naudan jauheliha' %}
              <input type = "text" name="{{grocery.name}}_manufacturer" required="required" value="{{grocery.manufacturer}}" maxlength="50">
          {% endif %}
          <br>

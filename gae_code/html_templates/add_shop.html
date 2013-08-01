@@ -10,9 +10,9 @@
     {% for grocery in groceries %}
         {{grocery.name}} {{grocery.amount}} {{grocery.quantity}} <br>
         {% if grocery.name == "Suomalainen rasvaton maito" or grocery.name == "Suomalainen naudan jauheliha" %}
-            Tuottaja: <input type="text" required="required" name={{grocery.name}}"_manufacturer" maxlength="50"><br>
+            Tuottaja: <input type="text" required="required" name="{{grocery.identi}}_manufacturer" maxlength="50"><br>
         {%endif%}
-        Hinta: <input type="number" step="any" required="required" name="{grocery.name}_price" maxlength="50"><br>
+        Hinta: <input type="number" step="any" required="required" name="{{grocery.identi}}_price" maxlength="50"><br>
     {% endfor %}
     <input type="submit" value="Luo kauppa" name = "add_shop"><br>
 </form>

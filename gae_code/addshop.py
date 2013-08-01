@@ -4,20 +4,20 @@
 import webapp2
 from common import get_basket_price_from_groceries
 from common import render_add_shop
+from common import identifier
 
 
 from google.appengine.api import users
 from models import Grocery
 from models import Shop
+from common import create_basket
 
 
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
-        print "mitä ihmettä?"
         if not users.get_current_user():
             return self.redirect('/')
-        print '!!!!!!!'
         render_add_shop(self.request, self.response)
 
     def post(self):
@@ -29,31 +29,51 @@ class AddShop(webapp2.RequestHandler):
                     area=self.request.get('area'),
                     city=self.request.get('city'),
                     postal_code=self.request.get('postal_code'),
-                    groceries=[self.__add_grocery_to_shop('Rasvaton Maito', 'rasvaton_maito', quantity='l', amount=1),
-                               self.__add_grocery_to_shop('Reissumies', 'reissumies', quantity='kpl', amount=4,
-                                                          manufacturer='Oululainen'),
-                               self.__add_grocery_to_shop('Oltermanni', 'oltermanni', quantity='kg', amount=1,
-                                                          manufacturer='Valio'),
-                               self.__add_grocery_to_shop('Tomaatit', 'tomaatit', quantity='kg', amount=1,
-                                                          manufacturer='Suomalainen'),
-                               self.__add_grocery_to_shop('Naudan Jauheliha', 'jauheliha', quantity='g', amount=400),
-                               self.__add_grocery_to_shop('Jogurtti', 'jogurtti', quantity='l', amount=1,
-                                                          manufacturer='Arla & Ingman'),
-                               self.__add_grocery_to_shop('Tutti-Frutti', 'tutti-frutti', quantity='g', amount=400,
-                                                          manufacturer='Fazer'),
-                               self.__add_grocery_to_shop('Juhla Mokka kahvi', 'kahvi', quantity='g', amount=500,
-                                                          manufacturer='Paulig')
-                               ]
-        )
+                    groceries=self.__return_basket_from_form()
+                            )
         shop.price = get_basket_price_from_groceries(shop.groceries)
         shop.put()
 
-    def __add_grocery_to_shop(self, grocery_name, grocery_id, manufacturer = None, price = None, quantity = None, amount = None):
+    def __return_basket_from_form(self):
+        example_basket = create_basket()
+        basket = []
+        for grocery in example_basket:
+            if grocery.name == "Suomalainen rasvaton maito" or grocery.name == "Suomalainen naudan jauheliha":
+                basket.append(self.__add_grocery_to_shop(grocery.name,
+                                           identifier(grocery.name),
+                                           quantity=grocery.quantity,
+                                           amount=grocery.amount))
+            else:
+                basket.append(self.__add_grocery_to_shop(grocery.name,
+                                            identifier(grocery.name),
+                                            quantity=grocery.quantity,
+                                            amount=grocery.amount,
+                                            manufacturer=grocery.manufacturer))
+        return basket
+
+    def __add_grocery_to_shop(self, grocery_name,
+                              grocery_id,
+                              manufacturer=None,
+                              price=None, quantity=None,
+                              amount=None):
         return Grocery(name=grocery_name,
-                       manufacturer=self.__return_value_to_the_grocery('manufacturer', manufacturer, grocery_id),
-                       price=self.__format_number_with_dot(self.__return_value_to_the_grocery('price', price, grocery_id)),
-                       quantity=self.__return_value_to_the_grocery('quantity', quantity, grocery_id),
-                       amount=self.__format_number_with_dot(self.__return_value_to_the_grocery('amount', amount, grocery_id))
+                       manufacturer=self.__return_value_to_the_grocery(
+                                                                'manufacturer',
+                                                                manufacturer,
+                                                                grocery_id
+                                                                ),
+                       price=self.__format_number_with_dot(
+                                            self.__return_value_to_the_grocery(
+                                            'price',
+                                            price, grocery_id)
+                                                           ),
+                       quantity=self.__return_value_to_the_grocery(
+                                                        'quantity',
+                                                        quantity, grocery_id),
+                       amount=self.__format_number_with_dot(
+                                            self.__return_value_to_the_grocery(
+                                                        'amount',
+                                                        amount, grocery_id))
                        )
 
     def __format_number_with_dot(self, number):

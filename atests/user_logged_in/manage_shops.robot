@@ -8,14 +8,14 @@ Add the Shop With Groceries
     [Arguments]    ${name}    ${city}    ${area}    ${postal_code}    ${prices}=1
     Enter to the shop adding page
     Add Shop Information    ${name}    ${city}    ${postal_code}    ${area}
-    Add Grocery with producer    rasvaton_maito    Valio    ${prices}
+    Add Grocery with producer    suomalainen_rasvaton_maito    Valio    ${prices}
     Add Grocery without producer    reissumies    0.79
     Add Grocery without producer    oltermanni    6.95
-    Add Grocery without producer    tomaatit    2.19
-    Add Grocery with producer    jauheliha    Reilu    3.29
-    Add Grocery without producer    jogurtti    2.45
-    Add Grocery without producer    tutti-frutti    2.69
-    Add Grocery without producer    kahvi    3.25
+    Add Grocery without producer   suomalainen_tomaatti    2.19
+    Add Grocery with producer    suomalainen_naudan_jauheliha    Reilu    3.29
+    Add Grocery without producer    maustettu_jogurtti    2.45
+    Add Grocery without producer    tutti_frutti_jumbo    2.69
+    Add Grocery without producer    juhla_mokka_kahvi    3.25
     Click Element    name=add_shop
 
 Enter to the shop adding page

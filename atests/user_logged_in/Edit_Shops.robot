@@ -12,14 +12,14 @@ Modify one shop and one shop information
     [Teardown]    Delete Shop    Tokmanni Juva
 
 Modify gorcery price in one grocery
-    Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
+    Modify Shop Information    oltermanni_price    Citymarket Juva    42.24
     Check that there are right price and whole basket price is right
     [Teardown]    Delete Shop    Citymarket Juva
 
 Modify gorcery manufacturor in one grocery
-    Modify Shop Information    Naudan Jauheliha_manufacturer    Citymarket Juva    Leon Liha
+    Modify Shop Information    Suomalainen naudan jauheliha_manufacturer    Citymarket Juva    Leon Liha
     Go To    ${HOST}
-    Modify Shop Information    Rasvaton Maito_manufacturer    Citymarket Juva    Sonjan Meijeri
+    Modify Shop Information    Suomalainen rasvaton maito_manufacturer    Citymarket Juva    Sonjan Meijeri
     Page Should Contain    Leon Liha
     Page Should Contain    Sonjan Meijeri
     [Teardown]    Delete Shop    Citymarket Juva
