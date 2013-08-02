@@ -31,15 +31,16 @@ def render_shop_page_from_the_template(request, response, safe_url, page):
     response.out.write(template.render(template_values))
 
 
-def render_add_shop(request, response):
+def render_add_shop(request, response, chtml):
     url, url_linktext, user = return_user_and_login_url(request.uri)
     template = jinja_environment.get_template('add_shop.html')
     groceries = create_basket()
     template_values = {
             'current_url': request.host.split(':')[0],
-            'url,': url,
+            'url': url,
             'user': user,
             'url_linktext': url_linktext,
-            'groceries': groceries
+            'groceries': groceries,
+            'captchahtml': chtml
             }
     response.out.write(template.render(template_values))

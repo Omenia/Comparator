@@ -5,6 +5,7 @@ import webapp2
 from common import get_basket_price_from_groceries
 from common import render_add_shop
 from common import identifier
+from recaptcha.client import captcha
 
 
 from google.appengine.api import users
@@ -16,13 +17,18 @@ from common import create_basket
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
-        if not users.get_current_user():
-            return self.redirect('/')
-        render_add_shop(self.request, self.response)
+        chtml = captcha.displayhtml(
+            public_key="6LewluUSAAAAADiBroOZBCe9d3j-rcIORGxQvacj",
+            use_ssl=False,
+            error=None)
+        render_add_shop(self.request, self.response, chtml)
 
     def post(self):
-        self.__add_shop_to_database()
-        return self.redirect('/')
+        if not users.get_current_user():
+            self.__create_rechatpca()
+        else:
+            self.__add_shop_to_database()
+            return self.redirect('/')
 
     def __add_shop_to_database(self):
         shop = Shop(name=self.request.get('name'),
