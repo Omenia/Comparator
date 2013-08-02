@@ -15,7 +15,7 @@ function deleteShop(shop){
      
      {% for grocery in shop.groceries %}
      <tr class="{{ loop.cycle('n_odd', 'n_even') }}"''><td><span class="m">{{ grocery.name}}, {{grocery.manufacturer}}</td>
-     <td><span class="m">{{grocery.amount}} {{grocery.quantity}}</td>
+     <td><span class="m">{{"%i" % grocery.amount}} {{grocery.quantity}}</td>
      <td><span class="m">{{ "%.2f" % grocery.price}} €</span></td></tr>
      {% endfor %}
      <tr><td>&nbsp;</td><td><img src="pics/total.png"></td><td><span class="m"><b>{{"%.2f" % shop.price}} €</b></span></td></tr>
