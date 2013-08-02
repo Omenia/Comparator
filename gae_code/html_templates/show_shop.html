@@ -22,7 +22,10 @@ function deleteShop(shop){
      </table>
 <br><br>
      <form method="post">
-        {% if not user %} {{captchahtml}} {% endif %}
+        {% if not user %} 
+        {{captchahtml}}
+        Saat CHAPTCHA:n pois päältä <a href="{{ url}}">kirjautumalla</a> Google-tunnuksilla.</a><br>
+         {% endif %}
 	    <input type="submit" value="Muokkaa kauppaa" name = "edit_shop">
         <input type="submit" value="Poista kauppa" onClick="deleteShop('{{shop.name}} {{shop.area}}')" name = "delete_shop">
     </form>

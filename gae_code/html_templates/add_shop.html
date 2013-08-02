@@ -14,7 +14,10 @@
         {%endif%}
         Hinta: <input type="number" step="any" required="required" name="{{grocery.identi}}_price" maxlength="50"><br>
     {% endfor %}
-    {% if not user %} {{ captchahtml }} {% endif %}
+    {% if not user %}
+    {{ captchahtml }}
+    Saat CHAPTCHA:n pois päältä <a href="{{ url}}">kirjautumalla</a> Google-tunnuksilla.</a><br>
+    {% endif %}
     <input type="submit" value="Luo kauppa" name = "add_shop"><br>
 </form>
 <br>
