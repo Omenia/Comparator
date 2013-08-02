@@ -13,7 +13,7 @@ jinja_environment = jinja2.Environment(
                     loader=jinja2.FileSystemLoader('html_templates/'))
 
 
-def render_shop_page_from_the_template(request, response, safe_url, page):
+def render_shop_page_from_the_template(request, response, safe_url, page, chtml = None):
     url, url_linktext, user = return_user_and_login_url(request.uri)
     if users.get_current_user():
         user = users.get_current_user()
@@ -24,6 +24,7 @@ def render_shop_page_from_the_template(request, response, safe_url, page):
         'shop': shop,
         'user': user,
         'url': url,
+        'captchahtml': chtml,
         'url_linktext': url_linktext,
         'current_url': request.host.split(':')[0]
     }
