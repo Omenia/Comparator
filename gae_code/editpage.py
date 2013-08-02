@@ -9,8 +9,6 @@ from common import render_shop_page_from_the_template
 
 class EditShop(webapp2.RequestHandler):
     def get(self):
-        if not users.get_current_user():
-            return self.redirect('/')
         safe_url = self.request.get('shop')
         render_shop_page_from_the_template(
                 self.request,

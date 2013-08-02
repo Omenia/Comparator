@@ -24,9 +24,7 @@ class ShowShop(webapp2.RequestHandler):
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()
-        logging.info('moi')
         if not users.get_current_user():
-                logging.info('moi')
                 challenge = self.request.get('recaptcha_challenge_field')
                 response = self.request.get('recaptcha_response_field')
                 remoteip = environ['REMOTE_ADDR']
@@ -36,18 +34,22 @@ class ShowShop(webapp2.RequestHandler):
                          "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf",
                          remoteip)
                 if cResponse.is_valid:
+                    print "!!!!!!!!s"
                     if self.request.get('delete_shop'):
+                        print "!?!"
                         shop.key.delete()
                         return self.redirect('/')
                     elif self.request.get('edit_shop'):
+                        print "!?!?"
                         return self.redirect('/edit_shop?shop='+shop.key.urlsafe())
                 else:
                     #TODO: Now this only display page that CAPTCHA was incorrect
                     error = cResponse.error_code
                     self.response.headers['Content-Type'] = 'text/plain'
                     self.response.write(error)
-        if self.request.get('delete_shop'):
-            shop.key.delete()
-            return self.redirect('/')
-        elif self.request.get('edit_shop'):
-            return self.redirect('/edit_shop?shop='+shop.key.urlsafe())
+        else:
+            if self.request.get('delete_shop'):
+                shop.key.delete()
+                return self.redirect('/')
+            elif self.request.get('edit_shop'):
+                return self.redirect('/edit_shop?shop='+shop.key.urlsafe())
