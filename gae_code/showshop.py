@@ -7,7 +7,7 @@ from recaptcha.client import captcha
 from os import environ
 from google.appengine.api import users
 from google.appengine.ext import ndb
-from common import render_shop_page_from_the_template
+from common import render_page
 import logging
 
 
@@ -20,7 +20,12 @@ class ShowShop(webapp2.RequestHandler):
         error=None)
 
         safe_url = self.request.get('shop')
-        render_shop_page_from_the_template(self.request, self.response, safe_url, 'show_shop.html', chtml)
+        render_page(self.request,
+                    self.response,
+                    'show_shop.html',
+                    chtml,
+                    safe_url
+                    )
 
     def post(self):
         shop = ndb.Key(urlsafe = self.request.get('shop')).get()

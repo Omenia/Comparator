@@ -1,19 +1,20 @@
 
 import webapp2
 
-from google.appengine.api import users
 from google.appengine.ext import ndb
 from common import get_basket_price_from_groceries
-from common import render_shop_page_from_the_template
+from common import render_page
 
 
 class EditShop(webapp2.RequestHandler):
     def get(self):
         safe_url = self.request.get('shop')
-        render_shop_page_from_the_template(
-                self.request,
-                self.response, safe_url,
-                'edit_shop.html')
+        render_page(
+                    self.request,
+                    self.response,
+                    'edit_shop.html',
+                    safe_url=safe_url
+                    )
 
     def post(self):
         shop = ndb.Key(urlsafe=self.request.get('shop')).get()

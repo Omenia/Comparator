@@ -12,17 +12,20 @@ jinja_environment = jinja2.Environment(
                     loader=jinja2.FileSystemLoader('html_templates/'))
 
 
-def render_shop_page_from_the_template(request, response, safe_url, page, chtml = None):
+def render_page(request, response, page, chtml = None, safe_url = None):
     url, url_linktext, user = return_user_and_login_url(request.uri)
-    shop = ndb.Key(urlsafe=safe_url).get()
     template_values = {
-        'shop': shop,
         'user': user,
         'url': url,
-        'captchahtml': chtml,
         'url_linktext': url_linktext,
         'current_url': request.host.split(':')[0]
     }
+    if safe_url:
+        shop = ndb.Key(urlsafe=safe_url).get()
+        template_values['shop'] = shop
+    if chtml:
+        template_values['captchahtml'] = chtml
+
     template = jinja_environment.get_template(page)
     response.out.write(template.render(template_values))
 
