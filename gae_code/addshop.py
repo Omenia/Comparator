@@ -3,7 +3,7 @@
 
 import webapp2
 from common import get_basket_price_from_groceries
-from common import render_add_shop
+from common import render_page
 from common import identifier
 from recaptcha.client import captcha
 
@@ -21,7 +21,7 @@ class AddShop(webapp2.RequestHandler):
             public_key="6LewluUSAAAAADiBroOZBCe9d3j-rcIORGxQvacj",
             use_ssl=False,
             error=None)
-        render_add_shop(self.request, self.response, chtml)
+        render_page(self.request, self.response, 'add_shop.html', chtml)
 
     def post(self):
         if not users.get_current_user():

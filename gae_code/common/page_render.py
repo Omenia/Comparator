@@ -25,21 +25,9 @@ def render_page(request, response, page, chtml = None, safe_url = None):
         template_values['shop'] = shop
     if chtml:
         template_values['captchahtml'] = chtml
+    if page == 'add_shop.html':
+        groceries = create_basket()
+        template_values['groceries'] = groceries
 
-    template = jinja_environment.get_template(page)
-    response.out.write(template.render(template_values))
-
-
-def render_add_shop(request, response, chtml):
-    url, url_linktext, user = return_user_and_login_url(request.uri)
-    template = jinja_environment.get_template('add_shop.html')
-    groceries = create_basket()
-    template_values = {
-            'current_url': request.host.split(':')[0],
-            'url': url,
-            'user': user,
-            'url_linktext': url_linktext,
-            'groceries': groceries,
-            'captchahtml': chtml
-            }
+    template=jinja_environment.get_template(page)
     response.out.write(template.render(template_values))
