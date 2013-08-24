@@ -12,7 +12,7 @@ jinja_environment = jinja2.Environment(
                     loader=jinja2.FileSystemLoader('html_templates/'))
 
 
-def render_page(request, response, page, chtml = None, safe_url = None):
+def render_page(request, response, page, chtml = None, safe_url = None, shops_to_show = None, filters = None):
     url, url_linktext, user = return_user_and_login_url(request.uri)
     template_values = {
         'user': user,
@@ -25,9 +25,13 @@ def render_page(request, response, page, chtml = None, safe_url = None):
         template_values['shop'] = shop
     if chtml:
         template_values['captchahtml'] = chtml
-    if page == 'add_shop.html':
+    if page == 'add_shop.html' or page == 'index.html':
         groceries = create_basket()
         template_values['groceries'] = groceries
+    if shops_to_show:
+        template_values['shops_to_show'] = shops_to_show
+    if filters:
+        template_values['filters'] = filters
 
     template=jinja_environment.get_template(page)
     response.out.write(template.render(template_values))

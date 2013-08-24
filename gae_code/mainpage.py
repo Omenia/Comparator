@@ -9,7 +9,7 @@ from models import Filter
 from models import Shop
 from common import return_user_and_login_url
 from common import create_basket
-
+from common import render_page
 
 TEMPLATE_DIR = 'html_templates/'
 jinja_environment = jinja2.Environment(
@@ -19,21 +19,13 @@ jinja_environment = jinja2.Environment(
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
-        default_groceries = create_basket()
         shops_to_show = self.__create_shops_which_are_shown()
-        url, url_linktext, user = return_user_and_login_url(self.request.uri)
         filters = self.__generate_filters()
-        template_values = {
-          'shops_to_show': shops_to_show,
-          'current_url': self.request.host.split(':')[0],
-          'url': url,
-          'url_linktext': url_linktext,
-          'user': user,
-          'filters': filters,
-          'default_groceries': default_groceries
-        }
-        template = jinja_environment.get_template('index.html')
-        self.response.out.write(template.render(template_values))
+        render_page(self.request,
+                    self.response,
+                    'index.html',
+                    shops_to_show=shops_to_show,
+                    filters=filters)
 
     def post(self):
 
