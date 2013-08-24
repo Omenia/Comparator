@@ -12,7 +12,8 @@ jinja_environment = jinja2.Environment(
                     loader=jinja2.FileSystemLoader('html_templates/'))
 
 
-def render_page(request, response, page, chtml = None, safe_url = None, shops_to_show = None, filters = None):
+def render_page(request, response, page,
+                chtml=None, safe_url=None, shops_to_show=None, filters=None):
     url, url_linktext, user = return_user_and_login_url(request.uri)
     template_values = {
         'user': user,
@@ -33,5 +34,5 @@ def render_page(request, response, page, chtml = None, safe_url = None, shops_to
     if filters:
         template_values['filters'] = filters
 
-    template=jinja_environment.get_template(page)
+    template = jinja_environment.get_template(page)
     response.out.write(template.render(template_values))

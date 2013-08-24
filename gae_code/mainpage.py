@@ -7,8 +7,6 @@ import jinja2
 from models import Opt
 from models import Filter
 from models import Shop
-from common import return_user_and_login_url
-from common import create_basket
 from common import render_page
 
 TEMPLATE_DIR = 'html_templates/'
@@ -48,10 +46,10 @@ class MainPage(webapp2.RequestHandler):
         default_for_area = 'Alue'
         default_for_no_of_shops = '5'
         default_for_postal_code = 'Postinumero'
-        selected_values.update(self.__add_key_to_the_selected_values_dict('city', default_for_city))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('area', default_for_area))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('no_of_shops', default_for_no_of_shops, default_for_no_of_shops))
-        selected_values.update(self.__add_key_to_the_selected_values_dict('postal_code', default_for_postal_code))
+        selected_values.update(self.__add_key_to_selected_value('city', default_for_city))
+        selected_values.update(self.__add_key_to_selected_value('area', default_for_area))
+        selected_values.update(self.__add_key_to_selected_value('no_of_shops', default_for_no_of_shops, default_for_no_of_shops))
+        selected_values.update(self.__add_key_to_selected_value('postal_code', default_for_postal_code))
 
         if len(cities) != 0:
             cities.insert(0,default_for_city)
@@ -61,7 +59,7 @@ class MainPage(webapp2.RequestHandler):
 
         return selected_values, cities, areas, postal_codes, no_of_shops
 
-    def __add_key_to_the_selected_values_dict(self, ident, default_id, default_value=''):
+    def __add_key_to_selected_value(self, ident, default_id, default_value=''):
         selected_value = {}
         if self.request.get(ident):
             selected_value[ident] = self.request.get(ident)
