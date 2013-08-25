@@ -13,7 +13,7 @@ from common import render_page
 class ShowShop(webapp2.RequestHandler):
 
     def get(self):
-        chtml = captcha.create_capthca_html
+        chtml = captcha.create_capthca_html()
         safe_url = self.request.get('shop')
         render_page(self.request,
                     self.response,
