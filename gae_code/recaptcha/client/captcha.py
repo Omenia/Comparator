@@ -131,7 +131,6 @@ def create_rechatpca(self):
 
 
 def create_capthca_html():
-    logging.error("jee")
     return displayhtml(
                 public_key=PUBLIC_KEY,
                 use_ssl=False,

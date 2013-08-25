@@ -17,8 +17,7 @@ from common import create_basket
 class AddShop(webapp2.RequestHandler):
 
     def get(self):
-        chtml = captcha.create_capthca_html
-        print chtml
+        chtml = captcha.create_capthca_html()
         render_page(self.request, self.response, 'add_shop.html', chtml)
 
     def post(self):
