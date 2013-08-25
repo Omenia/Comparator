@@ -8,17 +8,12 @@ from os import environ
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from common import render_page
-import logging
 
 
 class ShowShop(webapp2.RequestHandler):
 
     def get(self):
-        chtml = captcha.displayhtml(
-        public_key="6LewluUSAAAAADiBroOZBCe9d3j-rcIORGxQvacj",
-        use_ssl=False,
-        error=None)
-
+        chtml = captcha.create_capthca_html
         safe_url = self.request.get('shop')
         render_page(self.request,
                     self.response,

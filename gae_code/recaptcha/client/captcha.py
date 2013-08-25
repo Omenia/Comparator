@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+PUBLIC_KEY = "6LewluUSAAAAADiBroOZBCe9d3j-rcIORGxQvacj"
 from os import environ
 import urllib
 from google.appengine.api import urlfetch
+import logging
 
 """
     Adapted from http://pypi.python.org/pypi/recaptcha-client
@@ -108,20 +110,29 @@ def submit (recaptcha_challenge_field,
         # recaptcha server was not reachable
         return RecaptchaResponse (is_valid=False, error_code = "recaptcha-not-reachable")
 
-    def create_rechatpca(self):
-        challenge = self.request.get('recaptcha_challenge_field')
-        response = self.request.get('recaptcha_response_field')
-        remoteip = environ['REMOTE_ADDR']
-        cResponse = self.submit(
-                 challenge,
-                 response,
-                 "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf",
-                 remoteip)
-        if cResponse.is_valid:
-            self.__add_shop_to_database()
-            return self.redirect('/')
-        else:
-            #TODO: Now this only display page that CAPTCHA was incorrect
-            error = cResponse.error_code
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write(error)
+
+def create_rechatpca(self):
+    challenge = self.request.get('recaptcha_challenge_field')
+    response = self.request.get('recaptcha_response_field')
+    remoteip = environ['REMOTE_ADDR']
+    cResponse = self.submit(
+             challenge,
+             response,
+             "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf",
+             remoteip)
+    if cResponse.is_valid:
+        self.__add_shop_to_database()
+        return self.redirect('/')
+    else:
+        #TODO: Now this only display page that CAPTCHA was incorrect
+        error = cResponse.error_code
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write(error)
+
+
+def create_capthca_html():
+    logging.error("jee")
+    return displayhtml(
+                public_key=PUBLIC_KEY,
+                use_ssl=False,
+                error=None)
