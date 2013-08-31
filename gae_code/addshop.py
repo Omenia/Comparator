@@ -6,8 +6,6 @@ from common import get_basket_price_from_groceries
 from common import render_page
 from common import identifier
 from recaptcha.client import captcha
-
-
 from google.appengine.api import users
 from models import Grocery
 from models import Shop
@@ -22,7 +20,15 @@ class AddShop(webapp2.RequestHandler):
 
     def post(self):
         if not users.get_current_user():
-            self.__create_rechatpca()
+            correct_captcha, error = captcha.create_rechatpca(self.request)
+            if correct_captcha:
+                self.__add_shop_to_database()
+                return self.redirect('/')
+            else:
+                #TODO: Now this only display page that CAPTCHA was incorrect
+                self.response.headers['Content-Type'] = 'text/plain'
+                self.response.write(error)
+
         else:
             self.__add_shop_to_database()
             return self.redirect('/')

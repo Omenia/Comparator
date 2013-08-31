@@ -111,23 +111,19 @@ def submit (recaptcha_challenge_field,
         return RecaptchaResponse (is_valid=False, error_code = "recaptcha-not-reachable")
 
 
-def create_rechatpca(self):
-    challenge = self.request.get('recaptcha_challenge_field')
-    response = self.request.get('recaptcha_response_field')
+def create_rechatpca(request):
+    challenge = request.get('recaptcha_challenge_field')
+    response = request.get('recaptcha_response_field')
     remoteip = environ['REMOTE_ADDR']
-    cResponse = self.submit(
+    cResponse = submit(
              challenge,
              response,
              "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf",
              remoteip)
     if cResponse.is_valid:
-        self.__add_shop_to_database()
-        return self.redirect('/')
+        return True, None
     else:
-        #TODO: Now this only display page that CAPTCHA was incorrect
-        error = cResponse.error_code
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(error)
+        return False, cResponse.error_code
 
 
 def create_capthca_html():
