@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 PUBLIC_KEY = "6LewluUSAAAAADiBroOZBCe9d3j-rcIORGxQvacj"
+PRIVATE_KEY = "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf"
+
 from os import environ
 import urllib
 from google.appengine.api import urlfetch
-import logging
+
 
 """
     Adapted from http://pypi.python.org/pypi/recaptcha-client
@@ -118,7 +120,7 @@ def create_rechatpca(request):
     cResponse = submit(
              challenge,
              response,
-             "6LewluUSAAAAAC-nDS0rxfqrq8e6-ZzrknKJBhNf",
+             PRIVATE_KEY,
              remoteip)
     if cResponse.is_valid:
         return True, None
