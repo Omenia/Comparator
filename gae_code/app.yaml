@@ -13,14 +13,14 @@ handlers:
   static_dir: stylesheets
 
 - url: /js
-  static_dir: js
+  static_dir: static/js
   
 - url: /pics
-  static_dir: pics
+  static_dir: static/pics
 
 - url: /robots\.txt
-  static_files: robots.txt
-  upload: robots\.txt
+  static_files: static/robots.txt
+  upload: static/robots\.txt
 
 - url: .*
   script: main.app

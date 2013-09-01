@@ -1,1 +1,1 @@
-Ruokakori muuttaa tapasi ostaa p√§ivitt√§istavaraa.
+Ruokakori muuttaa tapasi ostaa p‰ivitt‰istavaraa.

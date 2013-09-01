@@ -4,7 +4,6 @@
 import webapp2
 
 from recaptcha.client import captcha
-from os import environ
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from common import render_page

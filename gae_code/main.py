@@ -2,12 +2,10 @@
 
 
 import webapp2
-
-
-from mainpage import MainPage
-from addshop import AddShop
-from showshop import ShowShop
-from editpage import EditShop
+from views import MainPage
+from views import AddShop
+from views import ShowShop
+from views import EditShop
 
 
 app = webapp2.WSGIApplication([
