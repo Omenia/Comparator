@@ -1,4 +1,4 @@
 @ECHO OFF
 
 pybot -d output\ -V variable_files\localhost.py %* .
-ECHO Taas muutos
+ECHO Whats up?
