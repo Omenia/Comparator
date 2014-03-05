@@ -1,5 +1,5 @@
 *** Settings ***
-Library           Selenium 2 Library      timeout=30.0      implicit_wait=1.0
+Library           Selenium 2 Library      timeout=30.0      implicit_wait=2.0
 
 *** Variables ***
 
