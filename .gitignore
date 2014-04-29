@@ -5,3 +5,4 @@
 atests/output
 .idea/
 .metadata/
+*.log
