@@ -43,8 +43,14 @@ Delete Shop
     ${shop}=    Convert To String    ${shop}
     Click Link    ${shop}
     Click Element    delete_shop
-    Run Keyword and Ignore Error    Confirm Action
+    Accept shop deletion
     Shop should not exict on main page    ${shop}
+
+Accept shop deletion
+    #One for the firefox
+    Run Keyword and Ignore Error     Confirm Action
+    #Two for the chrome
+    Run Keyword and Ignore Error     Confirm Action
 
 Shop should not exict on main page
     [Arguments]    ${shop}
