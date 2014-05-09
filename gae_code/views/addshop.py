@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
-
 import webapp2
-from common import get_basket_price_from_groceries
-from common import render_page
-from common import identifier
-from recaptcha.client import captcha
-from google.appengine.api import users
-from models import Grocery
-from models import Shop
-from common import create_basket
-
+try:
+    from common import get_basket_price_from_groceries
+    from common import render_page
+    from common import identifier
+    from recaptcha.client import captcha
+    from google.appengine.api import users
+    from models import Grocery
+    from models import Shop
+    from common import create_basket
+except ImportError:
+    pass
 
 class AddShop(webapp2.RequestHandler):
 
@@ -70,19 +71,19 @@ class AddShop(webapp2.RequestHandler):
                              manufacturer,
                              grocery_id
                              ),
-               price=self.__dotify(self.__grocery_value('price',
+               price=self._dotify(self.__grocery_value('price',
                             price,
                             grocery_id)
                             ),
                quantity=self.__grocery_value('quantity',
                             quantity,
                             grocery_id),
-               amount=self.__dotify(self.__grocery_value(
+               amount=self._dotify(self.__grocery_value(
                             'amount',
                             amount, grocery_id))
                )
 
-    def __dotify(self, number):
+    def _dotify(self, number):
         if isinstance(number, int):
             return float(number)
         else:
