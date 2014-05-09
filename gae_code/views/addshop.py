@@ -55,6 +55,9 @@ class AddShop(webapp2.RequestHandler):
         for shop in shops:
             prices.append(shop.price)
         
+        # Sort prices in ascending order
+        prices.sort()
+        
         # Define low and high price ranges
         lowPrice = 0.0
         highPrice = 0.0        
@@ -65,8 +68,11 @@ class AddShop(webapp2.RequestHandler):
             lowPrice = minPrice+0.25*diff
             highPrice = minPrice+0.75*diff
        
-        # Assign new price class for every shop
+        # Assign new price class and price index for every shop
+        priceIndex = 1
         for shop in shops:
+            shop.priceIndex = priceIndex
+            priceIndex = priceIndex+1
             if shop.price < lowPrice:
                 shop.priceClass = 1
             elif shop.price > highPrice:
