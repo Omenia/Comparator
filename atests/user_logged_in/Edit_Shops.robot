@@ -8,15 +8,15 @@ Resource          manage_shops.robot
 Modify one shop and one shop information
     Modify Shop Information    name    Citymarket Juva    Tokmanni
     Go To    ${HOST}
-    Shop should exict on main page    Tokmanni
+    Shop should exist on main page    Tokmanni
     [Teardown]    Delete Shop    Tokmanni Juva
 
-Modify gorcery price in one grocery
+Modify grocery price in one grocery
     Modify Shop Information    Oltermanni_price    Citymarket Juva    42.24
     Check that there are right price and whole basket price is right
     [Teardown]    Delete Shop    Citymarket Juva
 
-Modify gorcery manufacturor in one grocery
+Modify grocery manufacturor in one grocery
     Modify Shop Information    Suomalainen naudan jauheliha_manufacturer    Citymarket Juva    Leon Liha
     Go To    ${HOST}
     Modify Shop Information    Suomalainen rasvaton maito_manufacturer    Citymarket Juva    Sonjan Meijeri
@@ -27,7 +27,7 @@ Modify gorcery manufacturor in one grocery
 Modify area
     Modify Shop Information    area    Citymarket Juva    Rantasalmi
     Go To    ${HOST}
-    Shop should exict on main page    Rantasalmi
+    Shop should exist on main page    Rantasalmi
     [Teardown]    Delete Shop    Citymarket Rantasalmi
 
 *** Keywords ***
@@ -40,7 +40,7 @@ Modify Shop Information
 
 Create Base Shop
     Add the Shop With Groceries    Citymarket    Juva    Juva    00100
-    Shop should exict on main page    Citymarket Juva
+    Shop should exist on main page    Citymarket Juva
 
 Check that there are right price and whole basket price is right
     Page Should Contain    42.24

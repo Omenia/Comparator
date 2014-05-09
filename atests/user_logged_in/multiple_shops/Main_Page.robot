@@ -6,12 +6,12 @@ Resource          ../manage_shops.robot
 
 *** Test Cases ***
 With default setting by five shown shops, one should no been seen
-    Shop should not exict on main page    K-Market MP
+    Shop should not exist on main page    K-Market MP
 
-Filter more tha five shops.
+Filter more than five shops.
     Select From List    no_of_shops    20
     Click Element    name=apply_filter
-    Shop should exict on main page    K-Market MP
+    Shop should exist on main page    K-Market MP
 
 Filter shops by cities
     Select From List    city    Gotham City

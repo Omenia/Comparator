@@ -33,7 +33,7 @@ Add Grocery with producer
     Input Text    ${id}_manufacturer    ${name}
     Input Text    ${id}_price    ${price}
 
-Shop should exict on main page
+Shop should exist on main page
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is a right shop in the list    ${shop}
 
@@ -44,7 +44,7 @@ Delete Shop
     Click Link    ${shop}
     Click Element    delete_shop
     Accept shop deletion
-    Shop should not exict on main page    ${shop}
+    Shop should not exist on main page    ${shop}
 
 Accept shop deletion
     #One for the firefox
@@ -52,7 +52,7 @@ Accept shop deletion
     #Two for the chrome
     Run Keyword and Ignore Error     Confirm Action
 
-Shop should not exict on main page
+Shop should not exist on main page
     [Arguments]    ${shop}
     Wait Until Keyword Succeeds    30s    0.2s    Reload and check if there is not a shop in the list    ${shop}
 
