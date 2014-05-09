@@ -59,7 +59,7 @@ Shop should not exist on main page
 Reload and check if there is a right shop in the list
     [Arguments]    ${shop_name}
     Reload Page
-    Page Should Contain    ${shop_name}
+    Wait Until Page Contains    ${shop_name}     0.5
 
 Reload and check if there is not a shop in the list
     [Arguments]    ${shop_name}
