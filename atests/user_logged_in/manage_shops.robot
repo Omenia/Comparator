@@ -91,5 +91,6 @@ Login
     Go To    ${HOST}
     ${login}=    Convert To String    Kirjaudu sisään
     Click Link    ${login}
+    Wait Until Page Contains Element    email
     Click Element    id=submit-login
     Go To    ${HOST}
