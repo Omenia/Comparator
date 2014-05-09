@@ -67,18 +67,18 @@ class AddShop(webapp2.RequestHandler):
                               price=None, quantity=None,
                               amount=None):
         return Grocery(name=grocery_name,
-               manufacturer=self.__grocery_value('manufacturer',
+               manufacturer=self._grocery_value('manufacturer',
                              manufacturer,
                              grocery_id
                              ),
-               price=self._dotify(self.__grocery_value('price',
+               price=self._dotify(self._grocery_value('price',
                             price,
                             grocery_id)
                             ),
-               quantity=self.__grocery_value('quantity',
+               quantity=self._grocery_value('quantity',
                             quantity,
                             grocery_id),
-               amount=self._dotify(self.__grocery_value(
+               amount=self._dotify(self._grocery_value(
                             'amount',
                             amount, grocery_id))
                )
@@ -89,7 +89,7 @@ class AddShop(webapp2.RequestHandler):
         else:
             return float(number.replace(',', '.'))
 
-    def __grocery_value(self, info, value, grocery_id):
+    def _grocery_value(self, info, value, grocery_id):
         if value:
             return value
         else:
