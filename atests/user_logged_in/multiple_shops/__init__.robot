@@ -1,4 +1,4 @@
 *** Settings ***
 Suite Setup       Create six shops with the different total price.
-Suite Teardown    Remove six shops
+Suite Teardown    Erase database
 Resource          ../manage_shops.robot

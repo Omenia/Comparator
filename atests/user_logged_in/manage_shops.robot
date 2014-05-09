@@ -43,10 +43,10 @@ Delete Shop
     ${shop}=    Convert To String    ${shop}
     Click Link    ${shop}
     Click Element    delete_shop
-    Accept shop deletion
+    Accept dialog
     Shop should not exist on main page    ${shop}
 
-Accept shop deletion
+Accept dialog
     #One for the firefox
     Run Keyword and Ignore Error     Confirm Action
     #Two for the chrome
@@ -78,13 +78,14 @@ Create six shops with the different total price.
     Add the Shop With Groceries    Lidl    Gotham City    GC    00500    2
     Add the Shop With Groceries    Lidl    Megapolis    MP    02340    4
 
-Remove six shops
-    Delete Shop    S-Market GC
-    Delete Shop    S-Market MP
-    Delete Shop    K-Market MP
-    Delete Shop    Lidl GC
-    Delete Shop    Lidl MP
-    Delete Shop    K-Market GC
+Erase database
+    Open Browser    ${ADMINPAGE}   ${BROWSER}    alias=adminPanel
+    Click Link    /datastore
+    Click Element    allkeys
+	Click Button    delete_button
+	Accept dialog
+	Close Browser
+	Switch Browser   sut
 
 Login
     Go To    ${HOST}
