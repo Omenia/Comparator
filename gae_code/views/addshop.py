@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import webapp2
+import logging
 try:
     from common import get_basket_price_from_groceries
     from common import render_page
@@ -42,7 +43,37 @@ class AddShop(webapp2.RequestHandler):
                     groceries=self.__return_basket_from_form()
                             )
         shop.price = get_basket_price_from_groceries(shop.groceries)
-        shop.put()
+        self.__recalculate_price_classes(shop)
+
+    def __recalculate_price_classes(self, newShop):
+        # Get all shops in DB and append the newly added shop.
+        shops = Shop.query_book().fetch()
+        shops.append(newShop)
+        prices = []
+
+        # Get a list of all prices
+        for shop in shops:
+            prices.append(shop.price)
+        
+        # Define low and high price ranges
+        lowPrice = 0.0
+        highPrice = 0.0        
+        if(len(prices) > 0):
+            minPrice = min(prices)
+            maxPrice = max(prices)
+            diff = maxPrice - minPrice
+            lowPrice = minPrice+0.25*diff
+            highPrice = minPrice+0.75*diff
+       
+        # Assign new price class for every shop
+        for shop in shops:
+            if shop.price < lowPrice:
+                shop.priceClass = 1
+            elif shop.price > highPrice:
+                shop.priceClass = 3
+            else:
+                shop.priceClass = 2
+            shop.put()
 
     def __return_basket_from_form(self):
         example_basket = create_basket()
