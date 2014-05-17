@@ -19,7 +19,7 @@ Most Cheapest one have € sign
     Table Row Should Contain   shops    1    €
 
 Avergage one have €€ sign
-    Table Row Should Contain   shops    3    €
+    Table Row Should Contain   shops    3    €€
 
 Most expencive one have €€€ sign
-    Table Row Should Contain   shops    5    €
+    Table Row Should Contain   shops    5    €€€
