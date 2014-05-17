@@ -20,7 +20,6 @@ class Shop(ndb.Model):
     date = ndb.DateTimeProperty(auto_now=True)
     price = ndb.FloatProperty()
     priceClass = ndb.IntegerProperty(choices=set([0, 1, 2, 3]), default=0)
-    priceIndex = ndb.IntegerProperty(default=0)
     groceries = ndb.StructuredProperty(Grocery, repeated=True)
 
     @classmethod

@@ -71,8 +71,6 @@ class AddShop(webapp2.RequestHandler):
         # Assign new price class and price index for every shop
         priceIndex = 1
         for shop in shops:
-            shop.priceIndex = priceIndex
-            priceIndex = priceIndex+1
             if shop.price < lowPrice:
                 shop.priceClass = 1
             elif shop.price > highPrice:
