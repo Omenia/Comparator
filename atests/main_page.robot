@@ -1,5 +1,7 @@
 *** Settings ***
 Resource          user_logged_in/manage_shops.robot
+Default Tags  regression
+
 
 *** Variables ***
 

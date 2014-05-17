@@ -1,6 +1,8 @@
 *** Settings ***
 Test Setup        Create Base Shop
 Resource          manage_shops.robot
+Default Tags  regression
+
 
 *** Variables ***
 

@@ -1,5 +1,6 @@
 *** Settings ***
 Library           Selenium 2 Library
+Default Tags  regression
 
 *** Variables ***
 

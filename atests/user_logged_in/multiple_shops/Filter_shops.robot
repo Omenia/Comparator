@@ -1,6 +1,8 @@
 *** Settings ***
 Test Setup        Go To    ${HOST}
 Resource          ../manage_shops.robot
+Default Tags  regression
+
 
 *** Variables ***
 
