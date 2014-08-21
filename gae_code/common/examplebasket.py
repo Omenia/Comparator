@@ -1,3 +1,4 @@
+import os
 from ident import identifier
 
 
@@ -11,21 +12,22 @@ class Grocery(object):
 
 
 def create_basket():
-    groceries = [__add_grocery('Suomalainen rasvaton maito', 1, 'l'),
-                 __add_grocery('Suomalainen tomaatti', 1, 'kg'),
-                 __add_grocery('Reissumies', 4, 'kpl', 'Oululainen'),
-                 __add_grocery('Oltermanni', 1, 'kg', 'Valio'),
-                 __add_grocery('Suomalainen naudan jauheliha', 400, 'g'),
-                 __add_grocery('Juhla Mokka kahvi', 500, 'g', 'Paulig'),
-                 __add_grocery('Maustettu jogurtti', 1, 'l', 'Arla Ingman'),
-                 __add_grocery('Tutti Frutti Jumbo', 400, 'g', 'Fazer')
-                 ]
+
+    groceries = []
+
+    print os.getcwd()
+    with open('content.txt') as item:
+        for line in item.readlines():
+            groceries.append(__add_grocery(line.split('|')))
+
     return groceries
 
 
-def __add_grocery(name, amount, quantity, manufacturer=None):
-    return Grocery(name=name,
-            identi=identifier(name),
-            manufacturer=manufacturer,
-            amount=amount,
-            quantity=quantity)
+def __add_grocery(grocery):
+    if len(grocery) < 4:
+        grocery.append(None)
+    return Grocery(name=grocery[0],
+            identi=grocery[0],
+            amount=grocery[1],
+            quantity=grocery[2],
+            manufacturer=grocery[3])

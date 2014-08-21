@@ -10,13 +10,13 @@ handlers:
   upload: static/favicon\.ico
 
 - url: /stylesheets
-  static_dir: stylesheets
+  static_dir: ../dc/stylesheets
 
 - url: /js
   static_dir: static/js
   
 - url: /pics
-  static_dir: static/pics
+  static_dir: ../dc/pics
 
 - url: /robots\.txt
   static_files: static/robots.txt
