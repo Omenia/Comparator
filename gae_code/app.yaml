@@ -6,17 +6,17 @@ threadsafe: yes
 
 handlers:
 - url: /favicon\.ico
-  static_files: static/favicon.ico
-  upload: static/favicon\.ico
+  static_files: site/favicon.ico
+  upload: site/favicon\.ico
 
 - url: /stylesheets
-  static_dir: ../dc/stylesheets
+  static_dir: site/stylesheets
 
 - url: /js
-  static_dir: static/js
+  static_dir: site/js
   
 - url: /pics
-  static_dir: ../dc/pics
+  static_dir: site/pics
 
 - url: /robots\.txt
   static_files: static/robots.txt

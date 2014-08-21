@@ -16,7 +16,7 @@ def create_basket():
     groceries = []
 
     print os.getcwd()
-    with open('content.txt') as item:
+    with open('site/content.txt') as item:
         for line in item.readlines():
             groceries.append(__add_grocery(line.split('|')))
 
